@@ -67,6 +67,8 @@ const crumbs = computed<Crumb[]>(() => {
   if (route.name === 'ideas') return [...base, { label: 'Ideas sueltas' }]
   if (route.name === 'idea-detail') return [...base, { label: 'Ideas sueltas', to: '/ideas' }, { label: 'Detalle' }]
   if (route.name === 'buscar') return [...base, { label: 'Buscar' }]
+  if (route.name === 'explorar') return [...base, { label: 'Explorar' }]
+  if (route.name === 'tag') return [...base, { label: 'Explorar', to: '/explorar' }, { label: '#' + String(route.params.tag) }]
   return base
 })
 
@@ -121,8 +123,8 @@ const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorS
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
           <span class="nav-label">Dashboard</span>
         </RouterLink>
-        <RouterLink to="/s/ideas" class="nav-link" :class="{ active: isActive(['ideas', 'idea-detail']) || isSeccion('ideas') }" aria-label="Explorar ideas" title="Explorar ideas">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>
+        <RouterLink to="/explorar" class="nav-link" :class="{ active: isActive(['explorar', 'tag']) }" aria-label="Explorar ideas" title="Explorar ideas">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><circle cx="5" cy="6" r="1.8"/><circle cx="19" cy="6" r="1.8"/><circle cx="5" cy="18" r="1.8"/><circle cx="19" cy="18" r="1.8"/><path d="M6.5 7l4 3.5M17.5 7l-4 3.5M6.5 17l4-3.5M17.5 17l-4-3.5"/></svg>
           <span class="nav-label">Explorar</span>
         </RouterLink>
         <RouterLink to="/buscar" class="nav-link" :class="{ active: isActive('buscar') }" aria-label="Buscar" title="Buscar">

@@ -11,6 +11,7 @@ const router = createRouter({
     { path: '/n/:id', name: 'nota', component: () => import('@/views/NotaView.vue'), meta: { title: 'Nota' } },
     { path: '/buscar', name: 'buscar', component: () => import('@/views/BuscarView.vue'), meta: { title: 'Buscar' } },
     { path: '/t/:tag', name: 'tag', component: () => import('@/views/TagView.vue'), meta: { title: 'Etiqueta' } },
+    { path: '/explorar', name: 'explorar', component: () => import('@/views/ExplorarView.vue'), meta: { title: 'Explorar' } },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('@/views/NotFoundView.vue'), meta: { title: 'No encontrado' } }
   ]
 })
