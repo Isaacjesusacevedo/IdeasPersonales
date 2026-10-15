@@ -26,8 +26,18 @@ function paint() {
 export const ui = reactive({
   mode: loadMode(),
   drawer: false,
-  reading: false
+  reading: false,
+  palette: false
 })
+
+export function openPalette() {
+  ui.drawer = false
+  ui.palette = true
+}
+
+export function closePalette() {
+  ui.palette = false
+}
 
 export function toggleSidebar() {
   ui.mode = ui.mode === 'expanded' ? 'compact' : 'expanded'

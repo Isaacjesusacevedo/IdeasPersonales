@@ -2,8 +2,10 @@
 import { RouterView, useRoute, useRouter } from 'vue-router'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { notas, secciones, notaPorId, notasPorSeccion } from '@/data/vault'
-import { ui, toggleSidebar } from '@/ui'
+import { notaAlAzar } from '@/data/vault-index'
+import { ui, toggleSidebar, openPalette } from '@/ui'
 import BackgroundNetwork from '@/components/BackgroundNetwork.vue'
+import CommandPalette from '@/components/CommandPalette.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -24,9 +26,7 @@ const goBuscar = () => {
 }
 
 const aleatoria = () => {
-  const actual = route.params.id as string | undefined
-  const pool = notas.filter(n => n.id !== actual)
-  const pick = pool[Math.floor(Math.random() * pool.length)]
+  const pick = notaAlAzar(route.params.id as string | undefined)
   if (pick) router.push(`/n/${pick.id}`)
 }
 
@@ -37,6 +37,11 @@ const onKey = (e: KeyboardEvent) => {
     toggleSidebar()
     return
   }
+  if (mod && (e.key === 'k' || e.key === 'K')) {
+    e.preventDefault()
+    openPalette()
+    return
+  }
   if (e.key === 'Escape') {
     ui.drawer = false
     return
@@ -45,8 +50,7 @@ const onKey = (e: KeyboardEvent) => {
   const t = e.target as HTMLElement | null
   if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return
   e.preventDefault()
-  if (ui.mode === 'expanded' && window.innerWidth >= 768) searchBox.value?.focus()
-  else router.push({ name: 'buscar' })
+  openPalette()
 }
 onMounted(() => window.addEventListener('keydown', onKey))
 onUnmounted(() => window.removeEventListener('keydown', onKey))
@@ -183,7 +187,7 @@ const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorS
           </template>
         </nav>
         <span class="topbar-spacer"></span>
-        <button class="topbar-btn" @click="router.push({ name: 'buscar' })" aria-label="Buscar (Ctrl K)">
+        <button class="topbar-btn" @click="openPalette" aria-label="Buscar (Ctrl K)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
           <span class="topbar-btn-text">Buscar</span>
           <kbd>Ctrl K</kbd>
@@ -198,6 +202,7 @@ const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorS
           <component :is="Component" />
         </Transition>
       </RouterView>
+      <CommandPalette />
     </main>
   </div>
 </template>
