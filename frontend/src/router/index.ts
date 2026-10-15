@@ -10,6 +10,7 @@ const router = createRouter({
     { path: '/s/:seccion', name: 'seccion', component: () => import('@/views/SeccionView.vue'), meta: { title: 'Sección' } },
     { path: '/n/:id', name: 'nota', component: () => import('@/views/NotaView.vue'), meta: { title: 'Nota' } },
     { path: '/buscar', name: 'buscar', component: () => import('@/views/BuscarView.vue'), meta: { title: 'Buscar' } },
+    { path: '/t/:tag', name: 'tag', component: () => import('@/views/TagView.vue'), meta: { title: 'Etiqueta' } },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('@/views/NotFoundView.vue'), meta: { title: 'No encontrado' } }
   ]
 })

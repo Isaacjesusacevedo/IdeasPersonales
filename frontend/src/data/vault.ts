@@ -1,3 +1,12 @@
+export type NoteTipo = 'articulo' | 'ficha' | 'coleccion' | 'proyecto' | 'indice'
+
+export type NoteBlock =
+  | { t: 'h2' | 'h3'; texto: string }
+  | { t: 'p'; texto: string }
+  | { t: 'lista'; items: string[]; ordenada?: boolean }
+  | { t: 'card'; variante: 'definicion' | 'idea' | 'conclusion' | 'ejemplo'; titulo?: string; texto: string }
+  | { t: 'desplegable'; titulo: string; bloques: NoteBlock[] }
+
 export interface VaultNote {
   id: string
   titulo: string
@@ -7,6 +16,11 @@ export interface VaultNote {
   puntos: string[]
   relaciones: string[]
   origen: string
+  tipo?: NoteTipo
+  intro?: string
+  claves?: { termino: string; definicion: string }[]
+  bloques?: NoteBlock[]
+  tags?: string[]
 }
 
 export interface VaultSeccion {
