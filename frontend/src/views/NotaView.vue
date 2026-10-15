@@ -6,6 +6,7 @@ import { lecturaMin } from '@/data/vault-index'
 import { ui, enterReading, exitReading } from '@/ui'
 import NoteRenderer from '@/components/NoteRenderer.vue'
 import NoteToc from '@/components/NoteToc.vue'
+import LocalGraph from '@/components/LocalGraph.vue'
 import CalloutCard from '@/components/CalloutCard.vue'
 import Collapsible from '@/components/Collapsible.vue'
 import TagChip from '@/components/TagChip.vue'
@@ -129,7 +130,10 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
           </Collapsible>
         </div>
 
-        <NoteToc v-if="nota.bloques?.length" :bloques="nota.bloques" />
+        <div class="nota-rail">
+          <NoteToc v-if="nota.bloques?.length" :bloques="nota.bloques" />
+          <LocalGraph :id="nota.id" :key="nota.id" />
+        </div>
       </div>
 
       <button v-if="ui.reading" class="reading-exit" @click="exitReading" aria-label="Salir del modo lectura">Salir ✕ (Esc)</button>

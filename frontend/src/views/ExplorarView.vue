@@ -1,8 +1,21 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, defineAsyncComponent, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { tagIndex } from '@/data/vault-index'
 import ConceptCloud from '@/components/ConceptCloud.vue'
 import TagChip from '@/components/TagChip.vue'
+
+const GraphView = defineAsyncComponent(() => import('@/components/GraphView.vue'))
+
+const route = useRoute()
+const router = useRouter()
+const vista = ref(route.query.vista === 'grafo' ? 'grafo' : 'conceptos')
+watch(() => route.query.vista, v => { vista.value = v === 'grafo' ? 'grafo' : 'conceptos' })
+
+const ir = (v: 'conceptos' | 'grafo') => {
+  vista.value = v
+  router.replace({ query: { vista: v } })
+}
 
 const tags = computed(() =>
   Object.entries(tagIndex)
@@ -19,6 +32,16 @@ const tags = computed(() =>
       <p class="page-subtitle">{{ tags.length }} etiquetas en {{ tags.reduce((a, t) => a + t.n, 0) }} usos. El tamaño es frecuencia; el color, la sección dominante.</p>
     </div>
 
+    <div class="tabs" role="tablist" aria-label="Vista de exploración">
+      <button class="tab" :class="{ active: vista === 'conceptos' }" role="tab" :aria-selected="vista === 'conceptos'" @click="ir('conceptos')">Conceptos</button>
+      <button class="tab" :class="{ active: vista === 'grafo' }" role="tab" :aria-selected="vista === 'grafo'" @click="ir('grafo')">Grafo</button>
+    </div>
+
+    <div v-if="vista === 'grafo'" class="card">
+      <GraphView />
+    </div>
+
+    <template v-else>
     <div class="card" style="margin-bottom:16px">
       <ConceptCloud :max="40" :hero-max="40" :alto="440" />
     </div>
@@ -32,5 +55,6 @@ const tags = computed(() =>
         </span>
       </div>
     </div>
+    </template>
   </div>
 </template>
