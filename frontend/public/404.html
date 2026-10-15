@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="0; url=/IdeasPersonales/" />
+  <title>Ideas Personales</title>
+  <script>
+    // Fallback SPA para GitHub Pages: cualquier ruta profunda (p. ej. bookmarks
+    // viejos sin hash) vuelve al index, donde el hash-router resuelve la vista.
+    (function () {
+      var base = '/IdeasPersonales/';
+      if (location.pathname.indexOf(base) === 0) {
+        location.replace(base + '#/');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirigiendo a <a href="/IdeasPersonales/">Ideas Personales</a>…</p>
+</body>
+</html>
