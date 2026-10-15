@@ -9,7 +9,8 @@ Reglas aplicadas: ids/títulos/resúmenes/puntos/relaciones/origen intactos; sol
 Vocabulario controlado de tags (minúsculas, cada uno con 2+ usos al cerrar cada lote):
 csharp, sql, patrones, dotnet, trayectoria, operaciones, programacion, testing,
 decision, poder, principios, matriz, evaluacion, mapas, nucleo, estructura, metodo, plantillas,
-sesgos, ventas, accion.
+sesgos, ventas, accion, resplandor, herederos, dava, diseno, horror, reglas, arg, personajes,
+pozo, simbolos, entidad, indice.
 
 ## Lote piloto — Facultad + Ideas sueltas
 
@@ -54,3 +55,27 @@ y la regla 7 los reserva para conceptos generales — aquí no hizo falta invent
 - `men-rapidos` · tipo articulo · tags decision, accion · Agregado: intro + actuar / frenar / filtro + link a decisorium. Sin banderas.
 - `men-leyes` · tipo articulo · tags poder, decision · Agregado: intro + muestra + uso + links. Nota densa resumida en muestra; el detalle vive en el .md. Sin banderas.
 - `men-principe` · tipo articulo · tags poder, decision · Agregado: intro + ideas + links. Sin banderas.
+
+## Lote Proyecto Oxida (18 notas)
+
+Sin ejemplos añadidos: el universo se presenta con sus propios términos y cifras.
+`oxi-indice` suma el tag `indice` (pareja futura con `bro-consolidado` en el lote Brownies).
+
+- `oxi-indice` · tipo indice · tags resplandor, dava, herederos, indice · Agregado: intro + reparto + claves + links. Sin banderas.
+- `oxi-notas-autor` · tipo articulo · tags diseno, horror, reglas · Agregado: intro + ejes + regla moral + prohibiciones. Sin banderas.
+- `oxi-analisis` · tipo articulo · tags diseno, horror, reglas · Agregado: intro + falta + terror. Solo usa lo que la nota trae (sin fases inventadas). Sin banderas.
+- `oxi-horror` · tipo articulo · tags diseno, horror · Agregado: intro + pilares + sonido. Sin banderas.
+- `oxi-resplandor` · tipo articulo · tags resplandor, entidad · Agregado: intro + manifestaciones + voces y límites. Sin banderas.
+- `oxi-tenue` · tipo articulo · tags resplandor, herederos, entidad · Agregado: intro + efecto + pozo azul. Sin banderas.
+- `oxi-herederos` · tipo articulo · tags herederos, resplandor, dava, simbolos · Agregado: intro + capacidades + casos. Sin banderas.
+- `oxi-lucian` · tipo articulo · tags herederos, personajes, pozo · Agregado: intro + contradicción + río. Sin banderas.
+- `oxi-descendiente` · tipo articulo · tags herederos, personajes, dava · Agregado: intro + estado + links. **revisar**: ocupación pendiente de definir en el .md original.
+- `oxi-dava` · tipo articulo · tags dava, herederos · Agregado: intro + origen + método. Sin banderas.
+- `oxi-investigador` · tipo articulo · tags dava, personajes · Agregado: intro + descubrimiento + sabotaje. Sin banderas.
+- `oxi-cerebro` · tipo articulo · tags dava, resplandor · Agregado: intro + hallazgo + preguntas (las del propio texto). Sin banderas.
+- `oxi-ka` · tipo articulo · tags pozo, herederos · Agregado: intro + intentos + descenso. Sin banderas.
+- `oxi-capitulo` · tipo articulo · tags arg, simbolos · Agregado: intro + habitación + mensajes + quiebre. Sin banderas.
+- `oxi-informe` · tipo articulo · tags dava, resplandor · Agregado: intro + evidencias + estado. Sin banderas.
+- `oxi-mapa-tension` · tipo articulo · tags diseno, arg · Agregado: intro + escalada + claves. Sin banderas.
+- `oxi-web-arg` · tipo proyecto · tags arg, diseno · Agregado: intro + secciones + assets y pendiente. Sin banderas.
+- `oxi-sesgos-uso` · tipo articulo · tags sesgos, resplandor, dava · Agregado: intro + vectores. Sin banderas.

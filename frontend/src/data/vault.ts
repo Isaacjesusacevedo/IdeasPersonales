@@ -235,24 +235,241 @@ export const notas: VaultNote[] = [
   { id: 'con-proveedores', titulo: 'Proveedores', seccion: 'brownies', categoria: 'Red', resumen: 'Chocolatero Barracas + almacén harina. Comparar 2 por insumo, respaldo por crítico.', puntos: ['Precio actualizado cada compra. Tabla proveedor/producto/precio/calidad.'], relaciones: ['bro-fase3'], origen: 'Conexiones/Proveedores.md' },
 
   // ── OXIDA ──
-  { id: 'oxi-indice', titulo: 'Índice — Resplandor Naranja', seccion: 'oxida', categoria: 'Mapa', resumen: 'Puerta de entrada: Resplandor (cortafuegos) vs Tenue Azul, herederos, DAVA y credenciales.', puntos: ['Lucian nº1 (312 a.C.) → Descendiente nº16 (Bs.As. 2025) → Investigador I desaparecido.', 'Símbolos ΘΕΟΣ ὉΡΑΣΕΙΣ ὙΕΤΟΣ ΑἾΜΑ ΛΑΚΚΟΣ ὌΡΟΣ ΤΕΦΡΑ ΦΩΣ · SoloLaSangreLlama / 1652.'], relaciones: ['oxi-resplandor', 'oxi-tenue', 'oxi-dava'], origen: 'Proyecto Oxida/Índice.md' },
-  { id: 'oxi-notas-autor', titulo: 'Notas del autor — 2 ejes', seccion: 'oxida', categoria: 'Diseño', resumen: 'Eje I incomprensibilidad + Eje II eternidad. Sin buenos ni malos. Efectos Mandela = ediciones.', puntos: ['DAVA gestiona qué realidad existe; I sabotea con el protagonista futuro (Memorial).', 'Nunca explicar ejes, ni mostrar cara del Resplandor, ni humanizarlo.'], relaciones: ['oxi-analisis', 'oxi-horror'], origen: 'Proyecto Oxida/Notas del Autor.md' },
-  { id: 'oxi-analisis', titulo: 'Análisis del proyecto + roadmap', seccion: 'oxida', categoria: 'Diseño', resumen: 'Cap I es lo más fuerte. Falta Cap II y Eje II en prosa. Fases 1 consolidar, 2 horror, 3 expandir.', puntos: ['Completar Descendiente, fichas Resplandor/Tenue, mapa con grises.', 'Horror: mundanidad corrupta + burocracia que necesita que el horror continúe.'], relaciones: ['oxi-notas-autor', 'oxi-capitulo'], origen: 'Proyecto Oxida/Análisis del Proyecto.md' },
-  { id: 'oxi-horror', titulo: 'Horror analógico — marco', seccion: 'oxida', categoria: 'Género', resumen: 'Documental que se comporta mal: 4 pilares, wrong turn +10%, dos registros y paleta naranja/azul.', puntos: ['Mundanidad corrupta · arquitectura ausencia · burocracia contenedor · horror eternidad.', 'Sonoro 17-23Hz + Silencio Urbano. Referentes: Mandela, Local58, SCP, Archive 81.'], relaciones: ['oxi-capitulo', 'oxi-informe'], origen: 'Proyecto Oxida/Horror Analógico — Marco de Diseño.md' },
-  { id: 'oxi-resplandor', titulo: 'Resplandor Naranja — entidad', seccion: 'oxida', categoria: 'Lore', resumen: 'No criatura: anticuerpo que procesa variabilidad humana con bucles. No juzga, procesa.', puntos: ['Cielo naranja sin sombras, relojes detenidos, lluvias sangre, animales sincronizados.', 'Voces hostiles (rechazo) vs guía Creo en ti (filtración Tenue Azul).', 'No puede: procesar heredero con Tenue, ni borrar memoria documentada.'], relaciones: ['oxi-tenue', 'oxi-herederos'], origen: 'Proyecto Oxida/Resplandor Naranja.md' },
-  { id: 'oxi-tenue', titulo: 'Tenue Azul — contrafuerza', seccion: 'oxida', categoria: 'Lore', resumen: 'Impulso a continuar el tiempo. Débil pero ineliminable. En bordes nacen Herederos.', puntos: ['Da déjà vu y reconocimiento sin memoria. No elige herederos.', 'Pozo de luz azul: aislante infiltrado que Lucian creyó salida.'], relaciones: ['oxi-resplandor', 'oxi-herederos'], origen: 'Proyecto Oxida/Tenue Azul.md' },
-  { id: 'oxi-herederos', titulo: 'Herederos de Sangre', seccion: 'oxida', categoria: 'Lore', resumen: 'Accidentes de colisión Resplandor/Tenue con conciencia parcial del bucle. 0 rupturas en 370 años.', puntos: ['Perciben directo, reconocen símbolos, resisten interferencia. Zumbido 17-23Hz.', 'Lucian caso completo distorsionado · Descendiente nº16 = mismo individuo, 16 intentos.'], relaciones: ['oxi-lucian', 'oxi-descendiente'], origen: 'Proyecto Oxida/Herederos de Sangre.md' },
-  { id: 'oxi-lucian', titulo: 'Lucian de Sangris (312 a.C.)', seccion: 'oxida', categoria: 'Personaje', resumen: 'Bastardo de Ioánina que se autobautiza para liberar niños del estigma. Entra al Pozo por Eudora.', puntos: ['Carta narcisista Yo me reconozco único vs real ladrón dudoso + ἀγαπῶ σε πάτερ.', 'Río Heráclito: dejar de ser quien era era necesario. Cerebro preservado.'], relaciones: ['oxi-cerebro', 'oxi-dava'], origen: 'Proyecto Oxida/Lucian de Sangris.md' },
-  { id: 'oxi-descendiente', titulo: 'El Descendiente nº16', seccion: 'oxida', categoria: 'Personaje', resumen: 'Protagonista sin nombre, Bs.As. 2025 (Once/Palermo). Despertó sin recuerdo, ya en umbral.', puntos: ['2 monitores, impresora sola, hoja tibia, símbolos íntimos, dolor = Heredero activo.', 'Ocupación pendiente: dev / archivista / diseñador. No confiar ni en la guía.'], relaciones: ['oxi-capitulo', 'oxi-ka'], origen: 'Proyecto Oxida/El Descendiente.md' },
-  { id: 'oxi-dava', titulo: 'DAVA — La Fundación', seccion: 'oxida', categoria: 'Organización', resumen: 'Desde 1655 documenta y gestiona qué realidad existe vía percepciones de Herederos.', puntos: ['Manuscrito 1652 → fundación 1655 · 18 puntos calientes Río de la Plata.', 'Operativo / Analítico / Archivo. Deja rastros para que el Heredero crea elegir libre.', 'Sabe: el ciclo no se rompe, se redirige. Clasifica expedición Pozo como inexistente.'], relaciones: ['oxi-investigador', 'oxi-informe'], origen: 'Proyecto Oxida/DAVA.md' },
-  { id: 'oxi-investigador', titulo: 'Investigador I — el que pregunta', seccion: 'oxida', categoria: 'Personaje', resumen: 'Precisión +47h. Descubrió que mente post-descenso edita el mundo (Mandela). Sabotea con Memorial.', puntos: ['Mundo nº16 ya no es original: 15 ciclos acumulados.', 'Camino no autorizado (video, cipher, URL) + Proyecto Memorial hace 5 días. Estado DESCONOCIDO.'], relaciones: ['oxi-dava', 'oxi-ka'], origen: 'Proyecto Oxida/Investigador I.md' },
-  { id: 'oxi-cerebro', titulo: 'Cerebro digital — artefacto', seccion: 'oxida', categoria: 'Objeto', resumen: 'Fragmento en ánfora +2000 años que palpita y cifra en lenguaje eléctrico. Huésped sin nombre.', puntos: ['Hallado 1723 Tracia + 12 monedas Espero veros de nuevo + carta 312 a.C.', '¿Lucian? Solo coincidencia temporal. DAVA Alto Peligrosidad. ¿Qué pasa si el Descendiente lo toca?'], relaciones: ['oxi-lucian', 'oxi-resplandor'], origen: 'Proyecto Oxida/Cerebro digital.md' },
-  { id: 'oxi-ka', titulo: 'El Ka y la Expedición', seccion: 'oxida', categoria: 'Mecánica', resumen: 'Fuerza que lleva al Descendiente creyendo elegir. Pozo Orfanos: cuerpo 1.652s, mente eternidad.', puntos: ['15 intentos mismo individuo · 2 registros FOUNDATION censurados.', 'Fallo no fue bajar sino volver: desconexión cuerpo-mente filtra y reinicia.', 'Nº16 desbloqueó 7 estados: calibración, no puzzle. Modificará mundo para nº17.'], relaciones: ['oxi-descendiente', 'oxi-investigador'], origen: 'Proyecto Oxida/El Ka y La Expedición.md' },
-  { id: 'oxi-capitulo', titulo: 'Capítulo I — Distrito', seccion: 'oxida', categoria: 'Narrativa', resumen: 'Despierta con Creo en ti, luz naranja, impresora sola, hoja tibia griega y videos imposibles.', puntos: ['ACCESO RESTRINGIDO / NO MIRES CIELO · TE ODIO / NO LLEGARÁS / CANAL 03 SIN RESPUESTA.', 'Pergaminos Collegium Obscurum 1652 + Vince insaniam desintegrándose.', 'Entendió algo que no le gustó: dos voces, mismo timbre, distinta cadencia.'], relaciones: ['oxi-descendiente', 'oxi-web-arg'], origen: 'Proyecto Oxida/Capítulo I.md' },
-  { id: 'oxi-informe', titulo: 'Informe Clasificado 113Ω', seccion: 'oxida', categoria: 'Documento', resumen: 'Aparición multi-región 23:30 UTC: colapso EM, relojes detenidos, sol nocturno. DAVA lidera rastreo.', puntos: ['No miren al cielo antes de colapsar · Silencio Urbano · presión torácica universal.', 'Difusión prohibida NIVEL Ω. ONU en emergencia planetaria.'], relaciones: ['oxi-dava', 'oxi-resplandor'], origen: 'Proyecto Oxida/Informe Clasificado Nº 113Ω.md' },
-  { id: 'oxi-mapa-tension', titulo: 'Mapa de Tensión — 6 fases', seccion: 'oxida', categoria: 'Diseño', resumen: 'Cada anomalía +10% inexplicable. De zumbido a Camino A ὌΡΟΣ vs B ΤΕΦΡΑ ΦΩΣ.', puntos: ['F0 umbral → F1 contacto (Cap I) → F2 madriguera → F3 archivo → F4 convergencia → F5 sin retorno → F6 horizonte.', 'Claves que evolucionan: luz, voces, zumbido, símbolos, agua. Web bloquea retroceso en F5.'], relaciones: ['oxi-capitulo', 'men-indice-sesgos'], origen: 'Proyecto Oxida/Mapa de Tensión — Escalada Narrativa.md' },
-  { id: 'oxi-web-arg', titulo: 'La Web — ARG (Vue+TS)', seccion: 'oxida', categoria: 'Producto', resumen: 'El usuario ES el Descendiente: login SoloLaSangreLlama/1652 → /home Reporte1.mp4 → archivo DAVA.', puntos: ['/login /alejandria /documentos /investigacion /mapeados /encriptados /pergaminos.', 'Assets: 3 audios Agustina, videos Reporte1/meteorólogo, carta Lucian, cerebro, cielo, mapa.', 'Pendiente: biológicos, mapeados, encriptados, Canal 03. Referencia directa a este proyecto web.'], relaciones: ['yo-proyectos', 'oxi-capitulo'], origen: 'Proyecto Oxida/La Web — El Resplandor Naranja ARG.md' },
-  { id: 'oxi-sesgos-uso', titulo: 'Sesgos como vectores del sistema', seccion: 'oxida', categoria: 'Puente', resumen: 'Los 13 sesgos son cómo el Resplandor mueve al Descendiente donde quiere.', puntos: ['Autoridad: confía en DAVA por formato · Confirmación: racionaliza anomalías.', 'Halo Creo en ti = trampa · Espectador: DAVA paraliza justo lo necesario.'], relaciones: ['men-indice-sesgos', 'oxi-dava'], origen: 'Proyecto Oxida/Sesgos Cognitivos.md' },
+  {
+    id: 'oxi-indice', titulo: 'Índice — Resplandor Naranja', seccion: 'oxida', categoria: 'Mapa', resumen: 'Puerta de entrada: Resplandor (cortafuegos) vs Tenue Azul, herederos, DAVA y credenciales.', puntos: ['Lucian nº1 (312 a.C.) → Descendiente nº16 (Bs.As. 2025) → Investigador I desaparecido.', 'Símbolos ΘΕΟΣ ὉΡΑΣΕΙΣ ὙΕΤΟΣ ΑἾΜΑ ΛΑΚΚΟΣ ὌΡΟΣ ΤΕΦΡΑ ΦΩΣ · SoloLaSangreLlama / 1652.'], relaciones: ['oxi-resplandor', 'oxi-tenue', 'oxi-dava'], origen: 'Proyecto Oxida/Índice.md',
+    tipo: 'indice',
+    intro: 'La puerta de entrada: dos entidades, herederos numerados, DAVA y unas credenciales.',
+    tags: ['resplandor', 'dava', 'herederos', 'indice'],
+    bloques: [
+      { t: 'h2', texto: 'El reparto' },
+      { t: 'lista', items: ['Resplandor Naranja (cortafuegos) contra Tenue Azul (continuación).', 'Lucian nº1 (312 a.C.) → Descendiente nº16 (Bs.As. 2025) → Investigador I desaparecido.', 'DAVA guía al Heredero porque necesita que llegue.'] },
+      { t: 'h2', texto: 'Claves' },
+      { t: 'p', texto: 'Símbolos griegos, credenciales `SoloLaSangreLlama` / `1652` y el lema `Vince insaniam`.' },
+      { t: 'p', texto: 'Las entidades, en [[oxi-resplandor]] y [[oxi-tenue]].' }
+    ]
+  },
+  {
+    id: 'oxi-notas-autor', titulo: 'Notas del autor — 2 ejes', seccion: 'oxida', categoria: 'Diseño', resumen: 'Eje I incomprensibilidad + Eje II eternidad. Sin buenos ni malos. Efectos Mandela = ediciones.', puntos: ['DAVA gestiona qué realidad existe; I sabotea con el protagonista futuro (Memorial).', 'Nunca explicar ejes, ni mostrar cara del Resplandor, ni humanizarlo.'], relaciones: ['oxi-analisis', 'oxi-horror'], origen: 'Proyecto Oxida/Notas del Autor.md',
+    tipo: 'articulo',
+    intro: 'Las reglas internas del worldbuilding: dos ejes del horror y cero moral.',
+    tags: ['diseno', 'horror', 'reglas'],
+    bloques: [
+      { t: 'h2', texto: 'Los dos ejes' },
+      { t: 'lista', items: ['Eje I: incomprensibilidad categórica, nunca mirar el cielo de frente.', 'Eje II: eternidad, millones de años en 1 segundo narrados solo desde afuera.'] },
+      { t: 'h2', texto: 'Regla moral' },
+      { t: 'p', texto: 'No hay buenos ni malos: DAVA, Investigador I, la guía, el Resplandor y el Heredero actúan por interés propio.' },
+      { t: 'h2', texto: 'Prohibiciones' },
+      { t: 'p', texto: 'Nunca explicar ejes, ni mostrar cara del Resplandor, ni humanizarlo.' },
+      { t: 'p', texto: 'La hoja de ruta en [[oxi-analisis]] y el marco de género en [[oxi-horror]].' }
+    ]
+  },
+  {
+    id: 'oxi-analisis', titulo: 'Análisis del proyecto + roadmap', seccion: 'oxida', categoria: 'Diseño', resumen: 'Cap I es lo más fuerte. Falta Cap II y Eje II en prosa. Fases 1 consolidar, 2 horror, 3 expandir.', puntos: ['Completar Descendiente, fichas Resplandor/Tenue, mapa con grises.', 'Horror: mundanidad corrupta + burocracia que necesita que el horror continúe.'], relaciones: ['oxi-notas-autor', 'oxi-capitulo'], origen: 'Proyecto Oxida/Análisis del Proyecto.md',
+    tipo: 'articulo',
+    intro: 'Diagnóstico: el Capítulo I es lo más fuerte; falta el II y el Eje II en prosa.',
+    tags: ['diseno', 'horror', 'reglas'],
+    bloques: [
+      { t: 'h2', texto: 'Falta' },
+      { t: 'lista', items: ['Completar El Descendiente y escribir el Capítulo II.', 'Implementar el Eje II en prosa y completar fichas con grises.'] },
+      { t: 'h2', texto: 'Terror' },
+      { t: 'p', texto: 'Mundanidad corrupta + burocracia que necesita que el horror continúe.' },
+      { t: 'p', texto: 'Bases en [[oxi-notas-autor]] y primer capítulo en [[oxi-capitulo]].' }
+    ]
+  },
+  {
+    id: 'oxi-horror', titulo: 'Horror analógico — marco', seccion: 'oxida', categoria: 'Género', resumen: 'Documental que se comporta mal: 4 pilares, wrong turn +10%, dos registros y paleta naranja/azul.', puntos: ['Mundanidad corrupta · arquitectura ausencia · burocracia contenedor · horror eternidad.', 'Sonoro 17-23Hz + Silencio Urbano. Referentes: Mandela, Local58, SCP, Archive 81.'], relaciones: ['oxi-capitulo', 'oxi-informe'], origen: 'Proyecto Oxida/Horror Analógico — Marco de Diseño.md',
+    tipo: 'articulo',
+    intro: 'Documental que se comporta mal: cuatro pilares, giro gradual y dos registros.',
+    tags: ['diseno', 'horror'],
+    bloques: [
+      { t: 'h2', texto: 'Los 4 pilares' },
+      { t: 'lista', items: ['Mundanidad corrupta · arquitectura ausencia · burocracia contenedor · horror eternidad.'] },
+      { t: 'h2', texto: 'Sonido y referentes' },
+      { t: 'p', texto: 'Zumbido 17-23Hz + Silencio Urbano. Referentes: Mandela, Local58, SCP, Archive 81.' },
+      { t: 'p', texto: 'Aplicado en [[oxi-capitulo]] y en el documento [[oxi-informe]].' }
+    ]
+  },
+  {
+    id: 'oxi-resplandor', titulo: 'Resplandor Naranja — entidad', seccion: 'oxida', categoria: 'Lore', resumen: 'No criatura: anticuerpo que procesa variabilidad humana con bucles. No juzga, procesa.', puntos: ['Cielo naranja sin sombras, relojes detenidos, lluvias sangre, animales sincronizados.', 'Voces hostiles (rechazo) vs guía Creo en ti (filtración Tenue Azul).', 'No puede: procesar heredero con Tenue, ni borrar memoria documentada.'], relaciones: ['oxi-tenue', 'oxi-herederos'], origen: 'Proyecto Oxida/Resplandor Naranja.md',
+    tipo: 'articulo',
+    intro: 'No una criatura: un anticuerpo que procesa la variabilidad humana con bucles.',
+    tags: ['resplandor', 'entidad'],
+    bloques: [
+      { t: 'h2', texto: 'Manifestaciones' },
+      { t: 'lista', items: ['Cielo naranja sin sombras, relojes detenidos, lluvias de sangre y animales sincronizados.'] },
+      { t: 'h2', texto: 'Voces y límites' },
+      { t: 'lista', items: ['Voces hostiles de rechazo contra la guía `Creo en ti` (filtración Tenue Azul).', 'No puede: procesar heredero con Tenue, ni borrar memoria documentada.'] },
+      { t: 'p', texto: 'Su contraparte en [[oxi-tenue]] y quienes lo perciben en [[oxi-herederos]].' }
+    ]
+  },
+  {
+    id: 'oxi-tenue', titulo: 'Tenue Azul — contrafuerza', seccion: 'oxida', categoria: 'Lore', resumen: 'Impulso a continuar el tiempo. Débil pero ineliminable. En bordes nacen Herederos.', puntos: ['Da déjà vu y reconocimiento sin memoria. No elige herederos.', 'Pozo de luz azul: aislante infiltrado que Lucian creyó salida.'], relaciones: ['oxi-resplandor', 'oxi-herederos'], origen: 'Proyecto Oxida/Tenue Azul.md',
+    tipo: 'articulo',
+    intro: 'La contrafuerza: impulso a continuar el tiempo, débil pero ineliminable.',
+    tags: ['resplandor', 'herederos', 'entidad'],
+    bloques: [
+      { t: 'h2', texto: 'Efecto' },
+      { t: 'p', texto: 'Filtra la conexión colmena y da conciencia parcial del bucle: déjà vu y patrones. No elige herederos.' },
+      { t: 'h2', texto: 'El pozo azul' },
+      { t: 'p', texto: 'Pozo de luz azul bajo la montaña: aislante infiltrado que Lucian creyó salida.' },
+      { t: 'p', texto: 'El otro polo en [[oxi-resplandor]].' }
+    ]
+  },
+  {
+    id: 'oxi-herederos', titulo: 'Herederos de Sangre', seccion: 'oxida', categoria: 'Lore', resumen: 'Accidentes de colisión Resplandor/Tenue con conciencia parcial del bucle. 0 rupturas en 370 años.', puntos: ['Perciben directo, reconocen símbolos, resisten interferencia. Zumbido 17-23Hz.', 'Lucian caso completo distorsionado · Descendiente nº16 = mismo individuo, 16 intentos.'], relaciones: ['oxi-lucian', 'oxi-descendiente'], origen: 'Proyecto Oxida/Herederos de Sangre.md',
+    tipo: 'articulo',
+    intro: 'Accidentes de la colisión: humanos con conciencia parcial del bucle. Cero rupturas en 370 años.',
+    tags: ['herederos', 'resplandor', 'dava', 'simbolos'],
+    bloques: [
+      { t: 'h2', texto: 'Capacidades y síntomas' },
+      { t: 'lista', items: ['Perciben directo, reconocen símbolos sin aprender y resisten interferencia.', 'Visiones, dolor no físico, pensamientos ajenos y zumbido 17-23Hz.'] },
+      { t: 'h2', texto: 'Casos' },
+      { t: 'p', texto: 'Lucian, caso completo pero distorsionado; Descendiente nº16, mismo individuo en 16 intentos.' },
+      { t: 'p', texto: 'El primero en [[oxi-lucian]] y el actual en [[oxi-descendiente]].' }
+    ]
+  },
+  {
+    id: 'oxi-lucian', titulo: 'Lucian de Sangris (312 a.C.)', seccion: 'oxida', categoria: 'Personaje', resumen: 'Bastardo de Ioánina que se autobautiza para liberar niños del estigma. Entra al Pozo por Eudora.', puntos: ['Carta narcisista Yo me reconozco único vs real ladrón dudoso + ἀγαπῶ σε πάτερ.', 'Río Heráclito: dejar de ser quien era era necesario. Cerebro preservado.'], relaciones: ['oxi-cerebro', 'oxi-dava'], origen: 'Proyecto Oxida/Lucian de Sangris.md',
+    tipo: 'articulo',
+    intro: 'Bastardo de Ioánina que se rebautiza para liberar niños del estigma y entra al Pozo por Eudora.',
+    tags: ['herederos', 'personajes', 'pozo'],
+    bloques: [
+      { t: 'h2', texto: 'La contradicción' },
+      { t: 'p', texto: 'Carta narcisista (`Yo me reconozco único`) contra el ladrón dudoso real, más un añadido infantil en griego.' },
+      { t: 'h2', texto: 'El río' },
+      { t: 'p', texto: 'Heráclito: dejar de ser quien era era necesario. Entra igual; cerebro preservado.' },
+      { t: 'p', texto: 'El artefacto en [[oxi-cerebro]] y quien lo custodia en [[oxi-dava]].' }
+    ]
+  },
+  {
+    id: 'oxi-descendiente', titulo: 'El Descendiente nº16', seccion: 'oxida', categoria: 'Personaje', resumen: 'Protagonista sin nombre, Bs.As. 2025 (Once/Palermo). Despertó sin recuerdo, ya en umbral.', puntos: ['2 monitores, impresora sola, hoja tibia, símbolos íntimos, dolor = Heredero activo.', 'Ocupación pendiente: dev / archivista / diseñador. No confiar ni en la guía.'], relaciones: ['oxi-capitulo', 'oxi-ka'], origen: 'Proyecto Oxida/El Descendiente.md',
+    tipo: 'articulo',
+    intro: 'Protagonista sin nombre en Bs.As. 2025: despertó sin recuerdo y ya está en el umbral.',
+    tags: ['herederos', 'personajes', 'dava'],
+    bloques: [
+      { t: 'h2', texto: 'Estado' },
+      { t: 'lista', items: ['2 monitores, impresora sola, hoja tibia y símbolos íntimos; el dolor marca Heredero activo.', 'Ocupación pendiente: dev, archivista o diseñador. No confiar ni en la guía.'] },
+      { t: 'p', texto: 'Su primer contacto en [[oxi-capitulo]] y la fuerza que lo lleva en [[oxi-ka]].' }
+    ]
+  },
+  {
+    id: 'oxi-dava', titulo: 'DAVA — La Fundación', seccion: 'oxida', categoria: 'Organización', resumen: 'Desde 1655 documenta y gestiona qué realidad existe vía percepciones de Herederos.', puntos: ['Manuscrito 1652 → fundación 1655 · 18 puntos calientes Río de la Plata.', 'Operativo / Analítico / Archivo. Deja rastros para que el Heredero crea elegir libre.', 'Sabe: el ciclo no se rompe, se redirige. Clasifica expedición Pozo como inexistente.'], relaciones: ['oxi-investigador', 'oxi-informe'], origen: 'Proyecto Oxida/DAVA.md',
+    tipo: 'articulo',
+    intro: 'La única institución con certeza: documenta y gestiona qué realidad existe desde 1655.',
+    tags: ['dava', 'herederos'],
+    bloques: [
+      { t: 'h2', texto: 'Origen' },
+      { t: 'p', texto: 'Manuscrito 1652 → fundación 1655; 18 puntos calientes en el Río de la Plata.' },
+      { t: 'h2', texto: 'Método' },
+      { t: 'lista', items: ['Operativo, Analítico y Archivo; deja rastros para que el Heredero crea elegir libre.', 'Sabe que el ciclo no se rompe, se redirige; clasifica la expedición al Pozo como inexistente.'] },
+      { t: 'p', texto: 'Su expediente global en [[oxi-informe]] y su díscolo en [[oxi-investigador]].' }
+    ]
+  },
+  {
+    id: 'oxi-investigador', titulo: 'Investigador I — el que pregunta', seccion: 'oxida', categoria: 'Personaje', resumen: 'Precisión +47h. Descubrió que mente post-descenso edita el mundo (Mandela). Sabotea con Memorial.', puntos: ['Mundo nº16 ya no es original: 15 ciclos acumulados.', 'Camino no autorizado (video, cipher, URL) + Proyecto Memorial hace 5 días. Estado DESCONOCIDO.'], relaciones: ['oxi-dava', 'oxi-ka'], origen: 'Proyecto Oxida/Investigador I.md',
+    tipo: 'articulo',
+    intro: 'El analista de +47h que descubrió que la mente post-descenso edita el mundo.',
+    tags: ['dava', 'personajes'],
+    bloques: [
+      { t: 'h2', texto: 'Descubrimiento' },
+      { t: 'p', texto: 'Mundo nº16 ya no original: 15 ciclos acumulados de percepciones.' },
+      { t: 'h2', texto: 'Sabotaje' },
+      { t: 'p', texto: 'Camino no autorizado (video, cipher, URL) + Proyecto Memorial hace 5 días. Estado DESCONOCIDO.' },
+      { t: 'p', texto: 'Su institución en [[oxi-dava]] y la mecánica en [[oxi-ka]].' }
+    ]
+  },
+  {
+    id: 'oxi-cerebro', titulo: 'Cerebro digital — artefacto', seccion: 'oxida', categoria: 'Objeto', resumen: 'Fragmento en ánfora +2000 años que palpita y cifra en lenguaje eléctrico. Huésped sin nombre.', puntos: ['Hallado 1723 Tracia + 12 monedas Espero veros de nuevo + carta 312 a.C.', '¿Lucian? Solo coincidencia temporal. DAVA Alto Peligrosidad. ¿Qué pasa si el Descendiente lo toca?'], relaciones: ['oxi-lucian', 'oxi-resplandor'], origen: 'Proyecto Oxida/Cerebro digital.md',
+    tipo: 'articulo',
+    intro: 'Fragmento en ánfora de +2000 años que palpita y cifra en lenguaje eléctrico.',
+    tags: ['dava', 'resplandor'],
+    bloques: [
+      { t: 'h2', texto: 'Hallazgo' },
+      { t: 'p', texto: 'Tracia 1723 + 12 monedas con mensaje + carta de 312 a.C.' },
+      { t: 'h2', texto: 'Preguntas' },
+      { t: 'p', texto: '¿Lucian? Solo coincidencia temporal. DAVA lo marca Alto Peligrosidad. ¿Qué pasa si el Descendiente lo toca?' },
+      { t: 'p', texto: 'El candidato a dueño en [[oxi-lucian]] y la entidad que lo consulta en [[oxi-resplandor]].' }
+    ]
+  },
+  {
+    id: 'oxi-ka', titulo: 'El Ka y la Expedición', seccion: 'oxida', categoria: 'Mecánica', resumen: 'Fuerza que lleva al Descendiente creyendo elegir. Pozo Orfanos: cuerpo 1.652s, mente eternidad.', puntos: ['15 intentos mismo individuo · 2 registros FOUNDATION censurados.', 'Fallo no fue bajar sino volver: desconexión cuerpo-mente filtra y reinicia.', 'Nº16 desbloqueó 7 estados: calibración, no puzzle. Modificará mundo para nº17.'], relaciones: ['oxi-descendiente', 'oxi-investigador'], origen: 'Proyecto Oxida/El Ka y La Expedición.md',
+    tipo: 'articulo',
+    intro: 'La fuerza que lleva al Descendiente creyendo elegir; el fallo fue volver, no bajar.',
+    tags: ['pozo', 'herederos'],
+    bloques: [
+      { t: 'h2', texto: 'Intentos' },
+      { t: 'p', texto: '15 intentos del mismo individuo; 2 registros FOUNDATION censurados.' },
+      { t: 'h2', texto: 'El descenso' },
+      { t: 'p', texto: 'Cuerpo 1.652 segundos en Orfanos, mente en eternidad; la desconexión filtra y reinicia.' },
+      { t: 'p', texto: 'La nº16 desbloqueó 7 estados: calibración, no puzzle. Modificará el mundo para la nº17.' },
+      { t: 'p', texto: 'El protagonista en [[oxi-descendiente]].' }
+    ]
+  },
+  {
+    id: 'oxi-capitulo', titulo: 'Capítulo I — Distrito', seccion: 'oxida', categoria: 'Narrativa', resumen: 'Despierta con Creo en ti, luz naranja, impresora sola, hoja tibia griega y videos imposibles.', puntos: ['ACCESO RESTRINGIDO / NO MIRES CIELO · TE ODIO / NO LLEGARÁS / CANAL 03 SIN RESPUESTA.', 'Pergaminos Collegium Obscurum 1652 + Vince insaniam desintegrándose.', 'Entendió algo que no le gustó: dos voces, mismo timbre, distinta cadencia.'], relaciones: ['oxi-descendiente', 'oxi-web-arg'], origen: 'Proyecto Oxida/Capítulo I.md',
+    tipo: 'articulo',
+    intro: 'Despierta con guía hostil y acogedora a la vez, luz naranja e impresora sola.',
+    tags: ['arg', 'simbolos'],
+    bloques: [
+      { t: 'h2', texto: 'La habitación' },
+      { t: 'p', texto: 'Luz naranja sin sombras, monitores solos y hoja tibia con griegos íntimos.' },
+      { t: 'h2', texto: 'Los mensajes' },
+      { t: 'lista', items: ['`ACCESO RESTRINGIDO` y `NO MIRES CIELO` contra `TE ODIO` y `NO LLEGARÁS`.', 'Pergaminos de 1652 y un Vince que se desintegra.'] },
+      { t: 'h2', texto: 'El quiebre' },
+      { t: 'p', texto: 'Entendió algo que no le gustó: dos voces, mismo timbre, distinta cadencia.' },
+      { t: 'p', texto: 'Quien lo vive en [[oxi-descendiente]]; la puerta web en [[oxi-web-arg]].' }
+    ]
+  },
+  {
+    id: 'oxi-informe', titulo: 'Informe Clasificado 113Ω', seccion: 'oxida', categoria: 'Documento', resumen: 'Aparición multi-región 23:30 UTC: colapso EM, relojes detenidos, sol nocturno. DAVA lidera rastreo.', puntos: ['No miren al cielo antes de colapsar · Silencio Urbano · presión torácica universal.', 'Difusión prohibida NIVEL Ω. ONU en emergencia planetaria.'], relaciones: ['oxi-dava', 'oxi-resplandor'], origen: 'Proyecto Oxida/Informe Clasificado Nº 113Ω.md',
+    tipo: 'articulo',
+    intro: 'Aparición multi-región a las 23:30 UTC: colapso EM, relojes detenidos y sol nocturno.',
+    tags: ['dava', 'resplandor'],
+    bloques: [
+      { t: 'h2', texto: 'Evidencias' },
+      { t: 'lista', items: ['Transmisiones (`No miren al cielo`) antes de colapsar.', 'Silencio Urbano y presión torácica universal.'] },
+      { t: 'h2', texto: 'Estado' },
+      { t: 'p', texto: 'Difusión prohibida NIVEL Ω; la ONU en emergencia y DAVA liderando el rastreo.' },
+      { t: 'p', texto: 'La fundación en [[oxi-dava]] y el fenómeno en [[oxi-resplandor]].' }
+    ]
+  },
+  {
+    id: 'oxi-mapa-tension', titulo: 'Mapa de Tensión — 6 fases', seccion: 'oxida', categoria: 'Diseño', resumen: 'Cada anomalía +10% inexplicable. De zumbido a Camino A ὌΡΟΣ vs B ΤΕΦΡΑ ΦΩΣ.', puntos: ['F0 umbral → F1 contacto (Cap I) → F2 madriguera → F3 archivo → F4 convergencia → F5 sin retorno → F6 horizonte.', 'Claves que evolucionan: luz, voces, zumbido, símbolos, agua. Web bloquea retroceso en F5.'], relaciones: ['oxi-capitulo', 'men-indice-sesgos'], origen: 'Proyecto Oxida/Mapa de Tensión — Escalada Narrativa.md',
+    tipo: 'articulo',
+    intro: 'Seis fases donde cada anomalía es 10% más inexplicable, hasta dos caminos finales.',
+    tags: ['diseno', 'arg'],
+    bloques: [
+      { t: 'h2', texto: 'Escalada' },
+      { t: 'p', texto: 'De zumbido a Camino A ὌΡΟΣ contra Camino B ΤΕΦΡΑ ΦΩΣ, pasando por madriguera, archivo y convergencia.' },
+      { t: 'h2', texto: 'Claves' },
+      { t: 'p', texto: 'Luz, voces, zumbido, símbolos y agua evolucionan; la web bloquea el retroceso en F5.' },
+      { t: 'p', texto: 'El inicio en [[oxi-capitulo]] y los sesgos por fase en [[men-indice-sesgos]].' }
+    ]
+  },
+  {
+    id: 'oxi-web-arg', titulo: 'La Web — ARG (Vue+TS)', seccion: 'oxida', categoria: 'Producto', resumen: 'El usuario ES el Descendiente: login SoloLaSangreLlama/1652 → /home Reporte1.mp4 → archivo DAVA.', puntos: ['/login /alejandria /documentos /investigacion /mapeados /encriptados /pergaminos.', 'Assets: 3 audios Agustina, videos Reporte1/meteorólogo, carta Lucian, cerebro, cielo, mapa.', 'Pendiente: biológicos, mapeados, encriptados, Canal 03. Referencia directa a este proyecto web.'], relaciones: ['yo-proyectos', 'oxi-capitulo'], origen: 'Proyecto Oxida/La Web — El Resplandor Naranja ARG.md',
+    tipo: 'proyecto',
+    intro: 'El usuario ES el Descendiente: login con credenciales de la narrativa y archivo DAVA navegable.',
+    tags: ['arg', 'diseno'],
+    bloques: [
+      { t: 'h2', texto: 'Secciones' },
+      { t: 'p', texto: 'Login, Alejandría, documentos, investigación, mapeados, encriptados y pergaminos.' },
+      { t: 'h2', texto: 'Assets y pendiente' },
+      { t: 'lista', items: ['3 audios, videos Reporte1 y meteorólogo, carta, cerebro, cielo y mapa.', 'Pendiente: biológicos, mapeados, encriptados y Canal 03.'] },
+      { t: 'p', texto: 'Mismo stack que [[yo-proyectos]]; la historia continúa en [[oxi-capitulo]].' }
+    ]
+  },
+  {
+    id: 'oxi-sesgos-uso', titulo: 'Sesgos como vectores del sistema', seccion: 'oxida', categoria: 'Puente', resumen: 'Los 13 sesgos son cómo el Resplandor mueve al Descendiente donde quiere.', puntos: ['Autoridad: confía en DAVA por formato · Confirmación: racionaliza anomalías.', 'Halo Creo en ti = trampa · Espectador: DAVA paraliza justo lo necesario.'], relaciones: ['men-indice-sesgos', 'oxi-dava'], origen: 'Proyecto Oxida/Sesgos Cognitivos.md',
+    tipo: 'articulo',
+    intro: 'Los 13 sesgos como vectores: así mueve el sistema al Descendiente.',
+    tags: ['sesgos', 'resplandor', 'dava'],
+    bloques: [
+      { t: 'h2', texto: 'Vectores' },
+      { t: 'lista', items: ['Autoridad: confía en DAVA por formato; Confirmación: racionaliza anomalías.', 'Halo `Creo en ti` como trampa; Espectador: DAVA paraliza justo lo necesario.'] },
+      { t: 'p', texto: 'El catálogo en [[men-indice-sesgos]] y el operador en [[oxi-dava]].' }
+    ]
+  },
 
   // ── MENTE ──
   {
