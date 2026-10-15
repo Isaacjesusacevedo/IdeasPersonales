@@ -209,30 +209,320 @@ export const notas: VaultNote[] = [
   },
 
   // ── BROWNIES ──
-  { id: 'bro-adn', titulo: 'ADN del Brownie', seccion: 'brownies', categoria: 'Visión', resumen: 'Artesanal, belga, húmedo dentro + crocante fuera, para after-office. No somos precio ni panadería.', puntos: ['Diferenciación: textura + chocolate belga + presentación instagrameable.', 'Momento: antojo 5pm y after-office. NO: abuela, barato, genérico.'], relaciones: ['bro-okr', 'bro-fase1'], origen: 'Plan/01_Vision_y_Objetivos/ADN_del_Brownie.md' },
-  { id: 'bro-okr', titulo: 'OKR 3 meses — 100 u/sem', seccion: 'brownies', categoria: 'Objetivos', resumen: '100 u/semana en Palermo con 30% recurrentes al mes 3. Revisión domingos vs Log.', puntos: ['Mes1 20u/5% cata · Mes2 50u/15% canales · Mes3 100u/30% escalar.', 'KR: volumen, recurrencia, presencia Soho/Hollywood.'], relaciones: ['bro-log', 'bro-eventos'], origen: 'Plan/01_Vision_y_Objetivos/OKR_Brownies_3_meses.md' },
-  { id: 'bro-acuerdo', titulo: 'Acuerdo con socio', seccion: 'brownies', categoria: 'Sociedad', resumen: 'Roles, reparto, horarios y conflictos por escrito. Si no está escrito, no existe.', puntos: ['Cocina / ventas / redes por definir responsable.', 'Reglas: % reparto, última palabra, resolución de conflictos, firma con fecha.'], relaciones: ['con-luciano', 'bro-okr'], origen: 'Plan/01_Vision_y_Objetivos/Acuerdo_con_Socio.md' },
-  { id: 'bro-fase1', titulo: 'Fase 1 — Receta MVP', seccion: 'brownies', categoria: 'Producto', resumen: 'Cata ciega A/B/C con 10 personas y puntaje 1-10. La ganadora = Receta Base.', puntos: ['Variables controladas, no intuición. Registrar todo en Log.', 'Mide humedad, intensidad, dulzor y crocancia.'], relaciones: ['bro-log', 'bro-eventos'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Fase_1_Receta_MVP.md' },
-  { id: 'bro-fase2', titulo: 'Fase 2 — Logística y packaging', seccion: 'brownies', categoria: 'Operación', resumen: 'Palermo instagrameable = moneda. Kraft + sello, delivery 19-21h, checklist de salida.', puntos: ['Pedidos hasta 18h, rapidez como diferenciador.', 'Bolso térmico, cambio chico, stock verificado, envases con logo.'], relaciones: ['bro-fase3', 'bro-mapa'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Fase_2_Logistica_y_Embalaje.md' },
-  { id: 'bro-fase3', titulo: 'Fase 3 — Precio y canales', seccion: 'brownies', categoria: 'Ventas', resumen: 'Precio = (MP + hora + delivery) x3. Cara a cara, WhatsApp, consignación 20% e IG.', puntos: ['Referencia Palermo $1500-2500. Promos: mini-trozo + fidelidad 5ta caja.', 'Canal principal: probar sin presión → encargo → comunidad.'], relaciones: ['con-locales', 'bro-protocolo-venta'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Fase_3_Precio_y_Canales.md' },
-  { id: 'bro-eventos', titulo: 'Eventos y lanzamiento', seccion: 'brownies', categoria: 'Lanzamiento', resumen: 'Calidad sobre cantidad: cata día 30 → preview día 75 → ruta semanal jueves+sábado.', puntos: ['Evento1: 6-8 amigos gratis + pregunta ¿comprarías caja de 6?', 'Evento2: pop-up Plazoleta Cortázar 40 unidades + preventa WhatsApp.', 'Evento3: mensaje miércoles, hornear solo lo encargado, cero desperdicio.'], relaciones: ['bro-clientes-semilla', 'bro-mapa'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Plan_de_Eventos_y_Lanzamiento.md' },
-  { id: 'bro-calendario', titulo: 'Calendario y cuenta regresiva', seccion: 'brownies', categoria: 'Cultivo', resumen: '55 días floración + secado + curado. 8 semanas para dominar línea común. Solo común a la venta.', puntos: ['Hitos +55 corte, +62 secado, +72 curado, +73 infusión.', 'Nota legal: Ley 27.350/Reprocann cubre personal; venta abierta = solo común.'], relaciones: ['bro-protocolo-manteca', 'bro-errores'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Calendario_y_Cuenta_Regresiva.md' },
-  { id: 'bro-protocolo-manteca', titulo: 'Protocolo manteca infusionada', seccion: 'brownies', categoria: 'Técnica', resumen: 'Estándar 5 fases sin hervir: secado, water curing frío, descarboxilación, infusión, purificación.', puntos: ['110-115°C 35min obligatorio · infusión 80-85°C baño María con termómetro.', 'Manteca 82% o coco, nunca leche. Checklist por responsable.'], relaciones: ['bro-errores', 'con-luciano'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Protocolo_Manteca_Infusionada.md' },
-  { id: 'bro-errores', titulo: 'Errores críticos de procesamiento', seccion: 'brownies', categoria: 'Técnica', resumen: '5 errores que arruinan potencia/sabor y su corrección exacta.', puntos: ['No hervir flor · no usar leche · descarboxilar siempre · no pasar 100°C · no secar en horno.'], relaciones: ['bro-protocolo-manteca'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Errores_Criticos_Procesamiento.md' },
-  { id: 'bro-clientes-semilla', titulo: 'Clientes semilla', seccion: 'brownies', categoria: 'Clientes', resumen: 'Probaron en evento y pidieron repetir: tratar como socios, contacto solo 24h antes.', puntos: ['Tabla nombre/WhatsApp/preferencia/frecuencia/recordatorio.', 'Repetición = métrica clave. Consignación → ficha en Clientes Clave.'], relaciones: ['bro-log', 'con-clientes'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Clientes_Semilla.md' },
-  { id: 'bro-consolidado', titulo: 'Documento consolidado', seccion: 'brownies', categoria: 'Índice', resumen: 'Índice-resumen de todo el proyecto: visión, fases, contexto, decisiones, modelos y estado día 1.', puntos: ['Replica ADN, OKR, cronograma, eventos y acción inmediata Gurruchaga/Honduras.', 'Estado: día 1 cultivo, 8 semanas de espera, venta = línea común.'], relaciones: ['sis-integracion', 'bro-accion'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Consolidado_Del_Proyecto.md' },
-  { id: 'bro-accion', titulo: 'Acción inmediata — sábado Palermo', seccion: 'brownies', categoria: 'Acción', resumen: 'Cata + 20 brownies sábado 17h Gurruchaga y Honduras, outfit definido, registrar en Log.', puntos: ['2 días cata a ciegas · logo simple · nombres: Bunker / Dulce Poder / Bloque.', 'Actitud de favor, no miedo. Foto primera venta a IG/WhatsApp.'], relaciones: ['bro-log', 'bro-checklist'], origen: 'Plan/Accion_Inmediata.md' },
-  { id: 'bro-mapa', titulo: 'Mapa de Palermo', seccion: 'brownies', categoria: 'Territorio', resumen: '4 microclimas: Soho turista, Hollywood oficinista, Parques familia, Oficinas delivery.', puntos: ['Recorrer cada zona, marcar circulación alta, registrar cada salida en Log.'], relaciones: ['bro-log', 'bro-eventos'], origen: 'Plan/03_Contexto_y_Paradigmas/Mapa_de_Palermo.md' },
-  { id: 'bro-paradigma', titulo: 'Paradigma del emprendedor', seccion: 'brownies', categoria: 'Mentalidad', resumen: 'De convencer (presión) a servir (aliado): resolver el antojo 5pm.', puntos: ['Combos café, hora dorada after-office, mensajes del momento.', 'Revisión mensual: ¿vendí desde convencimiento o servicio?'], relaciones: ['men-paradigmas', 'bro-protocolo-venta'], origen: 'Plan/03_Contexto_y_Paradigmas/Paradigma_del_Emprendedor.md' },
-  { id: 'bro-log', titulo: 'Log de ventas y feedback', seccion: 'brownies', categoria: 'Ritual', resumen: 'SAGRADO: ubicación, hora, clima y frase textual. El negativo = oro. Revisión domingo.', puntos: ['Prohibido ¿te gustó? → ¿qué mejorarías? / ¿por qué NO lo comprarías?', 'Registrar el mismo día, textual, sin interpretar. Catas A/B/C documentadas.'], relaciones: ['bro-protocolo-venta', 'con-clientes'], origen: 'Plan/04_Decisiones_y_Revisiones/Log_de_Ventas_y_Feedback.md' },
-  { id: 'bro-checklist', titulo: 'Checklist imagen personal', seccion: 'brownies', categoria: 'Ritual', resumen: 'Casual premium Palermo: blancas limpias, jean oscuro, remera lisa, delantal de tela.', puntos: ['Manos miran: uñas, mentitas, cabello. Espejo + logo visible + cambio + stock.'], relaciones: ['bro-accion'], origen: 'Plan/04_Decisiones_y_Revisiones/Checklist_Imagen_Personal.md' },
-  { id: 'bro-protocolo-venta', titulo: 'Protocolo venta cara a cara', seccion: 'brownies', categoria: 'Ventas', resumen: 'Guion 30s con reciprocidad: mini-trozo gratis → caja lanzamiento → sin compromiso.', puntos: ['70% compra con reciprocidad. Mirar, sonreír, esperar, aceptar el no.', 'Postventa: agradecer, fidelidad, feedback abierto, registrar, fichar prescriptor.'], relaciones: ['bro-log', 'men-plan-venta'], origen: 'Plan/04_Decisiones_y_Revisiones/Protocolo_De_Venta_Cara_a_Cara.md' },
-  { id: 'bro-competencia', titulo: 'Competencia directa', seccion: 'brownies', categoria: 'Mercado', resumen: 'Mapear 5 lugares: precio, tamaño, packaging, atención y textura. Actualizar cada 2-3 meses.', puntos: ['Si secos→textura · feos→packaging · caros→valor · lentos→rapidez.'], relaciones: ['bro-fase3'], origen: 'Plan/05_Bateria_de_Ideas_y_Modelos/Competencia_Directa.md' },
-  { id: 'bro-sesgos-palermo', titulo: 'Sesgos del cliente palermitano', seccion: 'brownies', categoria: 'Psicología', resumen: 'Escasez real, bandwagon diario, aversión a la pérdida y reciprocidad sin manipulación.', puntos: ['Solo 30 cajas hoy · foto primera caja volando · 5ta extra para no perder.', 'Mini-trozo, compromiso y prueba social con clientes contentos.'], relaciones: ['men-indice-sesgos', 'bro-protocolo-venta'], origen: 'Plan/05_Bateria_de_Ideas_y_Modelos/Sesgos_del_Cliente_Palermitano.md' },
-  { id: 'con-luciano', titulo: 'Base fundacional — Luciano', seccion: 'brownies', categoria: 'Sociedad', resumen: 'Yo capital + él trabajo. 70/30 hasta recuperar → 50/50. Corte cada 15 días, llamada domingos 20h.', puntos: ['Yo finanzas/marketing · Luciano Maestro Browniero, autoridad del horno.', 'Alcancía compartida + planilla. Plan A/B según quién vende. Salida digna si consigue fijo.'], relaciones: ['bro-acuerdo', 'sis-plantilla-persona'], origen: 'Conexiones/Base_Fundacional_Luciano.md' },
-  { id: 'con-clientes', titulo: 'Clientes clave', seccion: 'brownies', categoria: 'Red', resumen: 'Solo feedback inteligente o prescriptores. Frases textuales, ficha con próximo paso.', puntos: ['Dueña cafetería con comisión = ejemplo de prescriptor.', 'Tabla de prescriptores + historial + próximo paso.'], relaciones: ['bro-clientes-semilla', 'bro-log'], origen: 'Conexiones/Clientes_Clave.md' },
-  { id: 'con-locales', titulo: 'Locales amigos', seccion: 'brownies', categoria: 'Red', resumen: 'Kioscos/cervecerías/coworkings con consignación 20%, reposición y packaging con logo.', puntos: ['Dejar caja, 20%, pagar puntual, agradecer en IG, stock actualizado.'], relaciones: ['bro-fase3'], origen: 'Conexiones/Locales_Amigos.md' },
-  { id: 'con-proveedores', titulo: 'Proveedores', seccion: 'brownies', categoria: 'Red', resumen: 'Chocolatero Barracas + almacén harina. Comparar 2 por insumo, respaldo por crítico.', puntos: ['Precio actualizado cada compra. Tabla proveedor/producto/precio/calidad.'], relaciones: ['bro-fase3'], origen: 'Conexiones/Proveedores.md' },
+  {
+    id: 'bro-adn', titulo: 'ADN del Brownie', seccion: 'brownies', categoria: 'Visión', resumen: 'Artesanal, belga, húmedo dentro + crocante fuera, para after-office. No somos precio ni panadería.', puntos: ['Diferenciación: textura + chocolate belga + presentación instagrameable.', 'Momento: antojo 5pm y after-office. NO: abuela, barato, genérico.'], relaciones: ['bro-okr', 'bro-fase1'], origen: 'Plan/01_Vision_y_Objetivos/ADN_del_Brownie.md',
+    tipo: 'articulo',
+    intro: 'Lo que hace distinto al brownie y lo que no somos.',
+    tags: ['brownies'],
+    bloques: [
+      { t: 'h2', texto: 'Propuesta' },
+      { t: 'p', texto: 'Artesanal, belga, húmedo dentro y crocante fuera, para el after-office.' },
+      { t: 'h2', texto: 'Diferenciación' },
+      { t: 'lista', items: ['Textura + chocolate belga + presentación instagrameable.', 'Momento: antojo 5pm y after-office. NO: abuela, barato, genérico.'] },
+      { t: 'p', texto: 'La meta numérica en [[bro-okr]] y la receta en [[bro-fase1]].' }
+    ]
+  },
+  {
+    id: 'bro-okr', titulo: 'OKR 3 meses — 100 u/sem', seccion: 'brownies', categoria: 'Objetivos', resumen: '100 u/semana en Palermo con 30% recurrentes al mes 3. Revisión domingos vs Log.', puntos: ['Mes1 20u/5% cata · Mes2 50u/15% canales · Mes3 100u/30% escalar.', 'KR: volumen, recurrencia, presencia Soho/Hollywood.'], relaciones: ['bro-log', 'bro-eventos'], origen: 'Plan/01_Vision_y_Objetivos/OKR_Brownies_3_meses.md',
+    tipo: 'proyecto',
+    intro: '100 unidades por semana en Palermo con 30% de recurrentes al tercer mes.',
+    tags: ['palermo', 'canales', 'metricas'],
+    bloques: [
+      { t: 'h2', texto: 'Escalera' },
+      { t: 'lista', ordenada: true, items: ['Mes 1: 20u y 5% con cata y prueba.', 'Mes 2: 50u y 15% con canales y consignación.', 'Mes 3: 100u y 30% para escalar.'] },
+      { t: 'h2', texto: 'KR y revisión' },
+      { t: 'p', texto: 'Volumen, recurrencia y presencia en Soho y Hollywood; revisión los domingos contra el Log.' },
+      { t: 'p', texto: 'El registro en [[bro-log]] y la rampa de salida en [[bro-eventos]].' }
+    ]
+  },
+  {
+    id: 'bro-acuerdo', titulo: 'Acuerdo con socio', seccion: 'brownies', categoria: 'Sociedad', resumen: 'Roles, reparto, horarios y conflictos por escrito. Si no está escrito, no existe.', puntos: ['Cocina / ventas / redes por definir responsable.', 'Reglas: % reparto, última palabra, resolución de conflictos, firma con fecha.'], relaciones: ['con-luciano', 'bro-okr'], origen: 'Plan/01_Vision_y_Objetivos/Acuerdo_con_Socio.md',
+    tipo: 'articulo',
+    intro: 'Roles, reparto, horarios y conflictos por escrito: si no está escrito, no existe.',
+    tags: ['sociedad', 'acuerdo'],
+    bloques: [
+      { t: 'h2', texto: 'Roles' },
+      { t: 'p', texto: 'Cocina, ventas y redes, con responsable por definir.' },
+      { t: 'h2', texto: 'Reglas' },
+      { t: 'p', texto: 'Porcentaje de reparto, horarios, última palabra, resolución de conflictos y firma con fecha.' },
+      { t: 'p', texto: 'La base con Luciano en [[con-luciano]] y la meta en [[bro-okr]].' }
+    ]
+  },
+  {
+    id: 'bro-fase1', titulo: 'Fase 1 — Receta MVP', seccion: 'brownies', categoria: 'Producto', resumen: 'Cata ciega A/B/C con 10 personas y puntaje 1-10. La ganadora = Receta Base.', puntos: ['Variables controladas, no intuición. Registrar todo en Log.', 'Mide humedad, intensidad, dulzor y crocancia.'], relaciones: ['bro-log', 'bro-eventos'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Fase_1_Receta_MVP.md',
+    tipo: 'articulo',
+    intro: 'Cata ciega A/B/C con 10 personas: la ganadora es la Receta Base.',
+    tags: ['log', 'cata'],
+    bloques: [
+      { t: 'h2', texto: 'Método' },
+      { t: 'p', texto: 'Variables controladas, no intuición; todo registrado en el Log.' },
+      { t: 'h2', texto: 'Qué se mide' },
+      { t: 'p', texto: 'Humedad, intensidad, dulzor y crocancia, con puntaje de 1 a 10.' },
+      { t: 'p', texto: 'El registro en [[bro-log]] y dónde se prueba en [[bro-eventos]].' }
+    ]
+  },
+  {
+    id: 'bro-fase2', titulo: 'Fase 2 — Logística y packaging', seccion: 'brownies', categoria: 'Operación', resumen: 'Palermo instagrameable = moneda. Kraft + sello, delivery 19-21h, checklist de salida.', puntos: ['Pedidos hasta 18h, rapidez como diferenciador.', 'Bolso térmico, cambio chico, stock verificado, envases con logo.'], relaciones: ['bro-fase3', 'bro-mapa'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Fase_2_Logistica_y_Embalaje.md',
+    tipo: 'articulo',
+    intro: 'Palermo instagrameable es moneda: kraft con sello, delivery 19-21h y checklist.',
+    tags: ['palermo', 'packaging'],
+    bloques: [
+      { t: 'h2', texto: 'Entrega' },
+      { t: 'p', texto: 'Pedidos hasta las 18h, entrega 19-21h; la rapidez como diferenciador.' },
+      { t: 'h2', texto: 'Checklist de salida' },
+      { t: 'p', texto: 'Bolso térmico, cambio chico, stock verificado antes de las 18h y envases con logo.' },
+      { t: 'p', texto: 'Precios y canales en [[bro-fase3]] y territorio en [[bro-mapa]].' }
+    ]
+  },
+  {
+    id: 'bro-fase3', titulo: 'Fase 3 — Precio y canales', seccion: 'brownies', categoria: 'Ventas', resumen: 'Precio = (MP + hora + delivery) x3. Cara a cara, WhatsApp, consignación 20% e IG.', puntos: ['Referencia Palermo $1500-2500. Promos: mini-trozo + fidelidad 5ta caja.', 'Canal principal: probar sin presión → encargo → comunidad.'], relaciones: ['con-locales', 'bro-protocolo-venta'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Fase_3_Precio_y_Canales.md',
+    tipo: 'articulo',
+    intro: 'Precio por fórmula y cuatro canales: cara a cara, WhatsApp, consignación e IG.',
+    tags: ['palermo', 'ventas', 'canales', 'whatsapp', 'consignacion', 'precio'],
+    bloques: [
+      { t: 'h2', texto: 'Fórmula' },
+      { t: 'p', texto: 'Precio = (materia prima + hora de trabajo + delivery) x3, con referencia Palermo $1500-2500.' },
+      { t: 'h2', texto: 'Canales y promos' },
+      { t: 'lista', items: ['Cara a cara, delivery por WhatsApp hasta las 18h, consignación al 20% e IG.', 'Promos: mini-trozo gratis con caja lanzamiento y fidelidad con brownie extra en la 5ta caja.'] },
+      { t: 'p', texto: 'El guion en [[bro-protocolo-venta]] y los locales en [[con-locales]].' }
+    ]
+  },
+  {
+    id: 'bro-eventos', titulo: 'Eventos y lanzamiento', seccion: 'brownies', categoria: 'Lanzamiento', resumen: 'Calidad sobre cantidad: cata día 30 → preview día 75 → ruta semanal jueves+sábado.', puntos: ['Evento1: 6-8 amigos gratis + pregunta ¿comprarías caja de 6?', 'Evento2: pop-up Plazoleta Cortázar 40 unidades + preventa WhatsApp.', 'Evento3: mensaje miércoles, hornear solo lo encargado, cero desperdicio.'], relaciones: ['bro-clientes-semilla', 'bro-mapa'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Plan_de_Eventos_y_Lanzamiento.md',
+    tipo: 'proyecto',
+    intro: 'Calidad sobre cantidad: cata, preview y ruta semanal sin desperdicio.',
+    tags: ['eventos', 'whatsapp'],
+    bloques: [
+      { t: 'h2', texto: 'Los 3 eventos' },
+      { t: 'lista', ordenada: true, items: ['Cata ciega día ~30: 6-8 amigos gratis + pregunta ¿comprarías caja de 6?', 'Preview Palermo día ~75: pop-up con 40 unidades + preventa WhatsApp.', 'Ruta semanal jueves y sábados: mensaje miércoles y hornear solo lo encargado.'] },
+      { t: 'p', texto: 'Los repetidores en [[bro-clientes-semilla]] y el territorio en [[bro-mapa]].' }
+    ]
+  },
+  {
+    id: 'bro-calendario', titulo: 'Calendario y cuenta regresiva', seccion: 'brownies', categoria: 'Cultivo', resumen: '55 días floración + secado + curado. 8 semanas para dominar línea común. Solo común a la venta.', puntos: ['Hitos +55 corte, +62 secado, +72 curado, +73 infusión.', 'Nota legal: Ley 27.350/Reprocann cubre personal; venta abierta = solo común.'], relaciones: ['bro-protocolo-manteca', 'bro-errores'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Calendario_y_Cuenta_Regresiva.md',
+    tipo: 'articulo',
+    intro: 'Cuenta regresiva del cultivo con hitos, más 8 semanas para dominar la línea común.',
+    tags: ['tiempos'],
+    bloques: [
+      { t: 'h2', texto: 'Hitos' },
+      { t: 'p', texto: '+55 corte, +62 secado, +72 curado y +73 infusión.' },
+      { t: 'h2', texto: 'Nota legal' },
+      { t: 'p', texto: 'Ley 27.350 y Reprocann cubren lo personal; la venta abierta es solo línea común.' },
+      { t: 'p', texto: 'El estándar técnico en [[bro-protocolo-manteca]] y qué evitar en [[bro-errores]].' }
+    ]
+  },
+  {
+    id: 'bro-protocolo-manteca', titulo: 'Protocolo manteca infusionada', seccion: 'brownies', categoria: 'Técnica', resumen: 'Estándar 5 fases sin hervir: secado, water curing frío, descarboxilación, infusión, purificación.', puntos: ['110-115°C 35min obligatorio · infusión 80-85°C baño María con termómetro.', 'Manteca 82% o coco, nunca leche. Checklist por responsable.'], relaciones: ['bro-errores', 'con-luciano'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Protocolo_Manteca_Infusionada.md',
+    tipo: 'proyecto',
+    intro: 'Estándar técnico en 5 fases, sin hervir: del secado a la purificación.',
+    tags: ['tecnica', 'tiempos', 'proceso'],
+    bloques: [
+      { t: 'h2', texto: 'Las 5 fases' },
+      { t: 'lista', ordenada: true, items: ['Secado y curado.', 'Water curing en frío.', 'Descarboxilación 110-115°C por 35 minutos, obligatoria.', 'Infusión 80-85°C a baño María con termómetro.', 'Purificación.'] },
+      { t: 'h2', texto: 'Reglas' },
+      { t: 'p', texto: 'Manteca 82% o coco, nunca leche; checklist por responsable.' },
+      { t: 'p', texto: 'Qué evitar en [[bro-errores]].' }
+    ]
+  },
+  {
+    id: 'bro-errores', titulo: 'Errores críticos de procesamiento', seccion: 'brownies', categoria: 'Técnica', resumen: '5 errores que arruinan potencia/sabor y su corrección exacta.', puntos: ['No hervir flor · no usar leche · descarboxilar siempre · no pasar 100°C · no secar en horno.'], relaciones: ['bro-protocolo-manteca'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Errores_Criticos_Procesamiento.md',
+    tipo: 'articulo',
+    intro: 'Cinco errores que arruinan potencia y sabor, cada uno con su corrección.',
+    tags: ['tecnica', 'proceso'],
+    bloques: [
+      { t: 'h2', texto: 'Los 5 errores' },
+      { t: 'lista', items: ['No hervir la flor.', 'No usar leche.', 'Descarboxilar siempre.', 'No pasar los 100°C en infusión.', 'No secar en horno.'] },
+      { t: 'p', texto: 'El estándar correcto en [[bro-protocolo-manteca]].' }
+    ]
+  },
+  {
+    id: 'bro-clientes-semilla', titulo: 'Clientes semilla', seccion: 'brownies', categoria: 'Clientes', resumen: 'Probaron en evento y pidieron repetir: tratar como socios, contacto solo 24h antes.', puntos: ['Tabla nombre/WhatsApp/preferencia/frecuencia/recordatorio.', 'Repetición = métrica clave. Consignación → ficha en Clientes Clave.'], relaciones: ['bro-log', 'con-clientes'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Clientes_Semilla.md',
+    tipo: 'articulo',
+    intro: 'Quienes probaron en evento y pidieron repetir: tratar como socios.',
+    tags: ['clientes', 'log', 'eventos', 'whatsapp', 'consignacion'],
+    bloques: [
+      { t: 'h2', texto: 'Registro' },
+      { t: 'p', texto: 'Tabla con nombre, WhatsApp, preferencia, frecuencia y próximo recordatorio.' },
+      { t: 'h2', texto: 'Reglas' },
+      { t: 'lista', items: ['Contacto solo 24h antes del horneado.', 'Repetición como métrica clave; consignación con ficha en Clientes Clave.'] },
+      { t: 'p', texto: 'Todo se anota en [[bro-log]] y los prescriptores en [[con-clientes]].' }
+    ]
+  },
+  {
+    id: 'bro-consolidado', titulo: 'Documento consolidado', seccion: 'brownies', categoria: 'Índice', resumen: 'Índice-resumen de todo el proyecto: visión, fases, contexto, decisiones, modelos y estado día 1.', puntos: ['Replica ADN, OKR, cronograma, eventos y acción inmediata Gurruchaga/Honduras.', 'Estado: día 1 cultivo, 8 semanas de espera, venta = línea común.'], relaciones: ['sis-integracion', 'bro-accion'], origen: 'Plan/02_Proyectos_Activos/Brownie_Project/Consolidado_Del_Proyecto.md',
+    tipo: 'indice',
+    intro: 'Índice-resumen de todo el proyecto al día 1: visión, fases y estado.',
+    tags: ['indice'],
+    bloques: [
+      { t: 'h2', texto: 'Contenido' },
+      { t: 'p', texto: 'Replica ADN, OKR, cronograma, eventos y acción inmediata en Gurruchaga y Honduras.' },
+      { t: 'h2', texto: 'Estado' },
+      { t: 'p', texto: 'Día 1 de cultivo, 8 semanas de espera y venta de línea común.' },
+      { t: 'p', texto: 'El mapa de dominios en [[sis-integracion]] y el primer paso en [[bro-accion]].' }
+    ]
+  },
+  {
+    id: 'bro-accion', titulo: 'Acción inmediata — sábado Palermo', seccion: 'brownies', categoria: 'Acción', resumen: 'Cata + 20 brownies sábado 17h Gurruchaga y Honduras, outfit definido, registrar en Log.', puntos: ['2 días cata a ciegas · logo simple · nombres: Bunker / Dulce Poder / Bloque.', 'Actitud de favor, no miedo. Foto primera venta a IG/WhatsApp.'], relaciones: ['bro-log', 'bro-checklist'], origen: 'Plan/Accion_Inmediata.md',
+    tipo: 'articulo',
+    intro: 'El primer sábado: cata más 20 brownies en Gurruchaga y Honduras.',
+    tags: ['palermo', 'log', 'cata'],
+    bloques: [
+      { t: 'h2', texto: 'El plan' },
+      { t: 'lista', items: ['2 días de cata a ciegas y logo simple.', 'Nombres candidatos: Bunker, Dulce Poder y Bloque.', 'Sábado 17h con outfit definido y actitud de favor, no miedo.'] },
+      { t: 'h2', texto: 'Después' },
+      { t: 'p', texto: 'Registrar en el Log y subir la foto de la primera venta a IG y WhatsApp.' },
+      { t: 'p', texto: 'Dónde anotar en [[bro-log]] y cómo vestir en [[bro-checklist]].' }
+    ]
+  },
+  {
+    id: 'bro-mapa', titulo: 'Mapa de Palermo', seccion: 'brownies', categoria: 'Territorio', resumen: '4 microclimas: Soho turista, Hollywood oficinista, Parques familia, Oficinas delivery.', puntos: ['Recorrer cada zona, marcar circulación alta, registrar cada salida en Log.'], relaciones: ['bro-log', 'bro-eventos'], origen: 'Plan/03_Contexto_y_Paradigmas/Mapa_de_Palermo.md',
+    tipo: 'articulo',
+    intro: 'Cuatro microclimas con lógicas distintas: Soho, Hollywood, Parques y Oficinas.',
+    tags: ['palermo', 'log'],
+    bloques: [
+      { t: 'h2', texto: 'Zonas' },
+      { t: 'p', texto: 'Soho turista, Hollywood oficinista, Parques familia y Oficinas para delivery.' },
+      { t: 'h2', texto: 'Tarea' },
+      { t: 'p', texto: 'Recorrer cada zona, marcar circulación alta y registrar cada salida en el Log.' },
+      { t: 'p', texto: 'El registro en [[bro-log]] y dónde estrenar en [[bro-eventos]].' }
+    ]
+  },
+  {
+    id: 'bro-paradigma', titulo: 'Paradigma del emprendedor', seccion: 'brownies', categoria: 'Mentalidad', resumen: 'De convencer (presión) a servir (aliado): resolver el antojo 5pm.', puntos: ['Combos café, hora dorada after-office, mensajes del momento.', 'Revisión mensual: ¿vendí desde convencimiento o servicio?'], relaciones: ['men-paradigmas', 'bro-protocolo-venta'], origen: 'Plan/03_Contexto_y_Paradigmas/Paradigma_del_Emprendedor.md',
+    tipo: 'articulo',
+    intro: 'De convencer a servir: resolver el antojo de las 5pm como aliado.',
+    tags: ['decision', 'metodo'],
+    bloques: [
+      { t: 'h2', texto: 'El cambio' },
+      { t: 'p', texto: 'Dejar el "tengo que convencerlos" (presión y miedo) por "resolverles el antojo" (servicio).' },
+      { t: 'h2', texto: 'Práctica' },
+      { t: 'lista', items: ['Combos con café o bebida y hora dorada after-office.', 'Mensajes del momento, no del producto.', 'Revisión mensual: ¿vendí desde convencimiento o servicio?'] },
+      { t: 'p', texto: 'El lente en [[men-paradigmas]] y la venta en [[bro-protocolo-venta]].' }
+    ]
+  },
+  {
+    id: 'bro-log', titulo: 'Log de ventas y feedback', seccion: 'brownies', categoria: 'Ritual', resumen: 'SAGRADO: ubicación, hora, clima y frase textual. El negativo = oro. Revisión domingo.', puntos: ['Prohibido ¿te gustó? → ¿qué mejorarías? / ¿por qué NO lo comprarías?', 'Registrar el mismo día, textual, sin interpretar. Catas A/B/C documentadas.'], relaciones: ['bro-protocolo-venta', 'con-clientes'], origen: 'Plan/04_Decisiones_y_Revisiones/Log_de_Ventas_y_Feedback.md',
+    tipo: 'articulo',
+    intro: 'El cuaderno sagrado: ubicación, hora, clima y frase textual, con revisión domingo.',
+    tags: ['ritual', 'ventas', 'registro'],
+    bloques: [
+      { t: 'h2', texto: 'Qué se anota' },
+      { t: 'p', texto: 'Ubicación, hora, clima y frase textual, siempre.' },
+      { t: 'h2', texto: 'Cómo preguntar' },
+      { t: 'p', texto: 'Prohibido el "¿te gustó?": usar "¿qué mejorarías?" o "¿por qué NO lo comprarías?". El negativo es oro.' },
+      { t: 'h2', texto: 'Disciplina' },
+      { t: 'p', texto: 'Registrar el mismo día, textual y sin interpretar, con catas A/B/C documentadas.' },
+      { t: 'p', texto: 'Se usa en [[bro-protocolo-venta]] y lo leen [[con-clientes]].' }
+    ]
+  },
+  {
+    id: 'bro-checklist', titulo: 'Checklist imagen personal', seccion: 'brownies', categoria: 'Ritual', resumen: 'Casual premium Palermo: blancas limpias, jean oscuro, remera lisa, delantal de tela.', puntos: ['Manos miran: uñas, mentitas, cabello. Espejo + logo visible + cambio + stock.'], relaciones: ['bro-accion'], origen: 'Plan/04_Decisiones_y_Revisiones/Checklist_Imagen_Personal.md',
+    tipo: 'articulo',
+    intro: 'Casual premium para Palermo, con las manos como vidriera.',
+    tags: ['ritual', 'palermo'],
+    bloques: [
+      { t: 'h2', texto: 'Vestimenta' },
+      { t: 'p', texto: 'Blancas limpias, jean oscuro, remera lisa y delantal de tela con logo.' },
+      { t: 'h2', texto: 'Antes de salir' },
+      { t: 'p', texto: 'Manos miran: uñas, mentitas y cabello. Espejo, logo visible, cambio y stock.' },
+      { t: 'p', texto: 'Se usa el sábado de [[bro-accion]].' }
+    ]
+  },
+  {
+    id: 'bro-protocolo-venta', titulo: 'Protocolo venta cara a cara', seccion: 'brownies', categoria: 'Ventas', resumen: 'Guion 30s con reciprocidad: mini-trozo gratis → caja lanzamiento → sin compromiso.', puntos: ['70% compra con reciprocidad. Mirar, sonreír, esperar, aceptar el no.', 'Postventa: agradecer, fidelidad, feedback abierto, registrar, fichar prescriptor.'], relaciones: ['bro-log', 'men-plan-venta'], origen: 'Plan/04_Decisiones_y_Revisiones/Protocolo_De_Venta_Cara_a_Cara.md',
+    tipo: 'articulo',
+    intro: 'Guion flexible de 30 segundos con reciprocidad y postventa con registro.',
+    tags: ['ventas', 'log', 'registro'],
+    bloques: [
+      { t: 'h2', texto: 'El guion' },
+      { t: 'p', texto: 'Saludo + mini-trozo gratis + caja lanzamiento, sin compromiso; el 70% compra con reciprocidad.' },
+      { t: 'h2', texto: 'Actitud' },
+      { t: 'p', texto: 'Mirar a los ojos, sonreír, esperar y aceptar el no.' },
+      { t: 'h2', texto: 'Postventa' },
+      { t: 'p', texto: 'Agradecer, fidelidad, feedback abierto, registrar en el Log y fichar prescriptor.' },
+      { t: 'p', texto: 'Dónde anotar en [[bro-log]] y la psicología detrás en [[men-plan-venta]].' }
+    ]
+  },
+  {
+    id: 'bro-competencia', titulo: 'Competencia directa', seccion: 'brownies', categoria: 'Mercado', resumen: 'Mapear 5 lugares: precio, tamaño, packaging, atención y textura. Actualizar cada 2-3 meses.', puntos: ['Si secos→textura · feos→packaging · caros→valor · lentos→rapidez.'], relaciones: ['bro-fase3'], origen: 'Plan/05_Bateria_de_Ideas_y_Modelos/Competencia_Directa.md',
+    tipo: 'articulo',
+    intro: 'Mapear 5 lugares cercanos y convertir cada debilidad ajena en diferenciador.',
+    tags: ['precio', 'metricas', 'packaging'],
+    bloques: [
+      { t: 'h2', texto: 'Qué anotar' },
+      { t: 'p', texto: 'Precio, tamaño, packaging, atención y textura de cada lugar; actualizar cada 2-3 meses.' },
+      { t: 'h2', texto: 'Lectura' },
+      { t: 'p', texto: 'Si secos, textura; si feos, packaging; si caros, valor; si lentos, rapidez.' },
+      { t: 'p', texto: 'Cómo responder en precio y canales: [[bro-fase3]].' }
+    ]
+  },
+  {
+    id: 'bro-sesgos-palermo', titulo: 'Sesgos del cliente palermitano', seccion: 'brownies', categoria: 'Psicología', resumen: 'Escasez real, bandwagon diario, aversión a la pérdida y reciprocidad sin manipulación.', puntos: ['Solo 30 cajas hoy · foto primera caja volando · 5ta extra para no perder.', 'Mini-trozo, compromiso y prueba social con clientes contentos.'], relaciones: ['men-indice-sesgos', 'bro-protocolo-venta'], origen: 'Plan/05_Bateria_de_Ideas_y_Modelos/Sesgos_del_Cliente_Palermitano.md',
+    tipo: 'articulo',
+    intro: 'Psicología sin manipulación: escasez real, prueba social y aversión a la pérdida.',
+    tags: ['sesgos', 'ventas', 'palermo'],
+    bloques: [
+      { t: 'h2', texto: 'Los 3 motores' },
+      { t: 'lista', items: ['Escasez: solo 30 cajas hoy, con stock real.', 'Bandwagon: foto diaria de la primera caja volando.', 'Aversión a la pérdida: 5ta extra para no perder.'] },
+      { t: 'h2', texto: 'Base' },
+      { t: 'p', texto: 'Mini-trozo, compromiso y prueba social con clientes contentos.' },
+      { t: 'p', texto: 'El catálogo en [[men-indice-sesgos]] y el guion en [[bro-protocolo-venta]].' }
+    ]
+  },
+  {
+    id: 'con-luciano', titulo: 'Base fundacional — Luciano', seccion: 'brownies', categoria: 'Sociedad', resumen: 'Yo capital + él trabajo. 70/30 hasta recuperar → 50/50. Corte cada 15 días, llamada domingos 20h.', puntos: ['Yo finanzas/marketing · Luciano Maestro Browniero, autoridad del horno.', 'Alcancía compartida + planilla. Plan A/B según quién vende. Salida digna si consigue fijo.'], relaciones: ['bro-acuerdo', 'sis-plantilla-persona'], origen: 'Conexiones/Base_Fundacional_Luciano.md',
+    tipo: 'articulo',
+    intro: 'Yo capital y él trabajo: reparto por etapas, corte quincenal y salida digna.',
+    tags: ['sociedad', 'acuerdo'],
+    bloques: [
+      { t: 'h2', texto: 'Roles' },
+      { t: 'p', texto: 'Yo finanzas y marketing; Luciano Maestro Browniero con autoridad del horno.' },
+      { t: 'h2', texto: 'Números' },
+      { t: 'p', texto: '70/30 hasta recuperar, luego 50/50; alcancía compartida con planilla y corte cada 15 días.' },
+      { t: 'h2', texto: 'Convivencia' },
+      { t: 'p', texto: 'Plan A/B según quién vende, llamada domingos 20h y salida digna si consigue fijo.' },
+      { t: 'p', texto: 'El acuerdo marco en [[bro-acuerdo]].' }
+    ]
+  },
+  {
+    id: 'con-clientes', titulo: 'Clientes clave', seccion: 'brownies', categoria: 'Red', resumen: 'Solo feedback inteligente o prescriptores. Frases textuales, ficha con próximo paso.', puntos: ['Dueña cafetería con comisión = ejemplo de prescriptor.', 'Tabla de prescriptores + historial + próximo paso.'], relaciones: ['bro-clientes-semilla', 'bro-log'], origen: 'Conexiones/Clientes_Clave.md',
+    tipo: 'articulo',
+    intro: 'Solo feedback inteligente o prescriptores, con frases textuales.',
+    tags: ['red', 'clientes'],
+    bloques: [
+      { t: 'h2', texto: 'Ficha' },
+      { t: 'p', texto: 'Tabla de prescriptores con historial y próximo paso, siempre con frases textuales.' },
+      { t: 'h2', texto: 'Ejemplo' },
+      { t: 'p', texto: 'Dueña de cafetería con comisión como prescriptora.' },
+      { t: 'p', texto: 'De dónde salen en [[bro-clientes-semilla]] y dónde se anotan en [[bro-log]].' }
+    ]
+  },
+  {
+    id: 'con-locales', titulo: 'Locales amigos', seccion: 'brownies', categoria: 'Red', resumen: 'Kioscos/cervecerías/coworkings con consignación 20%, reposición y packaging con logo.', puntos: ['Dejar caja, 20%, pagar puntual, agradecer en IG, stock actualizado.'], relaciones: ['bro-fase3'], origen: 'Conexiones/Locales_Amigos.md',
+    tipo: 'articulo',
+    intro: 'Kioscos, cervecerías y coworkings con consignación y reposición.',
+    tags: ['red', 'consignacion'],
+    bloques: [
+      { t: 'h2', texto: 'Acuerdo' },
+      { t: 'p', texto: 'Dejar caja con 20%, reposición y packaging con logo.' },
+      { t: 'h2', texto: 'Reglas' },
+      { t: 'p', texto: 'Stock actualizado, registro en el Log, pago puntual y agradecimiento en IG.' },
+      { t: 'p', texto: 'El canal en [[bro-fase3]].' }
+    ]
+  },
+  {
+    id: 'con-proveedores', titulo: 'Proveedores', seccion: 'brownies', categoria: 'Red', resumen: 'Chocolatero Barracas + almacén harina. Comparar 2 por insumo, respaldo por crítico.', puntos: ['Precio actualizado cada compra. Tabla proveedor/producto/precio/calidad.'], relaciones: ['bro-fase3'], origen: 'Conexiones/Proveedores.md',
+    tipo: 'articulo',
+    intro: 'Chocolatero y almacén: comparar de a 2 por insumo y respaldar lo crítico.',
+    tags: ['red', 'precio'],
+    bloques: [
+      { t: 'h2', texto: 'Quiénes' },
+      { t: 'p', texto: 'Chocolatero de Barracas y almacén para la harina al mejor precio.' },
+      { t: 'h2', texto: 'Reglas' },
+      { t: 'p', texto: 'Comparar 2 por insumo, precio actualizado en cada compra y respaldo por insumo crítico.' },
+      { t: 'p', texto: 'Impactan en la fórmula de [[bro-fase3]].' }
+    ]
+  },
 
   // ── OXIDA ──
   {
@@ -489,7 +779,7 @@ export const notas: VaultNote[] = [
     id: 'men-plan-venta', titulo: 'Plan de venta con 13 sesgos', seccion: 'mente', categoria: 'Ventas', resumen: 'Brownies como caso aplicado: tribu, aval, escasez, post diario, packaging y entrega fija.', puntos: ['F1 fundación → F2 círculo → F3 presencia diaria → F4 expansión 2-3 puntos.', 'Métricas: u/semana, recompra >30%, impulso >50%, menciones ≥3/sem.', 'Oro: los sesgos venden la primera vez; la repetición la gana el producto.'], relaciones: ['bro-protocolo-venta', 'men-indice-sesgos'], origen: 'Sesgos Cognitivos/Plan de Acción — Venta de Brownies.md',
     tipo: 'articulo',
     intro: 'Brownies como caso aplicado de los 13 sesgos, por fases y con métricas.',
-    tags: ['sesgos', 'ventas'],
+    tags: ['sesgos', 'ventas', 'brownies'],
     bloques: [
       { t: 'h2', texto: 'Fases' },
       { t: 'lista', ordenada: true, items: ['F1 fundación.', 'F2 círculo cercano.', 'F3 presencia diaria.', 'F4 expansión a 2-3 puntos.'] },

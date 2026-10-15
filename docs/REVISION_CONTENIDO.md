@@ -10,7 +10,9 @@ Vocabulario controlado de tags (minúsculas, cada uno con 2+ usos al cerrar cada
 csharp, sql, patrones, dotnet, trayectoria, operaciones, programacion, testing,
 decision, poder, principios, matriz, evaluacion, mapas, nucleo, estructura, metodo, plantillas,
 sesgos, ventas, accion, resplandor, herederos, dava, diseno, horror, reglas, arg, personajes,
-pozo, simbolos, entidad, indice.
+pozo, simbolos, entidad, indice, palermo, log, ventas, precio, canales, eventos, whatsapp,
+consignacion, red, clientes, registro, ritual, tecnica, proceso, tiempos, cata, metricas,
+packaging, sociedad, acuerdo, brownies.
 
 ## Lote piloto — Facultad + Ideas sueltas
 
@@ -79,3 +81,34 @@ Sin ejemplos añadidos: el universo se presenta con sus propios términos y cifr
 - `oxi-mapa-tension` · tipo articulo · tags diseno, arg · Agregado: intro + escalada + claves. Sin banderas.
 - `oxi-web-arg` · tipo proyecto · tags arg, diseno · Agregado: intro + secciones + assets y pendiente. Sin banderas.
 - `oxi-sesgos-uso` · tipo articulo · tags sesgos, resplandor, dava · Agregado: intro + vectores. Sin banderas.
+
+## Lote Proyecto Brownies (24 notas)
+
+Sin ejemplos añadidos. `men-plan-venta` suma el tag `brownies` ("Brownies como caso aplicado",
+literal de su resumen). Mapeos documentados: `metodo` en bro-paradigma (revisión mensual como
+método), `proceso` (título "Procesamiento" en errores + estándar en protocolo).
+
+- `bro-adn` · tipo articulo · tags brownies · Agregado: intro + propuesta + diferenciación. 1 solo tag por nota breve. **revisar**: nada, nota completa.
+- `bro-okr` · tipo proyecto · tags palermo, canales, metricas · Agregado: intro + escalera como timeline + KR. Sin banderas.
+- `bro-acuerdo` · tipo articulo · tags sociedad, acuerdo · Agregado: intro + roles + reglas. Sin banderas.
+- `bro-fase1` · tipo articulo · tags log, cata · Agregado: intro + método + qué se mide. Sin banderas.
+- `bro-fase2` · tipo articulo · tags palermo, packaging · Agregado: intro + entrega + checklist. Sin banderas.
+- `bro-fase3` · tipo articulo · tags palermo, ventas, canales, whatsapp, consignacion, precio · Agregado: intro + fórmula + canales y promos. Sin banderas.
+- `bro-eventos` · tipo proyecto · tags eventos, whatsapp · Agregado: intro + 3 eventos como timeline. Sin banderas.
+- `bro-calendario` · tipo articulo · tags tiempos · Agregado: intro + hitos + nota legal. 1 solo tag. **revisar**: nota completa pero mínima.
+- `bro-protocolo-manteca` · tipo proyecto · tags tecnica, tiempos, proceso · Agregado: intro + 5 fases como timeline + reglas. Sin banderas.
+- `bro-errores` · tipo articulo · tags tecnica, proceso · Agregado: intro + lista de 5. Sin banderas.
+- `bro-clientes-semilla` · tipo articulo · tags clientes, log, eventos, whatsapp, consignacion · Agregado: intro + registro + reglas. Sin banderas.
+- `bro-consolidado` · tipo indice · tags indice · Agregado: intro + contenido + estado. 1 solo tag. **revisar**: nada, es índice por naturaleza.
+- `bro-accion` · tipo articulo · tags palermo, log, cata · Agregado: intro + plan + después. Sin banderas.
+- `bro-mapa` · tipo articulo · tags palermo, log · Agregado: intro + zonas + tarea. Sin banderas.
+- `bro-paradigma` · tipo articulo · tags decision, metodo · Agregado: intro + cambio + práctica. Sin banderas.
+- `bro-log` · tipo articulo · tags ritual, ventas, registro · Agregado: intro + qué/cómo/disciplina. Sin banderas.
+- `bro-checklist` · tipo articulo · tags ritual, palermo · Agregado: intro + vestimenta + antes de salir. Sin banderas.
+- `bro-protocolo-venta` · tipo articulo · tags ventas, log, registro · Agregado: intro + guion + actitud + postventa. Sin banderas.
+- `bro-competencia` · tipo articulo · tags precio, metricas, packaging · Agregado: intro + qué anotar + lectura. Sin banderas.
+- `bro-sesgos-palermo` · tipo articulo · tags sesgos, ventas, palermo · Agregado: intro + motores + base. Sin banderas.
+- `con-luciano` · tipo articulo · tags sociedad, acuerdo · Agregado: intro + roles + números + convivencia. Sin banderas.
+- `con-clientes` · tipo articulo · tags red, clientes · Agregado: intro + ficha + ejemplo. Sin banderas.
+- `con-locales` · tipo articulo · tags red, consignacion · Agregado: intro + acuerdo + reglas. Sin banderas.
+- `con-proveedores` · tipo articulo · tags red, precio · Agregado: intro + quiénes + reglas. Sin banderas.
