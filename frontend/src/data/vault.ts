@@ -150,7 +150,7 @@ export const notas: VaultNote[] = [
     id: 'sis-index', titulo: 'Index Generalis — Mapa', seccion: 'sistema', categoria: 'Mapa', resumen: 'Mapa estructural del vault: 76 archivos, árbol, 47 vínculos y diagramas Mermaid.', puntos: ['Secciones raíz + 9 carpetas con etiquetas y estados.', 'Detecta 1 enlace frágil en Parci por guion corto vs largo.', '3 diagramas: Sistema Núcleo, Proyecto Brownies, Dominios Conocimiento.'], relaciones: ['sis-integracion', 'sis-consilium'], origen: 'Index_Generalis.md',
     tipo: 'indice',
     intro: 'El mapa estructural del vault: árbol, vínculos, diagramas y mantenimiento.',
-    tags: ['mapas', 'nucleo', 'estructura'],
+    tags: ['mapas', 'nucleo', 'estructura', 'indice'],
     bloques: [
       { t: 'h2', texto: 'Qué contiene' },
       { t: 'lista', items: ['Árbol de secciones raíz + 9 carpetas con etiquetas y estados.', '47 vínculos internos válidos y 1 enlace frágil detectado en Parci.', '3 diagramas: Sistema Núcleo, Proyecto Brownies y Dominios Conocimiento.'] },
