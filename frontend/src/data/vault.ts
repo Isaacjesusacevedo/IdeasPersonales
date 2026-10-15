@@ -43,12 +43,76 @@ export const secciones: VaultSeccion[] = [
 
 export const notas: VaultNote[] = [
   // ── YO ──
-  { id: 'yo-perfil', titulo: 'Perfil profesional', seccion: 'yo', categoria: 'Perfil', resumen: 'Estudiante avanzado Analista en Sistemas + 5 años de operaciones + desarrollo web full-stack.', puntos: ['Perfil dual conector operativo-técnico: monitoreo, inventarios, logística y desarrollo JS/Vue/React/Node/C#/SQL.', 'Operaciones: sistema propio de control en Excel avanzado que automatizó reportes manuales en Toxic Shine.', 'Desarrollo: frontend + backend + SQL + REST con foco en calidad, testing e ingeniería inversa pre-deploy.', 'Fortalezas: detalle, análisis, organización, comunicación técnica. Inglés B2.'], relaciones: ['yo-habilidades', 'yo-experiencia', 'yo-proyectos'], origen: 'Información Yo/Perfil profesional.md' },
-  { id: 'yo-contacto', titulo: 'Datos de contacto', seccion: 'yo', categoria: 'Contacto', resumen: 'Isaac Jesús Acevedo — José León Suárez, GBA. Email, tel, portfolio y GitHub.', puntos: ['Email isaac.acevedor1610@gmail.com · Tel +54 11 2729-8993.', 'Portfolio isaacjesusacevedo.github.io/portfolio · GitHub Isaacjesusacevedo.'], relaciones: ['yo-perfil'], origen: 'Información Yo/Datos de Contacto.md' },
-  { id: 'yo-experiencia', titulo: 'Experiencia laboral', seccion: 'yo', categoria: 'Trabajo', resumen: 'Toxic Shine (2021–hoy) encargado/supervisor + Tutoría Tupac Amaru (2023–2024).', puntos: ['Toxic Shine: monitoreo diario producción/inventario/logística, reportes semanales de cumplimiento y desvíos, sistema Excel VBA activo.', 'Tutor Programación: clases prácticas HTML/CSS/JS/Vue, revisión de código y debugging.', 'Puente operaciones↔código: validar datos, coordinar equipos, comparar períodos y KPIs.'], relaciones: ['yo-perfil', 'yo-habilidades'], origen: 'Información Yo/Experiencia laboral.md' },
-  { id: 'yo-educacion', titulo: 'Educación', seccion: 'yo', categoria: 'Estudio', resumen: 'Analista en Sistemas 3er año (Tupac Amaru) + curso web 6 meses + secundaria completa.', puntos: ['Terciario en curso desde 2023, compatibilizado con full-time y tutoría.', 'Curso Creación Páginas Web: HTML semántico, CSS Flex/Grid, JS DOM, a11y, Git y deploy.', 'Secundaria: Bachiller ES N°9 María G. de Galvagno.'], relaciones: ['fac-parcial', 'fac-guia-net'], origen: 'Información Yo/Educación.md' },
-  { id: 'yo-habilidades', titulo: 'Habilidades técnicas', seccion: 'yo', categoria: 'Stack', resumen: 'JS/Vue fuerte, React, HTML/CSS, C#/.NET, SQL Server, REST, Git, Scrum y calidad.', puntos: ['Lenguajes: JavaScript sólido, Vue fuerte, React, C#/.NET intermedio con capas y SOLID.', 'Datos/APIs: SQL Server, stored procedures, REST/JSON, fetch/axios, Postman, async y manejo de errores.', 'Agile/calidad: Git branching/PR, Scrum/Kanban, tests unitarios y funcionales, debugging e ingeniería inversa.'], relaciones: ['yo-proyectos', 'fac-demoado'], origen: 'Información Yo/Habilidades técnicas.md' },
-  { id: 'yo-proyectos', titulo: 'Proyectos personales', seccion: 'yo', categoria: 'Portfolio', resumen: 'Orange-Blue, Sistema Académico, Librerías, Galones Excel y portfolio full-stack.', puntos: ['Orange-Blue: web Vue+TS con visibilidades dinámicas y testing funcional.', 'Sistemas de consola C# en 3 capas con JSON y SOLID.', 'Gestión Área Galones: Excel VBA en uso real que reemplazó planillas manuales.', 'Método: interfaces → APIs → Kanban/Git → testing exhaustivo pre-deploy.'], relaciones: ['oxi-web-arg', 'fac-info-academica'], origen: 'Información Yo/Proyectos personales.md' },
+  {
+    id: 'yo-perfil', titulo: 'Perfil profesional', seccion: 'yo', categoria: 'Perfil', resumen: 'Estudiante avanzado Analista en Sistemas + 5 años de operaciones + desarrollo web full-stack.', puntos: ['Perfil dual conector operativo-técnico: monitoreo, inventarios, logística y desarrollo JS/Vue/React/Node/C#/SQL.', 'Operaciones: sistema propio de control en Excel avanzado que automatizó reportes manuales en Toxic Shine.', 'Desarrollo: frontend + backend + SQL + REST con foco en calidad, testing e ingeniería inversa pre-deploy.', 'Fortalezas: detalle, análisis, organización, comunicación técnica. Inglés B2.'], relaciones: ['yo-habilidades', 'yo-experiencia', 'yo-proyectos'], origen: 'Información Yo/Perfil profesional.md',
+    tipo: 'ficha',
+    intro: 'Perfil dual: operaciones y datos por un lado, desarrollo web full-stack por el otro, con base de Analista en Sistemas.',
+    tags: ['trayectoria', 'operaciones', 'csharp'],
+    claves: [
+      { termino: 'Operaciones', definicion: 'Monitoreo de producción, inventario y logística; sistema propio de control en Excel avanzado que automatizó reportes manuales.' },
+      { termino: 'Desarrollo', definicion: 'Frontend + backend + SQL + REST con foco en calidad, testing e ingeniería inversa pre-deploy.' },
+      { termino: 'Fortalezas', definicion: 'Detalle, análisis, organización y comunicación técnica. Inglés B2.' }
+    ]
+  },
+  {
+    id: 'yo-contacto', titulo: 'Datos de contacto', seccion: 'yo', categoria: 'Contacto', resumen: 'Isaac Jesús Acevedo — José León Suárez, GBA. Email, tel, portfolio y GitHub.', puntos: ['Email isaac.acevedor1610@gmail.com · Tel +54 11 2729-8993.', 'Portfolio isaacjesusacevedo.github.io/portfolio · GitHub Isaacjesusacevedo.'], relaciones: ['yo-perfil'], origen: 'Información Yo/Datos de Contacto.md',
+    tipo: 'articulo',
+    intro: 'Cómo contactarme: email, teléfono, ubicación y enlaces.',
+    tags: ['trayectoria']
+  },
+  {
+    id: 'yo-experiencia', titulo: 'Experiencia laboral', seccion: 'yo', categoria: 'Trabajo', resumen: 'Toxic Shine (2021–hoy) encargado/supervisor + Tutoría Tupac Amaru (2023–2024).', puntos: ['Toxic Shine: monitoreo diario producción/inventario/logística, reportes semanales de cumplimiento y desvíos, sistema Excel VBA activo.', 'Tutor Programación: clases prácticas HTML/CSS/JS/Vue, revisión de código y debugging.', 'Puente operaciones↔código: validar datos, coordinar equipos, comparar períodos y KPIs.'], relaciones: ['yo-perfil', 'yo-habilidades'], origen: 'Información Yo/Experiencia laboral.md',
+    tipo: 'articulo',
+    intro: 'Dos etapas: operación y supervisión en Toxic Shine desde 2021, y tutoría de programación entre 2023 y 2024.',
+    tags: ['trayectoria', 'operaciones'],
+    bloques: [
+      { t: 'h2', texto: 'Toxic Shine (2021–hoy)' },
+      { t: 'p', texto: 'Monitoreo diario de producción, inventario y logística en grandes volúmenes bajo plazo, con reportes semanales de cumplimiento, desvíos y performance.' },
+      { t: 'lista', items: ['Sistema propio de control en Excel VBA, hoy activo.', 'Validación y corrección de datos, coordinación multidisciplinaria y análisis comparativos por período.'] },
+      { t: 'h2', texto: 'Tutoría Tupac Amaru (2023–2024)' },
+      { t: 'p', texto: 'Clases prácticas de HTML, CSS, JS y Vue con proyectos reales, revisión de código, debugging y comunicación técnica clara.' },
+      { t: 'p', texto: 'El puente entre ambos mundos está descrito en [[yo-perfil]].' }
+    ]
+  },
+  {
+    id: 'yo-educacion', titulo: 'Educación', seccion: 'yo', categoria: 'Estudio', resumen: 'Analista en Sistemas 3er año (Tupac Amaru) + curso web 6 meses + secundaria completa.', puntos: ['Terciario en curso desde 2023, compatibilizado con full-time y tutoría.', 'Curso Creación Páginas Web: HTML semántico, CSS Flex/Grid, JS DOM, a11y, Git y deploy.', 'Secundaria: Bachiller ES N°9 María G. de Galvagno.'], relaciones: ['fac-parcial', 'fac-guia-net'], origen: 'Información Yo/Educación.md',
+    tipo: 'articulo',
+    intro: 'Formación en curso (Analista en Sistemas, 3er año) más un curso web de 6 meses y la secundaria completa.',
+    tags: ['trayectoria', 'programacion'],
+    bloques: [
+      { t: 'h2', texto: 'Terciario' },
+      { t: 'p', texto: 'Analista en Sistemas en curso desde 2023, compatibilizado con full-time y tutoría.' },
+      { t: 'h2', texto: 'Curso web (6 meses)' },
+      { t: 'p', texto: 'Creación de Páginas Web: HTML semántico, CSS Flex/Grid, JS con DOM y eventos, accesibilidad, Git y deploy.' },
+      { t: 'h2', texto: 'Secundaria' },
+      { t: 'p', texto: 'Bachiller en la ES N°9 María G. de Galvagno, completo.' },
+      { t: 'p', texto: 'Apuntes de la carrera en [[fac-parcial]] y [[fac-guia-net]].' }
+    ]
+  },
+  {
+    id: 'yo-habilidades', titulo: 'Habilidades técnicas', seccion: 'yo', categoria: 'Stack', resumen: 'JS/Vue fuerte, React, HTML/CSS, C#/.NET, SQL Server, REST, Git, Scrum y calidad.', puntos: ['Lenguajes: JavaScript sólido, Vue fuerte, React, C#/.NET intermedio con capas y SOLID.', 'Datos/APIs: SQL Server, stored procedures, REST/JSON, fetch/axios, Postman, async y manejo de errores.', 'Agile/calidad: Git branching/PR, Scrum/Kanban, tests unitarios y funcionales, debugging e ingeniería inversa.'], relaciones: ['yo-proyectos', 'fac-demoado'], origen: 'Información Yo/Habilidades técnicas.md',
+    tipo: 'ficha',
+    intro: 'Stack de lenguajes, datos, versionado y calidad, con idiomas.',
+    tags: ['csharp', 'sql', 'programacion', 'testing'],
+    claves: [
+      { termino: 'Lenguajes', definicion: 'JavaScript sólido, Vue fuerte, React, HTML5/CSS3 y C#/.NET intermedio con capas y SOLID.' },
+      { termino: 'Datos y APIs', definicion: 'SQL Server con stored procedures, REST/JSON con fetch/axios, Postman y manejo de errores async.' },
+      { termino: 'Calidad', definicion: 'Tests unitarios y funcionales, debugging e ingeniería inversa pre-deploy; Git con branching y PR.' }
+    ]
+  },
+  {
+    id: 'yo-proyectos', titulo: 'Proyectos personales', seccion: 'yo', categoria: 'Portfolio', resumen: 'Orange-Blue, Sistema Académico, Librerías, Galones Excel y portfolio full-stack.', puntos: ['Orange-Blue: web Vue+TS con visibilidades dinámicas y testing funcional.', 'Sistemas de consola C# en 3 capas con JSON y SOLID.', 'Gestión Área Galones: Excel VBA en uso real que reemplazó planillas manuales.', 'Método: interfaces → APIs → Kanban/Git → testing exhaustivo pre-deploy.'], relaciones: ['oxi-web-arg', 'fac-info-academica'], origen: 'Información Yo/Proyectos personales.md',
+    tipo: 'proyecto',
+    intro: 'Cinco proyectos que muestran el método: interfaces, APIs, Kanban y testing antes del deploy.',
+    tags: ['csharp', 'programacion'],
+    bloques: [
+      { t: 'h2', texto: 'Proyectos' },
+      { t: 'lista', items: ['Orange-Blue: web Vue+TS con visibilidades dinámicas y testing funcional.', 'Sistemas de consola C# en 3 capas con JSON y SOLID.', 'Gestión Área Galones: Excel VBA en uso real que reemplazó planillas manuales.'] },
+      { t: 'h2', texto: 'Método' },
+      { t: 'p', texto: 'Interfaces → APIs → Kanban/Git → testing exhaustivo pre-deploy.' },
+      { t: 'p', texto: 'La web ARG del Proyecto Oxida usa este mismo stack: [[oxi-web-arg]].' }
+    ]
+  },
 
   // ── SISTEMA ──
   { id: 'sis-consilium', titulo: 'Consilium — Kernel', seccion: 'sistema', categoria: 'Núcleo', resumen: 'Única fuente de verdad: rampa 60s, umbral 0.5, tabla de activación y principios P1-P6.', puntos: ['Clasifica cada consulta en Simple / Contextual / Compleja para no sobre-analizar.', 'Tabla de Activación con 11 disparadores (Lu, brownie, cliente, CV, sesgo, poder…) → archivo exacto.', 'P1 Observador Invisible · P2 Homo Homini Lupus · P3 Virtù vs Fortuna · P4 Velo · P5 Príncipe y Aliados · P6 Mínima Exposición.', 'Flujo en 7 pasos + registro de casos. No dice qué hacer, dice cómo actuar.'], relaciones: ['sis-decisorium', 'sis-plan', 'sis-integracion'], origen: 'Consilium.md' },
@@ -190,7 +254,8 @@ export const notas: VaultNote[] = [
   {
     id: 'idea-4', titulo: 'Tests xUnit + Vitest', seccion: 'ideas', categoria: 'Calidad', resumen: 'Base de 34 tests en verde como en Sistema Industrial.', puntos: ['Referencia PROYECTO.md v1.2.0.'], relaciones: ['fac-parcial'], origen: 'IDEAS.md',
     tipo: 'coleccion',
-    intro: 'Base de tests en verde como la del Sistema Industrial.'
+    intro: 'Base de tests en verde como la del Sistema Industrial.',
+    tags: ['testing']
   }
 ]
 

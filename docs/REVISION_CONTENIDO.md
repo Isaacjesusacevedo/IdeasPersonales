@@ -7,7 +7,7 @@ Reglas aplicadas: ids/títulos/resúmenes/puntos/relaciones/origen intactos; sol
 (toda ilustración viene de las propias notas).
 
 Vocabulario controlado de tags (minúsculas, cada uno con 2+ usos al cerrar cada lote):
-csharp, sql, patrones, dotnet.
+csharp, sql, patrones, dotnet, trayectoria, operaciones, programacion, testing.
 
 ## Lote piloto — Facultad + Ideas sueltas
 
@@ -18,4 +18,13 @@ csharp, sql, patrones, dotnet.
 - `idea-1` · tipo coleccion · sin tags (nota de 1 línea; forzar tags inventaría conceptos) · **revisar**: reemplazar por una idea real en IDEAS.md.
 - `idea-2` · tipo coleccion · sin tags · **revisar**: ¿sigue vigente el objetivo de demos en vivo?
 - `idea-3` · tipo coleccion · sin tags · **revisar**: estado del checkout (¿empezado?).
-- `idea-4` · tipo coleccion · sin tags · **revisar**: ¿los 34 tests siguen en verde? (candidato a tag `testing` junto a yo-habilidades en el lote Yo).
+- `idea-4` · tipo coleccion · tags testing (pareja con yo-habilidades) · **revisar**: ¿los 34 tests siguen en verde?
+
+## Lote Yo (6 notas)
+
+- `yo-perfil` · tipo ficha · tags trayectoria, operaciones, csharp · Agregado: intro + 3 claves (Operaciones / Desarrollo / Fortalezas) con definiciones literales de la nota. Sin ejemplos añadidos. Sin banderas.
+- `yo-contacto` · tipo articulo · tags trayectoria · Agregado: intro. Sin bloques (la nota son 2 datos; las claves duplicarían). **revisar**: nada pendiente, nota completa.
+- `yo-experiencia` · tipo articulo · tags trayectoria, operaciones · Agregado: intro + 2 secciones (Toxic Shine / Tutoría) con un link a yo-perfil. Sin banderas.
+- `yo-educacion` · tipo articulo · tags trayectoria, programacion · Agregado: intro + 3 niveles (Terciario / Curso / Secundaria) + links a fac-parcial y fac-guia-net. Sin banderas.
+- `yo-habilidades` · tipo ficha · tags csharp, sql, programacion, testing · Agregado: intro + 3 claves (Lenguajes / Datos y APIs / Calidad). `testing` mapea "tests unitarios" literal. Sin ejemplos añadidos. Sin banderas.
+- `yo-proyectos` · tipo proyecto · tags csharp, programacion · Agregado: intro + Proyectos / Método + link a oxi-web-arg. Sin banderas.

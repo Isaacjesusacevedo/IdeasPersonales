@@ -80,7 +80,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
               </div>
             </div>
             <NoteRenderer v-if="nota.bloques?.length" :bloques="nota.bloques" />
-            <ul v-if="!nota.bloques?.length" class="puntos">
+            <ul v-if="!nota.bloques?.length && !nota.claves?.length" class="puntos">
               <li v-for="(p, i) in nota.puntos" :key="i">{{ p }}</li>
             </ul>
           </template>
