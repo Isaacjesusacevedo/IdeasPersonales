@@ -14,18 +14,20 @@ const nota = computed(() => notaPorId(id.value))
 
 <template>
   <div class="page">
-    <div v-if="!nota" class="card" style="text-align:center;padding:60px">
-      <h2>Idea no encontrada</h2><br /><RouterLink to="/ideas" class="btn btn-primary">Volver</RouterLink>
+    <div v-if="!nota" class="card notfound">
+      <div class="page-eyebrow">Idea · no encontrada</div>
+      <h2>Esa idea no existe</h2>
+      <br /><RouterLink to="/ideas" class="btn btn-primary">Volver a ideas</RouterLink>
     </div>
-    <div v-else>
+    <div v-else class="nota">
       <div class="page-header">
         <div class="page-eyebrow">Idea · {{ nota.categoria }}</div>
         <h1 class="page-title">{{ nota.titulo }}</h1>
-        <p class="page-subtitle">{{ nota.resumen }}</p>
+        <p class="lead">{{ nota.resumen }}</p>
       </div>
-      <div class="card">
+      <div class="card lift">
         <div class="card-header"><div class="card-title">Detalle</div><RouterLink to="/ideas" class="btn btn-ghost">← Ideas</RouterLink></div>
-        <ul style="padding-left:20px;display:flex;flex-direction:column;gap:10px;color:var(--text-1)">
+        <ul class="puntos">
           <li v-for="(p, i) in nota.puntos" :key="i">{{ p }}</li>
         </ul>
       </div>

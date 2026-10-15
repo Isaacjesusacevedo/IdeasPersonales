@@ -14,16 +14,17 @@ export interface VaultSeccion {
   nombre: string
   subtitulo: string
   descripcion: string
+  acento?: 'purple' | 'teal' | 'mix'
 }
 
 export const secciones: VaultSeccion[] = [
-  { id: 'yo', nombre: 'Yo', subtitulo: 'Perfil · Contacto · Carrera', descripcion: 'Quién soy: perfil dual operativo-técnico, experiencia en Toxic Shine y tutoría, formación Analista en Sistemas, stack y proyectos.' },
-  { id: 'sistema', nombre: 'Sistema de Decisión', subtitulo: 'Consilium · Decisorium · Plan', descripcion: 'Cómo pienso y decido: kernel Consilium P1-P6, fork Decisorium matriz 5D, Plan en 3 pasadas y plantillas.' },
-  { id: 'brownies', nombre: 'Proyecto Brownies', subtitulo: 'Palermo · MVP · Venta', descripcion: 'Emprendimiento en Palermo: ADN, OKR 100 u/sem, receta MVP, logística, precio, eventos, mapa y red de apoyo.' },
-  { id: 'oxida', nombre: 'Proyecto Oxida', subtitulo: 'Resplandor Naranja · ARG', descripcion: 'Universo horror analógico: Resplandor vs Tenue Azul, Herederos, DAVA, Lucian, Descendiente, Capítulo I y ARG web.' },
-  { id: 'mente', nombre: 'Biblioteca Mental', subtitulo: 'Sesgos · Paradigmas · Poder', descripcion: 'Cómo se deforma la lectura y cómo jugar el tablero: 13 sesgos, paradigmas, pensamientos rápidos, 48 leyes y Maquiavelo.' },
-  { id: 'facultad', nombre: 'Facultad', subtitulo: '.NET · C# · ADO · SQL', descripcion: 'Apuntes técnicos de Análisis en Sistemas: interfaces, recursividad, lambdas, patrones, DI, ADO.NET, EF Core y Vue.' },
-  { id: 'ideas', nombre: 'Ideas sueltas', subtitulo: 'Lectura rápida', descripcion: 'Capturas rápidas del día a día, sincronizadas con IDEAS.md.' }
+  { id: 'yo', nombre: 'Yo', subtitulo: 'Perfil · Contacto · Trayectoria', descripcion: 'Quién soy: perfil dual operativo-técnico, experiencia en Toxic Shine y tutoría, formación Analista en Sistemas, stack y proyectos.', acento: 'purple' },
+  { id: 'sistema', nombre: 'Sistema de Decisión', subtitulo: 'Consilium · Decisorium · Plan', descripcion: 'Cómo pienso y decido: kernel Consilium P1-P6, fork Decisorium matriz 5D, Plan en 3 pasadas y plantillas.', acento: 'teal' },
+  { id: 'brownies', nombre: 'Proyecto Brownies', subtitulo: 'Palermo · MVP · Venta', descripcion: 'Emprendimiento en Palermo: ADN, OKR 100 u/sem, receta MVP, logística, precio, eventos, mapa y red de apoyo.', acento: 'mix' },
+  { id: 'oxida', nombre: 'Proyecto Oxida', subtitulo: 'Resplandor Naranja · ARG', descripcion: 'Universo horror analógico: Resplandor vs Tenue Azul, Herederos, DAVA, Lucian, Descendiente, Capítulo I y ARG web.', acento: 'purple' },
+  { id: 'mente', nombre: 'Biblioteca Mental', subtitulo: 'Sesgos · Paradigmas · Poder', descripcion: 'Cómo se deforma la lectura y cómo jugar el tablero: 13 sesgos, paradigmas, pensamientos rápidos, 48 leyes y Maquiavelo.', acento: 'teal' },
+  { id: 'facultad', nombre: 'Facultad', subtitulo: '.NET · C# · ADO · SQL', descripcion: 'Apuntes técnicos de Análisis en Sistemas: interfaces, recursividad, lambdas, patrones, DI, ADO.NET, EF Core y Vue.', acento: 'mix' },
+  { id: 'ideas', nombre: 'Ideas sueltas', subtitulo: 'Lectura rápida', descripcion: 'Capturas rápidas del día a día, sincronizadas con IDEAS.md.', acento: 'purple' }
 ]
 
 export const notas: VaultNote[] = [

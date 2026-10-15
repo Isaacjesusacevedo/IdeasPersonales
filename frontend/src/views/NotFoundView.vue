@@ -1,8 +1,11 @@
 <template>
   <div class="page">
-    <div class="card" style="text-align:center;padding:60px">
-      <h1>404</h1>
-      <p style="color:var(--text-2)">Ruta no encontrada.</p>
+    <div class="card notfound">
+      <div class="notfound-num" aria-hidden="true">404</div>
+      <h1 class="page-title">Ruta no encontrada</h1>
+      <p class="page-subtitle" style="text-align:center">Esa dirección no existe en el Vault.</p>
+      <br />
+      <RouterLink to="/" class="btn btn-primary">Volver al inicio</RouterLink>
     </div>
   </div>
 </template>
