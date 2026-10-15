@@ -8,7 +8,8 @@ Reglas aplicadas: ids/títulos/resúmenes/puntos/relaciones/origen intactos; sol
 
 Vocabulario controlado de tags (minúsculas, cada uno con 2+ usos al cerrar cada lote):
 csharp, sql, patrones, dotnet, trayectoria, operaciones, programacion, testing,
-decision, poder, principios, matriz, evaluacion, mapas, nucleo, estructura, metodo, plantillas.
+decision, poder, principios, matriz, evaluacion, mapas, nucleo, estructura, metodo, plantillas,
+sesgos, ventas, accion.
 
 ## Lote piloto — Facultad + Ideas sueltas
 
@@ -39,3 +40,17 @@ decision, poder, principios, matriz, evaluacion, mapas, nucleo, estructura, meto
 - `sis-plan` · tipo articulo · tags decision, poder, metodo · Agregado: intro + 3 pasadas como secciones + tarjeta "Uso inverso" (contenido literal) + links a paradigmas, sesgos y leyes. Sin banderas.
 - `sis-plantilla-persona` · tipo articulo · tags plantillas, principios, poder, metodo · Agregado: intro + grilla + links a príncipe y consilium. Sin banderas.
 - `sis-plantilla-fork` · tipo articulo · tags plantillas, matriz, decision, evaluacion · Agregado: intro + ficha + link a decisorium. Sin banderas.
+
+## Lote Biblioteca Mental (8 notas)
+
+Sin ejemplos didácticos añadidos en este lote: las notas ya traen sus propios ejemplos
+y la regla 7 los reserva para conceptos generales — aquí no hizo falta inventar ninguno.
+
+- `men-indice-sesgos` · tipo indice · tags sesgos, decision, ventas · Agregado: intro + catálogo en 2 listas + Doble uso + links. Sin banderas.
+- `men-plan-venta` · tipo articulo · tags sesgos, ventas · Agregado: intro + Fases como timeline + Métricas + tarjeta de conclusión con la regla de oro literal + links. Sin banderas.
+- `men-sesgo-autoridad` · tipo ficha · tags sesgos, ventas, poder · Agregado: intro + 3 claves (Autoridad / Halo / Encuadre) literales + sección Brownies. Sin banderas.
+- `men-sesgo-lectura` · tipo ficha · tags sesgos, ventas, decision · Agregado: intro + 3 claves literales + Antídoto y uso. Sin banderas.
+- `men-paradigmas` · tipo articulo · tags decision, metodo, accion · Agregado: intro + método en timeline de 4 pasos + link a bro-paradigma. Sin banderas.
+- `men-rapidos` · tipo articulo · tags decision, accion · Agregado: intro + actuar / frenar / filtro + link a decisorium. Sin banderas.
+- `men-leyes` · tipo articulo · tags poder, decision · Agregado: intro + muestra + uso + links. Nota densa resumida en muestra; el detalle vive en el .md. Sin banderas.
+- `men-principe` · tipo articulo · tags poder, decision · Agregado: intro + ideas + links. Sin banderas.

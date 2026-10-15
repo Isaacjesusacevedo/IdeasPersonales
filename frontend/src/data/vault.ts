@@ -255,14 +255,115 @@ export const notas: VaultNote[] = [
   { id: 'oxi-sesgos-uso', titulo: 'Sesgos como vectores del sistema', seccion: 'oxida', categoria: 'Puente', resumen: 'Los 13 sesgos son cómo el Resplandor mueve al Descendiente donde quiere.', puntos: ['Autoridad: confía en DAVA por formato · Confirmación: racionaliza anomalías.', 'Halo Creo en ti = trampa · Espectador: DAVA paraliza justo lo necesario.'], relaciones: ['men-indice-sesgos', 'oxi-dava'], origen: 'Proyecto Oxida/Sesgos Cognitivos.md' },
 
   // ── MENTE ──
-  { id: 'men-indice-sesgos', titulo: 'Índice de 13 sesgos', seccion: 'mente', categoria: 'Sesgos', resumen: 'Repositorio madre: detectar en uno mismo (Plan P1) y aplicar para vender (Plan inverso).', puntos: ['Afinidad, Atribución hostil, Autoridad, Confirmación, Disponibilidad, Halo, Espectador, Encuadre, Exceso confianza, Ilusión conocimiento, Proximidad temporal, Saliencia, Validez aparente.', 'Doble uso: limpiar lectura propia y diseñar mensajes que sí entran.'], relaciones: ['sis-plan', 'men-plan-venta'], origen: 'Sesgos Cognitivos/Índice de Sesgos Cognitivos.md' },
-  { id: 'men-plan-venta', titulo: 'Plan de venta con 13 sesgos', seccion: 'mente', categoria: 'Ventas', resumen: 'Brownies como caso aplicado: tribu, aval, escasez, post diario, packaging y entrega fija.', puntos: ['F1 fundación → F2 círculo → F3 presencia diaria → F4 expansión 2-3 puntos.', 'Métricas: u/semana, recompra >30%, impulso >50%, menciones ≥3/sem.', 'Oro: los sesgos venden la primera vez; la repetición la gana el producto.'], relaciones: ['bro-protocolo-venta', 'men-indice-sesgos'], origen: 'Sesgos Cognitivos/Plan de Acción — Venta de Brownies.md' },
-  { id: 'men-sesgo-autoridad', titulo: 'Sesgos: Autoridad · Halo · Encuadre', seccion: 'mente', categoria: 'Sesgos', resumen: 'Seguir prestigio sin cuestionar, contaminar todo por un rasgo y percibir según presentación.', puntos: ['Bata blanca / jefe / celebridad · atractivo=competente · 95% libre de grasa.', 'En Brownies: receta premiada, packaging lindo, quedan solo 12.'], relaciones: ['men-indice-sesgos'], origen: 'Sesgos Cognitivos/Autoridad.md + Efecto Halo + Encuadre' },
-  { id: 'men-sesgo-lectura', titulo: 'Sesgos: Confirmación · Disponibilidad · Saliencia', seccion: 'mente', categoria: 'Sesgos', resumen: 'Ver lo que confirma, sobreestimar lo memorable y mirar solo lo llamativo.', puntos: ['Solo medios afines · aviones vs autos · juzgar auto por color.', 'Antídoto Plan P1: ¿qué quiero creer? ¿qué sobreestimo? Uso inverso: testimonios + visibilidad + etiqueta dorada.'], relaciones: ['sis-plan'], origen: 'Sesgos Cognitivos/Confirmacion + Disponibilidad + Saliencia' },
-  { id: 'men-paradigmas', titulo: 'Paradigmas — el lente', seccion: 'mente', categoria: 'Paradigmas', resumen: 'Lente que define lo normal. Cambiar paradigma > acumular datos. Elegir el útil, no el verdadero.', puntos: ['4 pasos: identificar lente → cuestionar afuera → elegir útil → actuar dentro/fuera.', 'De convencer a servir: caso emprendedor brownies.'], relaciones: ['sis-plan', 'bro-paradigma'], origen: 'Paradigmas/Paradigmas.md' },
-  { id: 'men-rapidos', titulo: 'Pensamientos rápidos — 2 min', seccion: 'mente', categoria: 'Paradigmas', resumen: 'Atajos bajo presión: reversible+barato→ya; irreversible+caro→frenar; empate→la que enseña.', puntos: ['Filtro 3: ¿acerca a meta 1 año? ¿respetado aprobaría? ¿pérdida si abandono en 6m? 2 sí = avanzar.', 'Frenar con prisa social, emoción fuerte o una sola fuente.'], relaciones: ['sis-decisorium'], origen: 'Paradigmas/Pensamientos Rápidos.md' },
-  { id: 'men-leyes', titulo: 'Las 48 Leyes del Poder', seccion: 'mente', categoria: 'Poder', resumen: '6 bloques: imagen, juego psicológico, ofensiva, poder personal, geopolítica y dominio extremo.', puntos: ['Nunca opacar al maestro · decir menos · reputación · atención · dependencia.', 'Ausencia/escasez · imprevisibilidad · concentrar fuerzas · audacia · timing · fluidez.', 'Uso: antes de actuar, en conflicto y como diagnóstico transversal.'], relaciones: ['sis-plan', 'men-principe'], origen: 'Leyes del Poder/Leyes del Poder.md' },
-  { id: 'men-principe', titulo: 'El Príncipe — Maquiavelo', seccion: 'mente', categoria: 'Poder', resumen: 'Eficacia sobre moral: virtù vs fortuna, temido mejor que amado pero nunca odiado.', puntos: ['Favores de a poco, daños de una vez · parecer virtuoso · león + zorro.', 'No mercenarios · anti-adulación · mejor aliado temido que neutral pisoteado.'], relaciones: ['men-leyes', 'sis-plantilla-persona'], origen: 'Leyes del Poder/El Príncipe de Maquiavelo.md' },
+  {
+    id: 'men-indice-sesgos', titulo: 'Índice de 13 sesgos', seccion: 'mente', categoria: 'Sesgos', resumen: 'Repositorio madre: detectar en uno mismo (Plan P1) y aplicar para vender (Plan inverso).', puntos: ['Afinidad, Atribución hostil, Autoridad, Confirmación, Disponibilidad, Halo, Espectador, Encuadre, Exceso confianza, Ilusión conocimiento, Proximidad temporal, Saliencia, Validez aparente.', 'Doble uso: limpiar lectura propia y diseñar mensajes que sí entran.'], relaciones: ['sis-plan', 'men-plan-venta'], origen: 'Sesgos Cognitivos/Índice de Sesgos Cognitivos.md',
+    tipo: 'indice',
+    intro: 'El repositorio madre de 13 sesgos: para detectar en uno mismo y para comunicar.',
+    tags: ['sesgos', 'decision', 'ventas'],
+    bloques: [
+      { t: 'h2', texto: 'El catálogo' },
+      { t: 'lista', items: ['Afinidad, Atribución hostil, Autoridad, Confirmación, Disponibilidad, Halo y Espectador.', 'Encuadre, Exceso de confianza, Ilusión de conocimiento, Proximidad temporal, Saliencia y Validez aparente.'] },
+      { t: 'h2', texto: 'Doble uso' },
+      { t: 'p', texto: 'Detectar en uno mismo (Plan P1) y aplicar para vender (Plan inverso).' },
+      { t: 'p', texto: 'El caso aplicado está en [[men-plan-venta]] y la pasada 1 en [[sis-plan]].' }
+    ]
+  },
+  {
+    id: 'men-plan-venta', titulo: 'Plan de venta con 13 sesgos', seccion: 'mente', categoria: 'Ventas', resumen: 'Brownies como caso aplicado: tribu, aval, escasez, post diario, packaging y entrega fija.', puntos: ['F1 fundación → F2 círculo → F3 presencia diaria → F4 expansión 2-3 puntos.', 'Métricas: u/semana, recompra >30%, impulso >50%, menciones ≥3/sem.', 'Oro: los sesgos venden la primera vez; la repetición la gana el producto.'], relaciones: ['bro-protocolo-venta', 'men-indice-sesgos'], origen: 'Sesgos Cognitivos/Plan de Acción — Venta de Brownies.md',
+    tipo: 'articulo',
+    intro: 'Brownies como caso aplicado de los 13 sesgos, por fases y con métricas.',
+    tags: ['sesgos', 'ventas'],
+    bloques: [
+      { t: 'h2', texto: 'Fases' },
+      { t: 'lista', ordenada: true, items: ['F1 fundación.', 'F2 círculo cercano.', 'F3 presencia diaria.', 'F4 expansión a 2-3 puntos.'] },
+      { t: 'h2', texto: 'Métricas' },
+      { t: 'p', texto: 'Unidades por semana, recompra mayor a 30%, impulso mayor a 50% y menciones de 3 por semana.' },
+      { t: 'card', variante: 'conclusion', titulo: 'Regla de oro', texto: 'Los sesgos venden la primera vez; la repetición la gana el producto.' },
+      { t: 'p', texto: 'Los sesgos, uno por uno, en [[men-indice-sesgos]]; el guion de venta en [[bro-protocolo-venta]].' }
+    ]
+  },
+  {
+    id: 'men-sesgo-autoridad', titulo: 'Sesgos: Autoridad · Halo · Encuadre', seccion: 'mente', categoria: 'Sesgos', resumen: 'Seguir prestigio sin cuestionar, contaminar todo por un rasgo y percibir según presentación.', puntos: ['Bata blanca / jefe / celebridad · atractivo=competente · 95% libre de grasa.', 'En Brownies: receta premiada, packaging lindo, quedan solo 12.'], relaciones: ['men-indice-sesgos'], origen: 'Sesgos Cognitivos/Autoridad.md + Efecto Halo + Encuadre',
+    tipo: 'ficha',
+    intro: 'Tres atajos juntos: seguir al prestigio, contaminar por un rasgo y percibir según presentación.',
+    tags: ['sesgos', 'ventas', 'poder'],
+    claves: [
+      { termino: 'Autoridad', definicion: 'Seguir a quien tiene prestigio sin cuestionar: bata blanca, jefe o celebridad.' },
+      { termino: 'Halo', definicion: 'Una cualidad contamina todo lo demás: atractivo igual competente.' },
+      { termino: 'Encuadre', definicion: 'La presentación cambia la percepción: 95% libre de grasa.' }
+    ],
+    bloques: [
+      { t: 'h2', texto: 'En Brownies' },
+      { t: 'p', texto: 'Receta premiada, packaging lindo, quedan solo 12.' },
+      { t: 'p', texto: 'El catálogo completo en [[men-indice-sesgos]].' }
+    ]
+  },
+  {
+    id: 'men-sesgo-lectura', titulo: 'Sesgos: Confirmación · Disponibilidad · Saliencia', seccion: 'mente', categoria: 'Sesgos', resumen: 'Ver lo que confirma, sobreestimar lo memorable y mirar solo lo llamativo.', puntos: ['Solo medios afines · aviones vs autos · juzgar auto por color.', 'Antídoto Plan P1: ¿qué quiero creer? ¿qué sobreestimo? Uso inverso: testimonios + visibilidad + etiqueta dorada.'], relaciones: ['sis-plan'], origen: 'Sesgos Cognitivos/Confirmacion + Disponibilidad + Saliencia',
+    tipo: 'ficha',
+    intro: 'Tres filtros de lectura: ver lo que confirma, sobreestimar lo memorable y mirar lo llamativo.',
+    tags: ['sesgos', 'ventas', 'decision'],
+    claves: [
+      { termino: 'Confirmación', definicion: 'Buscar solo lo que confirma lo que ya creemos: solo medios afines.' },
+      { termino: 'Disponibilidad', definicion: 'Sobreestimar lo que se recuerda fácil: aviones contra autos.' },
+      { termino: 'Saliencia', definicion: 'Foco en lo llamativo aunque no sea lo importante: juzgar el auto por el color.' }
+    ],
+    bloques: [
+      { t: 'h2', texto: 'Antídoto y uso' },
+      { t: 'p', texto: 'Antídoto Plan P1: ¿qué quiero creer? ¿qué sobreestimo? Uso inverso: testimonios, visibilidad y etiqueta dorada.' },
+      { t: 'p', texto: 'La pasada 1 completa en [[sis-plan]].' }
+    ]
+  },
+  {
+    id: 'men-paradigmas', titulo: 'Paradigmas — el lente', seccion: 'mente', categoria: 'Paradigmas', resumen: 'Lente que define lo normal. Cambiar paradigma > acumular datos. Elegir el útil, no el verdadero.', puntos: ['4 pasos: identificar lente → cuestionar afuera → elegir útil → actuar dentro/fuera.', 'De convencer a servir: caso emprendedor brownies.'], relaciones: ['sis-plan', 'bro-paradigma'], origen: 'Paradigmas/Paradigmas.md',
+    tipo: 'articulo',
+    intro: 'El paradigma como lente: cambiarlo rinde más que acumular datos.',
+    tags: ['decision', 'metodo', 'accion'],
+    bloques: [
+      { t: 'h2', texto: 'El método en 4 pasos' },
+      { t: 'lista', ordenada: true, items: ['Identificar el lente actual.', 'Cuestionarlo: ¿qué queda afuera?', 'Elegir el útil, no el verdadero.', 'Actuar dentro o fuera; romperlo cuando convenga.'] },
+      { t: 'p', texto: 'De convencer a servir: caso emprendedor brownies, en [[bro-paradigma]].' }
+    ]
+  },
+  {
+    id: 'men-rapidos', titulo: 'Pensamientos rápidos — 2 min', seccion: 'mente', categoria: 'Paradigmas', resumen: 'Atajos bajo presión: reversible+barato→ya; irreversible+caro→frenar; empate→la que enseña.', puntos: ['Filtro 3: ¿acerca a meta 1 año? ¿respetado aprobaría? ¿pérdida si abandono en 6m? 2 sí = avanzar.', 'Frenar con prisa social, emoción fuerte o una sola fuente.'], relaciones: ['sis-decisorium'], origen: 'Paradigmas/Pensamientos Rápidos.md',
+    tipo: 'articulo',
+    intro: 'Atajos para decidir con poco tiempo: cuándo actuar, cuándo frenar y el filtro de 3 preguntas.',
+    tags: ['decision', 'accion'],
+    bloques: [
+      { t: 'h2', texto: 'Cuándo actuar' },
+      { t: 'lista', items: ['Reversible + barato → ya.', 'Irreversible + caro → frenar.', 'Empate → la que más enseña.', 'Duda → acción mínima que genere info.'] },
+      { t: 'h2', texto: 'Cuándo frenar' },
+      { t: 'p', texto: 'Con prisa social, emoción fuerte o una sola fuente.' },
+      { t: 'h2', texto: 'Filtro 3' },
+      { t: 'p', texto: '¿Acerca a meta 1 año? ¿Respetado aprobaría? ¿Pérdida si abandono en 6 meses? 2 sí es avanzar.' },
+      { t: 'p', texto: 'Decidir el qué en [[sis-decisorium]].' }
+    ]
+  },
+  {
+    id: 'men-leyes', titulo: 'Las 48 Leyes del Poder', seccion: 'mente', categoria: 'Poder', resumen: '6 bloques: imagen, juego psicológico, ofensiva, poder personal, geopolítica y dominio extremo.', puntos: ['Nunca opacar al maestro · decir menos · reputación · atención · dependencia.', 'Ausencia/escasez · imprevisibilidad · concentrar fuerzas · audacia · timing · fluidez.', 'Uso: antes de actuar, en conflicto y como diagnóstico transversal.'], relaciones: ['sis-plan', 'men-principe'], origen: 'Leyes del Poder/Leyes del Poder.md',
+    tipo: 'articulo',
+    intro: 'Las 48 leyes en 6 bloques: de la imagen al dominio extremo, para leer el tablero.',
+    tags: ['poder', 'decision'],
+    bloques: [
+      { t: 'h2', texto: 'Muestra de leyes' },
+      { t: 'lista', items: ['Nunca opacar al maestro · decir menos · reputación · atención · dependencia.', 'Ausencia y escasez · imprevisibilidad · concentrar fuerzas · audacia · timing · fluidez.'] },
+      { t: 'h2', texto: 'Uso' },
+      { t: 'p', texto: 'Antes de actuar, en conflicto y como diagnóstico transversal.' },
+      { t: 'p', texto: 'La pasada 2 en [[sis-plan]] y el caso clásico en [[men-principe]].' }
+    ]
+  },
+  {
+    id: 'men-principe', titulo: 'El Príncipe — Maquiavelo', seccion: 'mente', categoria: 'Poder', resumen: 'Eficacia sobre moral: virtù vs fortuna, temido mejor que amado pero nunca odiado.', puntos: ['Favores de a poco, daños de una vez · parecer virtuoso · león + zorro.', 'No mercenarios · anti-adulación · mejor aliado temido que neutral pisoteado.'], relaciones: ['men-leyes', 'sis-plantilla-persona'], origen: 'Leyes del Poder/El Príncipe de Maquiavelo.md',
+    tipo: 'articulo',
+    intro: 'Eficacia sobre moral: virtù contra fortuna, temido mejor que amado pero nunca odiado.',
+    tags: ['poder', 'decision'],
+    bloques: [
+      { t: 'h2', texto: 'Ideas' },
+      { t: 'lista', items: ['Favores de a poco, daños de una vez; parecer compasivo, leal y honesto; león + zorro.', 'No mercenarios; anti-adulación; mejor aliado temido que neutral pisoteado.'] },
+      { t: 'p', texto: 'Lectura de personas con [[sis-plantilla-persona]] y tablero en [[men-leyes]].' }
+    ]
+  },
 
   // ── FACULTAD ──
   {
