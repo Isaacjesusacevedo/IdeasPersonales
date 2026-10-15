@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
+  scrollBehavior() { return { top: 0 } },
   routes: [
     { path: '/', name: 'home', component: () => import('@/views/HomeView.vue'), meta: { title: 'Dashboard' } },
     { path: '/ideas', name: 'ideas', component: () => import('@/views/IdeasView.vue'), meta: { title: 'Ideas sueltas' } },

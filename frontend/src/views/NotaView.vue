@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { notaPorId, notasPorSeccion, secciones } from '@/data/vault'
+import { ui, enterReading, exitReading } from '@/ui'
 
 const route = useRoute()
 const nota = computed(() => notaPorId(route.params.id as string))
@@ -18,6 +19,12 @@ const vecinas = computed(() => {
   }
 })
 const tituloDe = (id: string) => notaPorId(id)?.titulo ?? id
+
+const onKey = (e: KeyboardEvent) => {
+  if (e.key === 'Escape' && ui.reading) exitReading()
+}
+onMounted(() => window.addEventListener('keydown', onKey))
+onUnmounted(() => window.removeEventListener('keydown', onKey))
 </script>
 
 <template>
@@ -37,7 +44,10 @@ const tituloDe = (id: string) => notaPorId(id)?.titulo ?? id
       <div class="card lift" style="margin-bottom:16px">
         <div class="card-header">
           <div class="card-title">Contenido · {{ vecinas.idx }}/{{ vecinas.total }}</div>
-          <RouterLink :to="`/s/${nota.seccion}`" class="btn btn-ghost">← {{ seccionNombre }}</RouterLink>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button v-if="!ui.reading" class="btn btn-ghost" @click="enterReading" aria-label="Activar modo lectura">Modo lectura</button>
+            <RouterLink :to="`/s/${nota.seccion}`" class="btn btn-ghost">← {{ seccionNombre }}</RouterLink>
+          </div>
         </div>
         <ul class="puntos">
           <li v-for="(p, i) in nota.puntos" :key="i">{{ p }}</li>
@@ -52,6 +62,7 @@ const tituloDe = (id: string) => notaPorId(id)?.titulo ?? id
         <span v-else></span>
         <RouterLink v-if="vecinas.next" :to="`/n/${vecinas.next}`" class="btn btn-ghost">{{ tituloDe(vecinas.next) }} →</RouterLink>
       </nav>
+      <button v-if="ui.reading" class="reading-exit" @click="exitReading" aria-label="Salir del modo lectura">Salir ✕ (Esc)</button>
     </div>
   </div>
 </template>

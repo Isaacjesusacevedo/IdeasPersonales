@@ -2,14 +2,15 @@
 import { RouterView, useRoute, useRouter } from 'vue-router'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { notas, secciones, notaPorId, notasPorSeccion } from '@/data/vault'
+import { ui, toggleSidebar } from '@/ui'
+import BackgroundNetwork from '@/components/BackgroundNetwork.vue'
 
 const route = useRoute()
 const router = useRouter()
-const sidebarOpen = ref(false)
 const q = ref('')
 const searchBox = ref<HTMLInputElement | null>(null)
 
-watch(() => route.name, () => { sidebarOpen.value = false })
+watch(() => route.name, () => { ui.drawer = false })
 
 const isActive = (name: string | string[]) => {
   if (Array.isArray(name)) return name.includes(route.name as string)
@@ -22,12 +23,30 @@ const goBuscar = () => {
   q.value = ''
 }
 
+const aleatoria = () => {
+  const actual = route.params.id as string | undefined
+  const pool = notas.filter(n => n.id !== actual)
+  const pick = pool[Math.floor(Math.random() * pool.length)]
+  if (pick) router.push(`/n/${pick.id}`)
+}
+
 const onKey = (e: KeyboardEvent) => {
-  if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return
+  const mod = e.ctrlKey || e.metaKey
+  if (mod && (e.key === 'b' || e.key === 'B')) {
+    e.preventDefault()
+    toggleSidebar()
+    return
+  }
+  if (e.key === 'Escape') {
+    ui.drawer = false
+    return
+  }
+  if (e.key !== '/' || mod || e.altKey) return
   const t = e.target as HTMLElement | null
   if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return
   e.preventDefault()
-  searchBox.value?.focus()
+  if (ui.mode === 'expanded' && window.innerWidth >= 768) searchBox.value?.focus()
+  else router.push({ name: 'buscar' })
 }
 onMounted(() => window.addEventListener('keydown', onKey))
 onUnmounted(() => window.removeEventListener('keydown', onKey))
@@ -60,21 +79,25 @@ const secIcon: Record<string, string> = {
   facultad: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19a2 2 0 0 1 2-2h13"/>',
   ideas: '<path d="M12 2v4M4.9 4.9l2.8 2.8M2 12h4M20 12h4M19.1 4.9l-2.8 2.8M12 22a7 7 0 0 0 4-12.7c-.6-.5-1-1.4-1-2.3h-6c0 .9-.4 1.8-1 2.3A7 7 0 0 0 12 22z"/>'
 }
+const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorSeccion(s.id).length} notas`
 </script>
 
 <template>
   <div class="app-shell">
+    <div class="bg-ambient" aria-hidden="true"></div>
+    <BackgroundNetwork />
+
     <button
-      @click="sidebarOpen = !sidebarOpen"
+      @click="ui.drawer = !ui.drawer"
       class="hamburger-btn"
-      :class="{ open: sidebarOpen }"
+      :class="{ open: ui.drawer }"
       aria-label="Abrir o cerrar menú">
       <span></span><span></span><span></span>
     </button>
 
-    <div v-if="sidebarOpen" class="app-nav__overlay" @click="sidebarOpen = false"></div>
+    <div v-if="ui.drawer" class="app-nav__overlay" @click="ui.drawer = false"></div>
 
-    <nav class="app-nav" :class="{ open: sidebarOpen }" aria-label="Navegación principal">
+    <nav id="main-nav" class="app-nav" :class="{ open: ui.drawer }" aria-label="Navegación principal">
       <div class="nav-brand">
         <svg class="brand-hex" width="40" height="44" viewBox="0 0 40 44" aria-hidden="true">
           <defs>
@@ -86,7 +109,7 @@ const secIcon: Record<string, string> = {
           <polygon points="20,2 37,11.5 37,32.5 20,42 3,32.5 3,11.5" fill="none" stroke="url(#ipg)" stroke-width="2.5" />
           <text x="20" y="27" text-anchor="middle" font-family="Syne, sans-serif" font-weight="800" font-size="13" fill="#e8ebf7">IP</text>
         </svg>
-        <div>
+        <div class="brand-text">
           <div class="nav-brand-name">Ideas Personales</div>
           <div class="nav-brand-sub">Obsidian Vault</div>
         </div>
@@ -94,13 +117,17 @@ const secIcon: Record<string, string> = {
 
       <div class="nav-section">
         <div class="nav-section-label">Principal</div>
-        <RouterLink to="/" class="nav-link" :class="{ active: isActive('home') }">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
-          Dashboard
+        <RouterLink to="/" class="nav-link" :class="{ active: isActive('home') }" aria-label="Dashboard" title="Dashboard">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+          <span class="nav-label">Dashboard</span>
         </RouterLink>
-        <RouterLink to="/buscar" class="nav-link" :class="{ active: isActive('buscar') }">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-          Buscar
+        <RouterLink to="/s/ideas" class="nav-link" :class="{ active: isActive(['ideas', 'idea-detail']) || isSeccion('ideas') }" aria-label="Explorar ideas" title="Explorar ideas">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>
+          <span class="nav-label">Explorar</span>
+        </RouterLink>
+        <RouterLink to="/buscar" class="nav-link" :class="{ active: isActive('buscar') }" aria-label="Buscar" title="Buscar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <span class="nav-label">Buscar</span>
         </RouterLink>
         <form @submit.prevent="goBuscar" class="cmdbar" role="search">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -116,10 +143,12 @@ const secIcon: Record<string, string> = {
           :key="s.id"
           :to="`/s/${s.id}`"
           class="nav-link"
-          :class="{ active: isSeccion(s.id) }">
+          :class="{ active: isSeccion(s.id) }"
+          :aria-label="tipDe(s)"
+          :title="tipDe(s)">
           <span class="sec-dot" :class="`sec-dot--${s.acento ?? 'purple'}`" aria-hidden="true"></span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" v-html="secIcon[s.id]"></svg>
-          {{ s.nombre }}
+          <span class="nav-label">{{ s.nombre }}</span>
           <span class="nav-count">{{ notasPorSeccion(s.id).length }}</span>
         </RouterLink>
       </div>
@@ -134,7 +163,16 @@ const secIcon: Record<string, string> = {
     </nav>
 
     <main class="app-main">
-      <div class="topbar" aria-label="Ruta actual">
+      <div class="topbar">
+        <button
+          class="icon-btn"
+          @click="toggleSidebar"
+          :aria-expanded="ui.mode === 'expanded'"
+          aria-controls="main-nav"
+          aria-label="Plegar o expandir el panel lateral"
+          title="Plegar/expandir (Ctrl+B)">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></svg>
+        </button>
         <nav class="crumbs" aria-label="Breadcrumb">
           <template v-for="(c, i) in crumbs" :key="i">
             <span v-if="i > 0" class="sep" aria-hidden="true">/</span>
@@ -142,6 +180,16 @@ const secIcon: Record<string, string> = {
             <span v-else class="here">{{ c.label }}</span>
           </template>
         </nav>
+        <span class="topbar-spacer"></span>
+        <button class="topbar-btn" @click="router.push({ name: 'buscar' })" aria-label="Buscar (Ctrl K)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <span class="topbar-btn-text">Buscar</span>
+          <kbd>Ctrl K</kbd>
+        </button>
+        <button class="topbar-btn topbar-btn--accent" @click="aleatoria" aria-label="Abrir una nota al azar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.2" fill="currentColor"/></svg>
+          <span class="topbar-btn-text">Sorprendeme</span>
+        </button>
       </div>
       <RouterView v-slot="{ Component }">
         <Transition name="fade-slide" mode="out-in">

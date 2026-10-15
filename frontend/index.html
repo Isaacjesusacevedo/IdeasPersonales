@@ -7,6 +7,12 @@
     <meta name="theme-color" content="#070b1a">
     <meta name="description" content="Ideas Personales — Obsidian Vault en la web: decisiones, proyectos, modelos mentales y apuntes.">
     <title>Ideas Personales</title>
+    <script>
+      try {
+        var m = localStorage.getItem('ip:sidebar') === 'compact' ? 'compact' : 'expanded';
+        document.documentElement.setAttribute('data-sidebar', m);
+      } catch (e) { /* sin almacenamiento */ }
+    </script>
   </head>
   <body>
     <div id="app"></div>

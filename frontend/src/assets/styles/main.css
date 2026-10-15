@@ -24,6 +24,7 @@
   --font-mono: 'IBM Plex Mono', monospace;
 
   --nav-w: 248px;
+  --sidebar-w: 248px;
 }
 
 /* ══ Base ══ */
@@ -72,7 +73,7 @@ a { color: inherit; }
   background: var(--grad); z-index: 120;
 }
 .app-nav {
-  width: var(--nav-w);
+  width: var(--sidebar-w);
   min-height: 100vh;
   background: var(--bg-2);
   border-right: 1px solid var(--border);
@@ -81,7 +82,7 @@ a { color: inherit; }
   z-index: 100;
   overflow-y: auto;
 }
-.app-main { margin-left: var(--nav-w); flex: 1; min-width: 0; min-height: 100vh; }
+.app-main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; min-height: 100vh; transition: margin-left 0.22s ease; }
 
 /* Topbar */
 .topbar {
@@ -344,4 +345,114 @@ a.card:hover .sec-arrow { transform: translateX(4px); color: var(--teal); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ══ FASE 1 · correcciones + shell plegable + fondo por capas ══ */
+
+/* Reset de subrayado en componentes-enlace */
+a.card, a.card h1, a.card h2, a.card h3, a.card p, a.card div,
+.nav-link, .nav-link:hover, .pill, .badge, .row-link, tbody td a { text-decoration: none; }
+a.card { color: inherit; }
+
+/* Hero y stats: correcciones de lectura */
+.hero-title { font-weight: 700; font-size: clamp(30px, 4.5vw, 50px); text-wrap: balance; }
+.stat-value { font-weight: 700; font-variant-numeric: tabular-nums; }
+.page { max-width: 1320px; }
+.nav-brand-name { font-size: 16px; letter-spacing: 0.01em; line-height: 1.2; }
+
+/* Transición de ancho del sidebar */
+.app-nav { transition: width 0.22s ease, transform 0.22s ease; }
+
+/* Fondo · b) luz ambiente con deriva lenta */
+.bg-ambient {
+  position: fixed; inset: -6%; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(720px 480px at 85% 6%, rgba(124, 58, 237, 0.12), transparent 65%),
+    radial-gradient(640px 460px at 8% 96%, rgba(45, 212, 191, 0.1), transparent 65%),
+    radial-gradient(560px 420px at 50% 55%, rgba(80, 110, 255, 0.08), transparent 65%);
+  animation: ambient-drift 80s ease-in-out infinite;
+}
+@keyframes ambient-drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(3%, 2%, 0); }
+}
+
+/* Fondo · c) red de ideas */
+.bg-net {
+  position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+  opacity: 0.07;
+  -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 45%, black 25%, transparent 78%);
+  mask-image: radial-gradient(ellipse 90% 85% at 50% 45%, black 25%, transparent 78%);
+}
+.bg-net line { opacity: 0.55; }
+.bg-net circle { opacity: 0.8; }
+.bg-net .net-pulse { animation: net-pulse 5s ease-in-out infinite; }
+@keyframes net-pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+
+/* Fondo · d) grano + viñeta */
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: 200; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.03; mix-blend-mode: soft-light;
+}
+.app-shell { position: relative; z-index: 1; }
+
+/* Modo compacto (solo desktop) */
+@media (min-width: 769px) {
+  [data-sidebar="compact"] { --sidebar-w: 68px; }
+  [data-sidebar="compact"] .nav-brand { justify-content: center; padding: 18px 8px 14px; }
+  [data-sidebar="compact"] .brand-text,
+  [data-sidebar="compact"] .nav-section-label,
+  [data-sidebar="compact"] .nav-label,
+  [data-sidebar="compact"] .nav-count,
+  [data-sidebar="compact"] .cmdbar,
+  [data-sidebar="compact"] .nav-status-text,
+  [data-sidebar="compact"] .nav-total { display: none; }
+  [data-sidebar="compact"] .nav-link { justify-content: center; padding: 10px 0; }
+  [data-sidebar="compact"] .nav-link.active::before { left: -8px; }
+  [data-sidebar="compact"] .nav-status { justify-content: center; }
+}
+
+/* Modo lectura: sin sidebar ni topbar, columna centrada, fondo atenuado */
+[data-sidebar="hidden"] .app-nav { display: none; }
+[data-sidebar="hidden"] .topbar { display: none; }
+[data-sidebar="hidden"] .app-main { margin-left: 0; }
+[data-reading] .bg-net { opacity: 0.035; }
+[data-reading] .bg-ambient { opacity: 0.6; }
+[data-reading] .page { max-width: 860px; margin: 0 auto; }
+.reading-exit {
+  position: fixed; bottom: 22px; right: 22px; z-index: 300;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--surface-2); color: var(--text); border: 1px solid var(--border-strong);
+  border-radius: 999px; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer;
+  box-shadow: var(--glow-purple);
+}
+.reading-exit:hover { border-color: var(--teal); }
+
+/* Botones de la topbar */
+.topbar-spacer { flex: 1; }
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 9px; cursor: pointer;
+  background: transparent; border: 1px solid transparent; color: var(--text-muted);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.icon-btn:hover { background: var(--surface-2); color: var(--text); border-color: var(--border); }
+.topbar-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--surface); border: 1px solid var(--border); color: var(--text);
+  border-radius: 10px; padding: 7px 12px; font-size: 13px; font-weight: 500; cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+}
+.topbar-btn:hover { border-color: var(--border-strong); background: var(--surface-2); }
+.topbar-btn kbd {
+  font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);
+  border: 1px solid var(--border-strong); border-radius: 5px; padding: 0 5px;
+}
+.topbar-btn--accent { border-color: rgba(45, 212, 191, 0.35); }
+.topbar-btn--accent:hover { border-color: var(--teal); }
+@media (max-width: 640px) {
+  .topbar-btn-text, .topbar-btn kbd { display: none; }
+  .topbar-btn { padding: 7px 9px; }
 }
