@@ -37,7 +37,7 @@ const totalTags = computed(() => Object.keys(tagIndex).length)
     </div>
     <div v-if="!lista.length" class="card empty">
       <h3>Sin notas con esta etiqueta</h3>
-      <p>Probá con otra, o <RouterLink to="/explorar" class="read-link">explorá la nube</RouterLink>.</p>
+      <p>Probá con otra, o <RouterLink to="/explorar" class="read-link">explorá el mapa</RouterLink>.</p>
     </div>
     <div v-else class="grid-2">
       <RouterLink v-for="n in lista" :key="n.id" :to="`/n/${n.id}`" class="card">

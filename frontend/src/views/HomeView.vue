@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { secciones, notas, notasPorSeccion } from '@/data/vault'
-import ConceptCloud from '@/components/ConceptCloud.vue'
+
+const IdeaFlowMini = defineAsyncComponent(() => import('@/components/IdeaFlow.vue'))
 
 const router = useRouter()
 const total = computed(() => notas.length)
@@ -49,7 +50,16 @@ const badgeDe = (seccion: string) => {
         </div>
         <div class="hero-rule" aria-hidden="true"></div>
       </div>
-      <ConceptCloud :hero-max="24" :mobile-max="16" :alto="300" />
+      <div class="card mapa-mini">
+        <div class="card-header">
+          <div class="card-title">Mapa de ideas</div>
+          <RouterLink to="/explorar" class="btn btn-ghost btn-sm">Abrir el mapa →</RouterLink>
+        </div>
+        <Suspense>
+          <IdeaFlowMini :mini="true" />
+          <template #fallback><div class="mapa-ph" aria-hidden="true"></div></template>
+        </Suspense>
+      </div>
     </header>
 
     <div class="stat-grid" role="list">
