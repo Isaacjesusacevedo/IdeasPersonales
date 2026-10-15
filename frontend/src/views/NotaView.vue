@@ -122,7 +122,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
 
           <RelatedNotes v-if="tipo !== 'indice'" :nota="nota" />
 
-          <Collapsible titulo="Contenido original del vault" style="margin-top:16px">
+          <Collapsible titulo="Contenido original de la nota" style="margin-top:16px">
             <p style="color:var(--text-muted);font-size:14px;margin-bottom:10px">{{ nota.resumen }}</p>
             <ul class="puntos">
               <li v-for="(p, i) in nota.puntos" :key="i">{{ p }}</li>

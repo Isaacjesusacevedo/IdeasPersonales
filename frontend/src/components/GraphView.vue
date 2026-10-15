@@ -236,7 +236,7 @@ onUnmounted(() => {
     </div>
 
     <div v-else ref="caja" class="grafo-caja">
-      <svg ref="svg" :width="W" :height="H" role="img" aria-label="Grafo de notas del vault"
+      <svg ref="svg" :width="W" :height="H" role="img" aria-label="Grafo de mis notas"
         @pointerdown="onDown($event, null)" @pointermove="onMove" @pointerup="onUp($event, null)" @pointercancel="onUp($event, null)">
         <g :transform="`translate(${tx},${ty}) scale(${k})`">
           <line v-for="(e, i) in edges" :key="'e' + i" :data-e="i"

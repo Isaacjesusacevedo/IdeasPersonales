@@ -9,7 +9,7 @@ const lista = notasPorSeccion('ideas')
     <div class="page-header">
       <div class="page-eyebrow">Lectura rápida · sincronizado con IDEAS.md</div>
       <h1 class="page-title">Ideas <span class="grad-text">sueltas</span></h1>
-      <p class="page-subtitle">Capturas del día a día. El Vault completo vive en las secciones del sidebar.</p>
+      <p class="page-subtitle">Capturas del día a día. Todas mis notas viven en los temas del sidebar.</p>
     </div>
     <div class="table-wrap"><table><thead><tr><th>Título</th><th>Categoría</th><th>Resumen</th></tr></thead>
     <tbody><tr v-for="n in lista" :key="n.id">

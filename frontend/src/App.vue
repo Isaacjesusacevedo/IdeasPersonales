@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterView, useRoute, useRouter } from 'vue-router'
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, watch } from 'vue'
 import { notas, secciones, notaPorId, notasPorSeccion } from '@/data/vault'
 import { notaAlAzar } from '@/data/vault-index'
 import { ui, toggleSidebar, openPalette } from '@/ui'
@@ -9,8 +9,6 @@ import CommandPalette from '@/components/CommandPalette.vue'
 
 const route = useRoute()
 const router = useRouter()
-const q = ref('')
-const searchBox = ref<HTMLInputElement | null>(null)
 
 watch(() => route.name, () => { ui.drawer = false })
 
@@ -19,11 +17,6 @@ const isActive = (name: string | string[]) => {
   return route.name === name
 }
 const isSeccion = (id: string) => route.name === 'seccion' && route.params.seccion === id
-
-const goBuscar = () => {
-  router.push({ name: 'buscar', query: q.value.trim() ? { q: q.value.trim() } : {} })
-  q.value = ''
-}
 
 const aleatoria = () => {
   const pick = notaAlAzar(route.params.id as string | undefined)
@@ -57,7 +50,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
 
 interface Crumb { label: string; to?: string }
 const crumbs = computed<Crumb[]>(() => {
-  const base: Crumb[] = [{ label: 'Inicio', to: '/' }]
+  const base: Crumb[] = [{ label: 'Mis ideas', to: '/' }]
   if (route.name === 'seccion') {
     const s = secciones.find(x => x.id === route.params.seccion)
     return [...base, { label: s?.nombre ?? 'Sección' }]
@@ -71,8 +64,8 @@ const crumbs = computed<Crumb[]>(() => {
   if (route.name === 'ideas') return [...base, { label: 'Ideas sueltas' }]
   if (route.name === 'idea-detail') return [...base, { label: 'Ideas sueltas', to: '/ideas' }, { label: 'Detalle' }]
   if (route.name === 'buscar') return [...base, { label: 'Buscar' }]
-  if (route.name === 'explorar') return [...base, { label: 'Explorar' }]
-  if (route.name === 'tag') return [...base, { label: 'Explorar', to: '/explorar' }, { label: '#' + String(route.params.tag) }]
+  if (route.name === 'explorar') return [...base, { label: 'Mapa de ideas' }]
+  if (route.name === 'tag') return [...base, { label: 'Mapa de ideas', to: '/explorar' }, { label: '#' + String(route.params.tag) }]
   return base
 })
 
@@ -117,33 +110,28 @@ const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorS
         </svg>
         <div class="brand-text">
           <div class="nav-brand-name">Ideas Personales</div>
-          <div class="nav-brand-sub">Obsidian Vault</div>
+          <div class="nav-brand-sub">Mis notas</div>
         </div>
       </div>
 
       <div class="nav-section">
         <div class="nav-section-label">Principal</div>
-        <RouterLink to="/" class="nav-link" :class="{ active: isActive('home') }" aria-label="Dashboard" title="Dashboard">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
-          <span class="nav-label">Dashboard</span>
+        <RouterLink to="/" class="nav-link" :class="{ active: isActive('home') }" aria-label="Mis ideas" title="Mis ideas">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.5 2.5M19 5l-2.5 2.5M5 19l2.5-2.5M19 19l-2.5-2.5M12 8a4 4 0 0 0-4 4c0 1.5.8 2.7 2 3.4V17h4v-1.6c1.2-.7 2-1.9 2-3.4a4 4 0 0 0-4-4z"/></svg>
+          <span class="nav-label">Mis ideas</span>
         </RouterLink>
-        <RouterLink to="/explorar" class="nav-link" :class="{ active: isActive(['explorar', 'tag']) }" aria-label="Explorar ideas" title="Explorar ideas">
+        <RouterLink to="/explorar" class="nav-link" :class="{ active: isActive(['explorar', 'tag']) }" aria-label="Mapa de ideas" title="Mapa de ideas">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><circle cx="5" cy="6" r="1.8"/><circle cx="19" cy="6" r="1.8"/><circle cx="5" cy="18" r="1.8"/><circle cx="19" cy="18" r="1.8"/><path d="M6.5 7l4 3.5M17.5 7l-4 3.5M6.5 17l4-3.5M17.5 17l-4-3.5"/></svg>
-          <span class="nav-label">Explorar</span>
+          <span class="nav-label">Mapa de ideas</span>
         </RouterLink>
         <RouterLink to="/buscar" class="nav-link" :class="{ active: isActive('buscar') }" aria-label="Buscar" title="Buscar">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
           <span class="nav-label">Buscar</span>
         </RouterLink>
-        <form @submit.prevent="goBuscar" class="cmdbar" role="search">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-          <input ref="searchBox" v-model="q" placeholder="Buscar en el vault" aria-label="Buscar en el vault" />
-          <kbd title="Pulsa / para enfocar">/</kbd>
-        </form>
       </div>
 
       <div class="nav-section">
-        <div class="nav-section-label">Vault</div>
+        <div class="nav-section-label">Mis temas</div>
         <RouterLink
           v-for="s in secciones"
           :key="s.id"
@@ -162,7 +150,7 @@ const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorS
       <div class="nav-footer">
         <div class="nav-status" role="status">
           <div class="nav-status-dot" aria-hidden="true"></div>
-          <span class="nav-status-text">Vault sincronizado</span>
+          <span class="nav-status-text">Todo al día</span>
         </div>
         <div class="nav-total">{{ notas.length }} notas en total</div>
       </div>

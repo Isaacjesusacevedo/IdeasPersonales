@@ -75,15 +75,15 @@ const limpiar = () => {
   <div class="page">
     <div class="page-header">
       <div class="page-eyebrow">Búsqueda local · sin backend</div>
-      <h1 class="page-title">Buscar en el <span class="grad-text">Vault</span></h1>
+        <h1 class="page-title">Buscar en <span class="grad-text">mis notas</span></h1>
       <p class="page-subtitle">{{ resultados.length }} resultados{{ q.trim() ? ` para "${q.trim()}"` : '' }}</p>
     </div>
 
-    <input v-model="q" class="cmd-input cmd-input--big" placeholder="Ej: DAVA, brownie, sesgo, Luciano…" aria-label="Buscar en el vault" style="margin-bottom:12px" />
+    <input v-model="q" class="cmd-input cmd-input--big" placeholder="Ej: DAVA, brownie, sesgo, Luciano…" aria-label="Buscar en mis notas" style="margin-bottom:12px" />
 
     <div class="filtros" role="group" aria-label="Filtros">
       <div class="filtro-grupo">
-        <span class="id-mono">Sección</span>
+        <span class="id-mono">Tema</span>
         <button v-for="s in secciones" :key="s.id" class="pill filtro-chip" :class="{ active: fSeccion === s.id }" :aria-pressed="fSeccion === s.id" @click="fSeccion = fSeccion === s.id ? '' : s.id">{{ s.nombre }}</button>
       </div>
       <div class="filtro-grupo">
@@ -113,7 +113,7 @@ const limpiar = () => {
         <button v-for="s in sugeridas" :key="s.tag" class="pill" @click="fTag = s.tag; q = ''">#{{ s.tag }}</button>
       </div>
     </div>
-    <div v-else class="table-wrap"><table><thead><tr><th>Nota</th><th>Sección</th><th>Resumen</th></tr></thead>
+    <div v-else class="table-wrap"><table><thead><tr><th>Nota</th><th>Tema</th><th>Resumen</th></tr></thead>
     <tbody><tr v-for="h in resultados" :key="h.nota.id">
       <td>
         <RouterLink :to="`/n/${h.nota.id}`" class="row-link"><template v-for="(f, j) in frags(h.nota.titulo)" :key="j"><mark v-if="f.mark">{{ f.texto }}</mark><template v-else>{{ f.texto }}</template></template></RouterLink>

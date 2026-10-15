@@ -28,7 +28,7 @@ const tags = computed(() =>
   <div class="page">
     <div class="page-header">
       <div class="page-eyebrow">Descubrir · por conceptos</div>
-      <h1 class="page-title">Explorar el <span class="grad-text">Vault</span></h1>
+      <h1 class="page-title">Explorar <span class="grad-text">mis notas</span></h1>
       <p class="page-subtitle">{{ tags.length }} etiquetas en {{ tags.reduce((a, t) => a + t.n, 0) }} usos. El tamaño es frecuencia; el color, la sección dominante.</p>
     </div>
 

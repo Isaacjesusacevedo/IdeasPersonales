@@ -35,12 +35,12 @@ const badgeDe = (seccion: string) => {
   <div class="page">
     <header class="hero hero-grid">
       <div>
-        <div class="page-eyebrow">Ideas Personales · Obsidian Vault</div>
-        <h1 class="hero-title">Todo lo que pienso, <span class="grad-text">en un solo lugar</span></h1>
-        <p class="hero-sub">{{ total }} notas organizadas en {{ secciones.length }} secciones: decisiones, proyectos, universo narrativo, modelos mentales y apuntes técnicos.</p>
+        <div class="page-eyebrow">Ideas Personales</div>
+        <h1 class="hero-title">Mis ideas, <span class="grad-text">conectadas</span>.</h1>
+        <p class="hero-sub">{{ total }} notas sobre cómo pienso, decido y construyo: decisiones, proyectos, universo narrativo, modelos mentales y apuntes técnicos. Seguí los caminos entre ellas.</p>
         <div class="hero-actions">
           <RouterLink to="/n/sis-consilium" class="btn btn-primary">Empezar por Consilium</RouterLink>
-          <RouterLink to="/explorar" class="btn btn-ghost">Explorar secciones</RouterLink>
+          <RouterLink to="/explorar" class="btn btn-ghost">Abrir el mapa →</RouterLink>
         </div>
         <div class="hero-rule" aria-hidden="true"></div>
       </div>
@@ -49,25 +49,25 @@ const badgeDe = (seccion: string) => {
 
     <div class="stat-grid" role="list">
       <div class="stat-card" role="listitem">
-        <div class="stat-label">Notas integradas</div>
+        <div class="stat-label">Notas</div>
         <div class="stat-value">{{ total }}</div>
-        <div class="stat-sub">Vault completo navegable</div>
+        <div class="stat-sub">Todas conectadas</div>
         <div class="stat-bar" aria-hidden="true"></div>
       </div>
       <div class="stat-card" role="listitem">
-        <div class="stat-label">Proyectos vivos</div>
+        <div class="stat-label">Proyectos</div>
         <div class="stat-value">2</div>
         <div class="stat-sub">Brownies + Oxida</div>
         <div class="stat-bar" aria-hidden="true"></div>
       </div>
       <div class="stat-card" role="listitem">
-        <div class="stat-label">Secciones</div>
+        <div class="stat-label">Temas</div>
         <div class="stat-value">{{ secciones.length }}</div>
-        <div class="stat-sub">Yo · Sistema · Mente…</div>
+        <div class="stat-sub">De Yo a Ideas sueltas</div>
         <div class="stat-bar" aria-hidden="true"></div>
       </div>
       <div class="stat-card" role="listitem">
-        <div class="stat-label">Sistema núcleo</div>
+        <div class="stat-label">Núcleo</div>
         <div class="stat-value">3</div>
         <div class="stat-sub">Consilium · Decisorium · Plan</div>
         <div class="stat-bar" aria-hidden="true"></div>
@@ -75,7 +75,7 @@ const badgeDe = (seccion: string) => {
     </div>
 
     <div class="card lift" style="margin-bottom:16px">
-      <div class="card-header"><div class="card-title">Secciones del vault</div><RouterLink to="/buscar" class="btn btn-ghost">Buscar →</RouterLink></div>
+      <div class="card-header"><div class="card-title">Mis temas</div><RouterLink to="/explorar" class="btn btn-ghost">Ver en el mapa →</RouterLink></div>
       <div class="grid-2">
         <RouterLink
           v-for="(s, idx) in porSeccion"

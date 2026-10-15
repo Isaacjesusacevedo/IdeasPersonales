@@ -19,7 +19,7 @@ const lista = computed(() => {
 <template>
   <div class="page">
     <div v-if="!seccion" class="card" style="text-align:center;padding:60px">
-      <h2>Sección no encontrada</h2><br /><RouterLink to="/" class="btn btn-primary">Volver</RouterLink>
+      <h2>Tema no encontrado</h2><br /><RouterLink to="/" class="btn btn-primary">Volver</RouterLink>
     </div>
     <div v-else>
       <div class="page-header">
@@ -28,7 +28,7 @@ const lista = computed(() => {
         <p class="page-subtitle">{{ seccion.descripcion }}</p>
         <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap">
           <span class="badge badge-teal">{{ lista.length }} notas</span>
-          <input v-model="filtro" class="form-input" placeholder="Filtrar en esta sección…" aria-label="Filtrar notas de la sección" style="max-width:280px" />
+          <input v-model="filtro" class="form-input" placeholder="Filtrar en este tema…" aria-label="Filtrar notas del tema" style="max-width:280px" />
         </div>
       </div>
       <div v-if="!lista.length" class="card empty">Sin resultados para ese filtro.</div>
