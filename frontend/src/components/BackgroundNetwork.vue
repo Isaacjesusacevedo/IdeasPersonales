@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// Red decorativa de ideas: nodos + enlaces generados una vez con PRNG de
-// semilla fija. Puramente visual (aria-hidden, sin eventos).
+// Líneas de flujo: 45 curvas Bézier diagonales + nodos. Puramente visual
+// (aria-hidden, sin eventos). Ocultas en <768px por CSS.
 function mulberry32(seed: number) {
   return function () {
     seed |= 0
@@ -11,55 +11,57 @@ function mulberry32(seed: number) {
   }
 }
 
-interface Node { x: number; y: number; r: number; c: string; pulse: boolean; d: string }
-interface Edge { x1: number; y1: number; x2: number; y2: number; c: string }
+interface Curva { d: string; o: string; dur: string }
+interface Punto { x: number; y: number; r: number; pulso: boolean; dur: string }
 
 const W = 1600
 const H = 900
-const N = 45
-const LINK_DIST = 250
+const rand = mulberry32(30415)
 
-const rand = mulberry32(20261015)
-const nodes: Node[] = []
-for (let i = 0; i < N; i++) {
-  const pick = rand()
-  nodes.push({
-    x: 40 + rand() * (W - 80),
-    y: 40 + rand() * (H - 80),
-    r: 1.6 + rand() * 2.2,
-    c: pick < 0.45 ? '#7c3aed' : pick < 0.8 ? '#2dd4bf' : '#8b94ff',
-    pulse: false,
-    d: (3 + rand() * 4).toFixed(2)
+const curvas: Curva[] = []
+for (let i = 0; i < 45; i++) {
+  const y0 = -60 + (i / 44) * (H + 120) + (rand() - 0.5) * 90
+  const y1 = y0 + (rand() - 0.5) * 420
+  const cx1 = W * (0.25 + rand() * 0.2)
+  const cx2 = W * (0.55 + rand() * 0.2)
+  curvas.push({
+    d: `M -120 ${y0.toFixed(0)} C ${cx1.toFixed(0)} ${(y0 + (rand() - 0.5) * 160).toFixed(0)}, ${cx2.toFixed(0)} ${(y1 + (rand() - 0.5) * 160).toFixed(0)}, ${W + 120} ${y1.toFixed(0)}`,
+    o: (0.1 + rand() * 0.04).toFixed(2),
+    dur: (30 + rand() * 30).toFixed(0)
   })
 }
-// 4 nodos con pulso lento, bien separados
-for (const k of [3, 16, 29, 40]) nodes[k % N].pulse = true
 
-const edges: Edge[] = []
-for (let i = 0; i < N; i++) {
-  for (let j = i + 1; j < N; j++) {
-    const dx = nodes[i].x - nodes[j].x
-    const dy = nodes[i].y - nodes[j].y
-    if (dx * dx + dy * dy < LINK_DIST * LINK_DIST) {
-      edges.push({
-        x1: nodes[i].x, y1: nodes[i].y, x2: nodes[j].x, y2: nodes[j].y,
-        c: rand() < 0.5 ? '#7c3aed' : '#2dd4bf'
-      })
-    }
-  }
+// 7 nodos sobre curvas (índices fijos, 3 con pulso)
+const puntos: Punto[] = []
+const fijos = [4, 11, 19, 26, 33, 39, 43]
+for (let j = 0; j < fijos.length; j++) {
+  const t = rand()
+  puntos.push({
+    x: 120 + rand() * (W - 240),
+    y: 80 + rand() * (H - 160),
+    r: 2 + rand() * 1.6,
+    pulso: t < 0.45,
+    dur: (4 + rand() * 4).toFixed(1)
+  })
 }
 </script>
 
 <template>
   <svg class="bg-net" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-    <g stroke-width="1">
-      <line v-for="(e, i) in edges" :key="'e' + i"
-        :x1="e.x1" :y1="e.y1" :x2="e.x2" :y2="e.y2" :stroke="e.c" />
+    <defs>
+      <linearGradient id="flowGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1600" y2="900">
+        <stop offset="0" stop-color="#7c3aed" />
+        <stop offset="1" stop-color="#2dd4bf" />
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke="url(#flowGrad)" stroke-width="1.2">
+      <path v-for="(c, i) in curvas" :key="'c' + i"
+        :d="c.d" :opacity="c.o" class="flujo" :style="{ animationDuration: c.dur + 's' }" />
     </g>
     <g>
-      <circle v-for="(n, i) in nodes" :key="'n' + i"
-        :cx="n.x" :cy="n.y" :r="n.r" :fill="n.c"
-        :class="{ 'net-pulse': n.pulse }" :style="n.pulse ? { animationDuration: n.d + 's' } : undefined" />
+      <circle v-for="(p, i) in puntos" :key="'p' + i"
+        :cx="p.x.toFixed(0)" :cy="p.y.toFixed(0)" :r="p.r.toFixed(1)" fill="#a78bfa"
+        :class="{ 'net-pulse': p.pulso }" :style="p.pulso ? { animationDuration: p.dur + 's' } : undefined" />
     </g>
   </svg>
 </template>

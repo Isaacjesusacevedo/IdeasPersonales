@@ -19,6 +19,11 @@ const router = createRouter({
 router.afterEach((to) => {
   const title = (to.meta.title as string) ?? 'App'
   document.title = `${title} · Ideas Personales`
+  // Contexto para atenuar el fondo en lectura (sin líneas de flujo ni cursor)
+  try {
+    if (to.name === 'nota' || to.name === 'idea-detail') document.documentElement.setAttribute('data-context', 'nota')
+    else document.documentElement.removeAttribute('data-context')
+  } catch { /* sin DOM */ }
 })
 
 export default router

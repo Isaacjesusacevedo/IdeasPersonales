@@ -7,6 +7,11 @@ import ConceptCloud from '@/components/ConceptCloud.vue'
 const router = useRouter()
 const total = computed(() => notas.length)
 const porSeccion = computed(() => secciones.map(s => ({ ...s, n: notasPorSeccion(s.id).length })))
+// La última card ocupa el resto de su fila si las de 1 columna son impares
+const esUltimoImpar = (id: string) => {
+  const simples = porSeccion.value.filter(s => s.n < 15)
+  return simples.length % 2 === 1 && simples[simples.length - 1]?.id === id
+}
 const destacadas = computed(() =>
   ['sis-consilium', 'bro-consolidado', 'oxi-indice', 'men-indice-sesgos']
     .map(id => notas.find(n => n.id === id)!)
@@ -76,14 +81,14 @@ const badgeDe = (seccion: string) => {
 
     <div class="card lift" style="margin-bottom:16px">
       <div class="card-header"><div class="card-title">Mis temas</div><RouterLink to="/explorar" class="btn btn-ghost">Ver en el mapa →</RouterLink></div>
-      <div class="grid-2">
+      <div class="bento">
         <RouterLink
           v-for="(s, idx) in porSeccion"
           :key="s.id"
           :to="`/s/${s.id}`"
           v-reveal="(idx % 4) * 70"
           class="card"
-          :class="s.acento === 'teal' ? 'card--teal' : ''">
+          :class="[{ 'card--teal': s.acento === 'teal', 'bento-wide': s.n >= 15, 'bento-fill': esUltimoImpar(s.id) }]">
           <div class="mono" style="font-size:11px;color:var(--teal)">{{ s.n }} notas · {{ s.subtitulo }}</div>
           <h3 style="margin:6px 0;display:flex;align-items:center">{{ s.nombre }}
             <svg class="sec-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>

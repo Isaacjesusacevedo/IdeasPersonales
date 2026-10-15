@@ -45,8 +45,42 @@ const onKey = (e: KeyboardEvent) => {
   e.preventDefault()
   openPalette()
 }
-onMounted(() => window.addEventListener('keydown', onKey))
-onUnmounted(() => window.removeEventListener('keydown', onKey))
+onMounted(() => {
+  window.addEventListener('keydown', onKey)
+  // Una sola escucha: luz del cursor + spotlight de cards (rAF, solo puntero fino)
+  const fino = window.matchMedia('(hover:hover) and (pointer:fine)').matches
+  const calma = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (!fino || calma) return
+  let sx = 0
+  let sy = 0
+  let turno = false
+  const volcar = () => {
+    turno = false
+    const root = document.documentElement
+    root.style.setProperty('--mx', sx + 'px')
+    root.style.setProperty('--my', sy + 'px')
+    const el = document.elementFromPoint(sx, sy)?.closest?.('.card, .stat-card') as HTMLElement | null
+    if (el) {
+      const r = el.getBoundingClientRect()
+      el.style.setProperty('--mx', sx - r.left + 'px')
+      el.style.setProperty('--my', sy - r.top + 'px')
+    }
+  }
+  const mover = (e: PointerEvent) => {
+    sx = e.clientX
+    sy = e.clientY
+    if (turno) return
+    turno = true
+    requestAnimationFrame(volcar)
+  }
+  window.addEventListener('pointermove', mover, { passive: true })
+  ;(window as unknown as { __spotCleanup?: () => void }).__spotCleanup = () =>
+    window.removeEventListener('pointermove', mover)
+})
+onUnmounted(() => {
+  window.removeEventListener('keydown', onKey)
+  ;(window as unknown as { __spotCleanup?: () => void }).__spotCleanup?.()
+})
 
 interface Crumb { label: string; to?: string }
 const crumbs = computed<Crumb[]>(() => {
@@ -83,8 +117,15 @@ const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorS
 
 <template>
   <div class="app-shell">
-    <div class="bg-ambient" aria-hidden="true"></div>
+    <div class="bg-aurora" aria-hidden="true">
+      <span class="blob blob--1"></span>
+      <span class="blob blob--2"></span>
+      <span class="blob blob--3"></span>
+      <span class="blob blob--4"></span>
+    </div>
+    <div class="bg-dots" aria-hidden="true"></div>
     <BackgroundNetwork />
+    <div class="cursor-light" aria-hidden="true"></div>
 
     <button
       @click="ui.drawer = !ui.drawer"
@@ -130,7 +171,7 @@ const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorS
         </RouterLink>
       </div>
 
-      <div class="nav-section">
+      <div class="nav-section nav-tree">
         <div class="nav-section-label">Mis temas</div>
         <RouterLink
           v-for="s in secciones"
