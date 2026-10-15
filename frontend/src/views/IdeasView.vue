@@ -1,35 +1,21 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { ideas } from '@/data/ideas'
-
-const estadoBadge = (e: string) =>
-  e === 'nueva' ? 'badge-blue' : e === 'en-curso' ? 'badge-amber' : 'badge-green'
+import { notasPorSeccion } from '@/data/vault'
+const lista = notasPorSeccion('ideas')
 </script>
 
 <template>
   <div class="page">
     <div class="page-header">
-      <div class="page-eyebrow">Listado · estilo Semanas / Productos</div>
-      <h1 class="page-title">Mis Ideas</h1>
-      <p class="page-subtitle">Tabla réplica Industrial: thead mono uppercase, hover surface, badges por estado.</p>
+      <div class="page-eyebrow">Lectura rápida · sincronizado con IDEAS.md</div>
+      <h1 class="page-title">Ideas sueltas</h1>
+      <p class="page-subtitle">Capturas del día a día. El Vault completo vive en las 6 secciones del sidebar.</p>
     </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>#</th><th>Título</th><th>Categoría</th><th>Estado</th><th>Resumen</th><th class="num">Fecha</th></tr>
-        </thead>
-        <tbody>
-          <tr v-for="idea in ideas" :key="idea.id">
-            <td class="num mono">{{ idea.id }}</td>
-            <td><RouterLink :to="`/ideas/${idea.id}`" style="color:var(--text-0);font-weight:600;text-decoration:none">{{ idea.titulo }}</RouterLink></td>
-            <td><span class="badge badge-blue">{{ idea.categoria }}</span></td>
-            <td><span class="badge" :class="estadoBadge(idea.estado)">{{ idea.estado }}</span></td>
-            <td style="max-width:320px">{{ idea.resumen }}</td>
-            <td class="num mono">{{ idea.fecha }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="table-wrap"><table><thead><tr><th>Título</th><th>Categoría</th><th>Resumen</th></tr></thead>
+    <tbody><tr v-for="n in lista" :key="n.id">
+      <td><RouterLink :to="`/n/${n.id}`" style="color:var(--text-0);font-weight:600;text-decoration:none">{{ n.titulo }}</RouterLink></td>
+      <td><span class="badge badge-blue">{{ n.categoria }}</span></td>
+      <td>{{ n.resumen }}</td>
+    </tr></tbody></table></div>
   </div>
 </template>
