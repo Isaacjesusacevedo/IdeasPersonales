@@ -116,16 +116,82 @@ export const notas: VaultNote[] = [
   { id: 'men-principe', titulo: 'El Príncipe — Maquiavelo', seccion: 'mente', categoria: 'Poder', resumen: 'Eficacia sobre moral: virtù vs fortuna, temido mejor que amado pero nunca odiado.', puntos: ['Favores de a poco, daños de una vez · parecer virtuoso · león + zorro.', 'No mercenarios · anti-adulación · mejor aliado temido que neutral pisoteado.'], relaciones: ['men-leyes', 'sis-plantilla-persona'], origen: 'Leyes del Poder/El Príncipe de Maquiavelo.md' },
 
   // ── FACULTAD ──
-  { id: 'fac-parcial', titulo: 'Parcial: interfaces, lambdas, patrones, DI + BD', seccion: 'facultad', categoria: 'Parcial', resumen: 'Prog + BD: contratos, recursividad, Func/Action, Singleton/Factory/Observer/Strategy, ADO y SQL.', puntos: ['Interfaces múltiple + default C#8 · IEnumerable/IComparable/IDisposable.', 'Recursividad base+paso, tail, StackOverflow, memo O(2n)→O(n).', 'Lambdas, LINQ Where/Select, closures. DI constructor + AddTransient/Scoped/Singleton.', 'ADO: Connection/Command/Reader, ExecuteReader vs NonQuery, AddWithValue, using anti-inyección.'], relaciones: ['fac-demoado', 'fac-guia-net'], origen: 'Facultad/Parcial — Interfaces, Recursividad, Lambdas, Patrones y DI.md' },
-  { id: 'fac-demoado', titulo: 'DemoAdo línea por línea', seccion: 'facultad', categoria: 'Proyecto', resumen: 'Consola .NET 9 ADO puro sin ORM: wrapper GetData/Execute + Singleton + repositorios País/Carrera.', puntos: ['Microsoft.Data.SqlClient · TupacDB · file-scoped namespace · new() · using C#8.', 'AddWithValue anti-inyección · ExecuteNonQuery==1 · cadena (local)/sspi/TrustServerCertificate.', 'static/lock double-check · Dispose + finalizador · CRUD con WHERE por clave.'], relaciones: ['fac-parcial', 'yo-habilidades'], origen: 'Facultad/DemoAdo — Explicación Línea por Línea.md' },
-  { id: 'fac-guia-net', titulo: 'Guía completa .NET y C#', seccion: 'facultad', categoria: 'Guía', resumen: 'De CLR/GC a async, records, ASP.NET Core y DTOs. Historia 2002→.NET 9 + glosario.', puntos: ['Value vs Reference · Nullable · POO virtual/override vs new · SOLID · sealed.', 'Genéricos, LINQ deferred, excepciones, Task/async, Func/Action, eventos.', 'ASP.NET middleware + DI + ModelState · records/with · JSON: SemaphoreSlim, no atómico.'], relaciones: ['fac-parcial', 'fac-info-academica'], origen: 'Facultad/NET y CSharp — Guía Completa.md' },
-  { id: 'fac-info-academica', titulo: 'Info académica + listado 3-way join', seccion: 'facultad', categoria: 'Proyecto', resumen: 'Tabla 1:1 con 4 BIT + listado consolidado. SPs + EF Core SpInvoker + BR con rollback manual.', puntos: ['UNIQUE/CASCADE · SET NOCOUNT · SCOPE_IDENTITY · sin FirstOrDefault sobre EXEC.', 'BR valida (título si Posee, excluyentes, ≥1 flag) · InscripcionService transaccional.', 'Vue: ListadoView 7 cols + InscripciónView 4 secciones + useApiFetch Bearer.'], relaciones: ['fac-guia-net', 'yo-proyectos'], origen: 'Facultad/info académica y listado.md' },
+  {
+    id: 'fac-parcial', titulo: 'Parcial: interfaces, lambdas, patrones, DI + BD', seccion: 'facultad', categoria: 'Parcial', resumen: 'Prog + BD: contratos, recursividad, Func/Action, Singleton/Factory/Observer/Strategy, ADO y SQL.', puntos: ['Interfaces múltiple + default C#8 · IEnumerable/IComparable/IDisposable.', 'Recursividad base+paso, tail, StackOverflow, memo O(2n)→O(n).', 'Lambdas, LINQ Where/Select, closures. DI constructor + AddTransient/Scoped/Singleton.', 'ADO: Connection/Command/Reader, ExecuteReader vs NonQuery, AddWithValue, using anti-inyección.'], relaciones: ['fac-demoado', 'fac-guia-net'], origen: 'Facultad/Parcial — Interfaces, Recursividad, Lambdas, Patrones y DI.md',
+    tipo: 'articulo',
+    intro: 'Apunte doble para el parcial: programación (interfaces, recursividad, lambdas, patrones y DI) y base de datos (ADO.NET y SQL), con snippets y un POC sin compilar.',
+    tags: ['csharp', 'sql', 'patrones'],
+    bloques: [
+      { t: 'h2', texto: 'Programación' },
+      { t: 'p', texto: 'Interfaces como contrato (múltiple, no instanciables, `IEnumerable<T>`), polimorfismo y `IDisposable`.' },
+      { t: 'lista', items: ['Caso base + paso recursivo: Factorial, Fibonacci y carpetas; memoización de O(2ⁿ) a O(n).', 'Lambdas `Func<>`, `Action` y `Predicate<T>` con LINQ (`Where`, `Select`) y closures.', 'Patrones: Singleton con doble check, Factory, Observer y Strategy; DI por constructor con `AddTransient`, `AddScoped` y `AddSingleton`.'] },
+      { t: 'h2', texto: 'Base de datos' },
+      { t: 'p', texto: 'ADO.NET con `SqlConnection`, `SqlCommand` y `SqlDataReader`, parámetros contra inyección y EF Core como ORM sobre ADO.NET.' },
+      { t: 'lista', items: ['DDL, DML, DQL, DCL y TCL con `JOIN`, `GROUP BY` y `COUNT`.', 'ABM completo con `IPaisRepositorio` y buenas prácticas: parámetros, WHERE por PK y `using`.'] },
+      { t: 'p', texto: 'La práctica está en [[fac-demoado]] y la teoría larga en [[fac-guia-net]].' }
+    ]
+  },
+  {
+    id: 'fac-demoado', titulo: 'DemoAdo línea por línea', seccion: 'facultad', categoria: 'Proyecto', resumen: 'Consola .NET 9 ADO puro sin ORM: wrapper GetData/Execute + Singleton + repositorios País/Carrera.', puntos: ['Microsoft.Data.SqlClient · TupacDB · file-scoped namespace · new() · using C#8.', 'AddWithValue anti-inyección · ExecuteNonQuery==1 · cadena (local)/sspi/TrustServerCertificate.', 'static/lock double-check · Dispose + finalizador · CRUD con WHERE por clave.'], relaciones: ['fac-parcial', 'yo-habilidades'], origen: 'Facultad/DemoAdo — Explicación Línea por Línea.md',
+    tipo: 'proyecto',
+    intro: 'Consola C# con .NET 9 y ADO.NET puro, sin ORM: explica línea por línea el wrapper de acceso a datos, el Singleton y los repositorios de País y Carrera contra TupacDB.',
+    tags: ['csharp', 'sql', 'dotnet'],
+    bloques: [
+      { t: 'h2', texto: 'Estructura' },
+      { t: 'lista', items: ['`Program.cs` con la demo de alta y listado.', '`AccesoDB.cs`: `GetData` para SELECT y `Execute` para INSERT/UPDATE/DELETE.', '`AccesoDbSingleton.cs`: instancia única con doble check y `lock`.', 'Modelos `Pais`, `Paises`, `Carrera` y repositorios con CRUD y `WHERE` por clave.'] },
+      { t: 'h2', texto: 'Claves técnicas' },
+      { t: 'lista', items: ['Parámetros `@` anti-inyección con `AddWithValue` y `ExecuteNonQuery() == 1`.', 'Cadena `(local)`, `sspi` y `TrustServerCertificate`; conexión perezosa y `Dispose`.', 'Sintaxis moderna: namespace file-scoped de C# 10, `new()` de C# 9 y `using` de C# 8.'] },
+      { t: 'p', texto: 'Base teórica en [[fac-parcial]].' }
+    ]
+  },
+  {
+    id: 'fac-guia-net', titulo: 'Guía completa .NET y C#', seccion: 'facultad', categoria: 'Guía', resumen: 'De CLR/GC a async, records, ASP.NET Core y DTOs. Historia 2002→.NET 9 + glosario.', puntos: ['Value vs Reference · Nullable · POO virtual/override vs new · SOLID · sealed.', 'Genéricos, LINQ deferred, excepciones, Task/async, Func/Action, eventos.', 'ASP.NET middleware + DI + ModelState · records/with · JSON: SemaphoreSlim, no atómico.'], relaciones: ['fac-parcial', 'fac-info-academica'], origen: 'Facultad/NET y CSharp — Guía Completa.md',
+    tipo: 'articulo',
+    intro: 'Guía larga de .NET y C#: de la historia 2002→.NET 9 y el CLR con GC hasta async, records, ASP.NET Core y DTOs, con glosario.',
+    tags: ['csharp', 'dotnet', 'patrones'],
+    bloques: [
+      { t: 'h2', texto: 'Plataforma y lenguaje' },
+      { t: 'lista', items: ['Historia 1.0 (2002) → Core (2016) → .NET 9, con CLR, IL/JIT y GC por generaciones.', 'Value vs Reference (stack vs heap), `Nullable` con `?`, `??` y `?.`, y los 4 pilares de POO con `virtual`/`override` y SOLID.'] },
+      { t: 'h2', texto: 'Moderno y web' },
+      { t: 'lista', items: ['Genéricos, LINQ con ejecución diferida, `Task` con `async`/`await` y delegates `Func`/`Action`.', 'ASP.NET Core: middleware, DI y `ModelState`; C# 8–12 con `record`, `with` y pattern matching.', 'JSON con riesgos reales: no atómico, carreras y `SemaphoreSlim(1,1)` como mutex.'] },
+      { t: 'p', texto: 'Lo evaluable está resumido en [[fac-parcial]].' }
+    ]
+  },
+  {
+    id: 'fac-info-academica', titulo: 'Info académica + listado 3-way join', seccion: 'facultad', categoria: 'Proyecto', resumen: 'Tabla 1:1 con 4 BIT + listado consolidado. SPs + EF Core SpInvoker + BR con rollback manual.', puntos: ['UNIQUE/CASCADE · SET NOCOUNT · SCOPE_IDENTITY · sin FirstOrDefault sobre EXEC.', 'BR valida (título si Posee, excluyentes, ≥1 flag) · InscripcionService transaccional.', 'Vue: ListadoView 7 cols + InscripciónView 4 secciones + useApiFetch Bearer.'], relaciones: ['fac-guia-net', 'yo-proyectos'], origen: 'Facultad/info académica y listado.md',
+    tipo: 'proyecto',
+    intro: 'Dos features reales: tabla académica 1:1 con 4 flags BIT y listado consolidado con join triple, con SPs, EF Core y rollback manual.',
+    tags: ['sql', 'dotnet', 'csharp'],
+    bloques: [
+      { t: 'h2', texto: 'Base de datos' },
+      { t: 'lista', items: ['Tabla con `UNIQUE`, `CASCADE`, `SET NOCOUNT ON` y `SCOPE_IDENTITY`; nunca `FirstOrDefaultAsync` sobre `EXEC`.', 'Repositorios con `SqlParameter` y `DBNull.Value`; `SpInvoker` centraliza los SPs.'] },
+      { t: 'h2', texto: 'Reglas y frontend' },
+      { t: 'lista', items: ['BR valida (título obligatorio, excluyentes, ≥1 flag) e `InscripcionService` transaccional con rollback manual.', 'Vue con `ListadoView` de 7 columnas y `useApiFetch` con `Bearer` y redirect al login.'] },
+      { t: 'p', texto: 'Comparte stack con [[fac-demoado]] y criterios con [[yo-proyectos]].' }
+    ]
+  },
 
   // ── IDEAS ──
-  { id: 'idea-1', titulo: 'Mi primera idea', seccion: 'ideas', categoria: 'Personal', resumen: 'Ejemplo inicial para leer siempre que necesites inspiración.', puntos: ['Bórrame y escribe tu primera idea real en IDEAS.md.'], relaciones: [], origen: 'IDEAS.md' },
-  { id: 'idea-2', titulo: 'Portfolio con demos en vivo', seccion: 'ideas', categoria: 'Carrera', resumen: 'Publicar 2-3 proyectos con demo y repo público.', puntos: ['Como módulo Productos en La Industrial: catálogo + tabla + badges.'], relaciones: ['yo-proyectos'], origen: 'IDEAS.md' },
-  { id: 'idea-3', titulo: 'Checkout MercadoPago en Brana', seccion: 'ideas', categoria: 'Brana', resumen: 'Pagos reales en el e-commerce esotérico.', puntos: ['Alerta ámbar estilo Dashboard: ruta y CTA.'], relaciones: [], origen: 'IDEAS.md' },
-  { id: 'idea-4', titulo: 'Tests xUnit + Vitest', seccion: 'ideas', categoria: 'Calidad', resumen: 'Base de 34 tests en verde como en Sistema Industrial.', puntos: ['Referencia PROYECTO.md v1.2.0.'], relaciones: ['fac-parcial'], origen: 'IDEAS.md' }
+  {
+    id: 'idea-1', titulo: 'Mi primera idea', seccion: 'ideas', categoria: 'Personal', resumen: 'Ejemplo inicial para leer siempre que necesites inspiración.', puntos: ['Bórrame y escribe tu primera idea real en IDEAS.md.'], relaciones: [], origen: 'IDEAS.md',
+    tipo: 'coleccion',
+    intro: 'Punto de partida del archivo: la primera idea de ejemplo.'
+  },
+  {
+    id: 'idea-2', titulo: 'Portfolio con demos en vivo', seccion: 'ideas', categoria: 'Carrera', resumen: 'Publicar 2-3 proyectos con demo y repo público.', puntos: ['Como módulo Productos en La Industrial: catálogo + tabla + badges.'], relaciones: ['yo-proyectos'], origen: 'IDEAS.md',
+    tipo: 'coleccion',
+    intro: 'Publicar una selección de proyectos con demo en vivo y repositorio público.'
+  },
+  {
+    id: 'idea-3', titulo: 'Checkout MercadoPago en Brana', seccion: 'ideas', categoria: 'Brana', resumen: 'Pagos reales en el e-commerce esotérico.', puntos: ['Alerta ámbar estilo Dashboard: ruta y CTA.'], relaciones: [], origen: 'IDEAS.md',
+    tipo: 'coleccion',
+    intro: 'Sumar pagos reales al e-commerce con checkout.'
+  },
+  {
+    id: 'idea-4', titulo: 'Tests xUnit + Vitest', seccion: 'ideas', categoria: 'Calidad', resumen: 'Base de 34 tests en verde como en Sistema Industrial.', puntos: ['Referencia PROYECTO.md v1.2.0.'], relaciones: ['fac-parcial'], origen: 'IDEAS.md',
+    tipo: 'coleccion',
+    intro: 'Base de tests en verde como la del Sistema Industrial.'
+  }
 ]
 
 export const notaPorId = (id: string) => notas.find(n => n.id === id)
