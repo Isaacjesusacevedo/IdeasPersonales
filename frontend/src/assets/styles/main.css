@@ -1,11 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap');
 
-/* ══ Tokens · identidad azul noche + morado + turquesa ══ */
+/* ══ Tokens · azul noche + morado + turquesa + índigo ══ */
 :root {
   --bg: #070b1a;
   --bg-2: #0b1126;
   --surface: #101733;
   --surface-2: #151d40;
+  --surface-grad: linear-gradient(180deg, rgba(26, 36, 72, 0.92) 0%, rgba(16, 23, 51, 0.88) 100%);
+  --panel-grad: linear-gradient(180deg, rgba(17, 27, 56, 0.9) 0%, rgba(11, 17, 38, 0.86) 100%);
   --border: rgba(139, 148, 255, 0.14);
   --border-strong: rgba(139, 148, 255, 0.28);
   --text: #e8ebf7;
@@ -14,12 +16,14 @@
   --purple-soft: #a78bfa;
   --teal: #2dd4bf;
   --teal-deep: #14b8a6;
+  --indigo: #4f46e5;
   --grad: linear-gradient(90deg, #7c3aed 0%, #2dd4bf 100%);
   --glow-purple: 0 0 24px rgba(124, 58, 237, 0.35);
   --glow-teal: 0 0 24px rgba(45, 212, 191, 0.28);
+  --glow-indigo: 0 0 24px rgba(79, 70, 229, 0.35);
   --radius: 14px;
 
-  --font-display: 'Syne', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
 
@@ -195,7 +199,7 @@ a { color: inherit; }
 /* ══ Cards ══ */
 .card {
   position: relative;
-  background: var(--surface); border: 1px solid var(--border);
+  background: var(--surface-grad); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 20px;
   transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
@@ -212,7 +216,7 @@ a.card:hover::before, .card.lift:hover::before { opacity: 1; }
 /* ══ Stats ══ */
 .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
 .stat-card {
-  background: var(--surface); border: 1px solid var(--border);
+  background: var(--surface-grad); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 20px; position: relative; overflow: hidden;
   animation: rise-in 0.5s ease both;
 }
@@ -222,14 +226,15 @@ a.card:hover::before, .card.lift:hover::before { opacity: 1; }
 @keyframes rise-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 .stat-label { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
 .stat-value {
-  font-family: var(--font-display); font-size: 34px; font-weight: 800; line-height: 1;
+  font-family: var(--font-display); font-size: 34px; font-weight: 600; line-height: 1;
+  font-variant-numeric: tabular-nums;
   background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .stat-sub { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
 .stat-bar { height: 3px; border-radius: 3px; background: var(--grad); margin-top: 14px; opacity: 0.7; }
 
 /* ══ Tablas ══ */
-.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); }
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); background: var(--panel-grad); }
 table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 thead tr { background: var(--bg-2); border-bottom: 1px solid var(--border); }
 thead th {

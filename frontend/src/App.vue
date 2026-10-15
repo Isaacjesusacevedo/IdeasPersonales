@@ -106,7 +106,7 @@ const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorS
             </linearGradient>
           </defs>
           <polygon points="20,2 37,11.5 37,32.5 20,42 3,32.5 3,11.5" fill="none" stroke="url(#ipg)" stroke-width="2.5" />
-          <text x="20" y="27" text-anchor="middle" font-family="Syne, sans-serif" font-weight="800" font-size="13" fill="#e8ebf7">IP</text>
+          <text x="20" y="27" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="13" fill="#e8ebf7">IP</text>
         </svg>
         <div class="brand-text">
           <div class="nav-brand-name">Ideas Personales</div>
