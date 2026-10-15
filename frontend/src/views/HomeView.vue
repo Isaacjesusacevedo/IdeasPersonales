@@ -78,9 +78,10 @@ const badgeDe = (seccion: string) => {
       <div class="card-header"><div class="card-title">Secciones del vault</div><RouterLink to="/buscar" class="btn btn-ghost">Buscar →</RouterLink></div>
       <div class="grid-2">
         <RouterLink
-          v-for="s in porSeccion"
+          v-for="(s, idx) in porSeccion"
           :key="s.id"
           :to="`/s/${s.id}`"
+          v-reveal="(idx % 4) * 70"
           class="card"
           :class="s.acento === 'teal' ? 'card--teal' : ''">
           <div class="mono" style="font-size:11px;color:var(--teal)">{{ s.n }} notas · {{ s.subtitulo }}</div>
@@ -108,7 +109,7 @@ const badgeDe = (seccion: string) => {
         <button class="btn btn-ghost btn-sm" @click="sorpresa">Sorprendeme</button>
       </div>
       <div class="grid-3">
-        <RouterLink v-for="n in descubrir" :key="n.id" :to="`/n/${n.id}`" class="card">
+        <RouterLink v-for="(n, idx) in descubrir" :key="n.id" :to="`/n/${n.id}`" v-reveal="idx * 70" class="card">
           <span class="pill">{{ n.categoria }}</span>
           <h3 style="margin:8px 0;font-size:15px">{{ n.titulo }}</h3>
           <p class="clamp-3" style="color:var(--text-muted);font-size:13px">{{ n.resumen }}</p>

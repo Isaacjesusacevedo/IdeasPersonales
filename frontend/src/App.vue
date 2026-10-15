@@ -203,6 +203,7 @@ const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorS
         </Transition>
       </RouterView>
       <CommandPalette />
+      <div v-if="ui.toast" class="toast" role="status" :key="ui.toastN">{{ ui.toast }}</div>
     </main>
   </div>
 </template>

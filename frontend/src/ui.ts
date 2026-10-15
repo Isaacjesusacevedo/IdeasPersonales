@@ -27,8 +27,19 @@ export const ui = reactive({
   mode: loadMode(),
   drawer: false,
   reading: false,
-  palette: false
+  palette: false,
+  toast: '' as string,
+  toastN: 0
 })
+
+let toastTimer: number | undefined
+
+export function toast(msg: string) {
+  ui.toast = msg
+  ui.toastN++
+  window.clearTimeout(toastTimer)
+  toastTimer = window.setTimeout(() => { ui.toast = '' }, 2200)
+}
 
 export function openPalette() {
   ui.drawer = false

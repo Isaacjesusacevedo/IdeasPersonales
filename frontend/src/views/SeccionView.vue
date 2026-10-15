@@ -34,9 +34,10 @@ const lista = computed(() => {
       <div v-if="!lista.length" class="card empty">Sin resultados para ese filtro.</div>
       <div v-else class="grid-2">
         <RouterLink
-          v-for="n in lista"
+          v-for="(n, idx) in lista"
           :key="n.id"
           :to="`/n/${n.id}`"
+          v-reveal="(idx % 6) * 60"
           class="card"
           :class="seccion.acento === 'teal' ? 'card--teal' : ''">
           <span class="pill">{{ n.categoria }}</span>
