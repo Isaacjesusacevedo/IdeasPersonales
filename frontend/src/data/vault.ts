@@ -115,13 +115,98 @@ export const notas: VaultNote[] = [
   },
 
   // ── SISTEMA ──
-  { id: 'sis-consilium', titulo: 'Consilium — Kernel', seccion: 'sistema', categoria: 'Núcleo', resumen: 'Única fuente de verdad: rampa 60s, umbral 0.5, tabla de activación y principios P1-P6.', puntos: ['Clasifica cada consulta en Simple / Contextual / Compleja para no sobre-analizar.', 'Tabla de Activación con 11 disparadores (Lu, brownie, cliente, CV, sesgo, poder…) → archivo exacto.', 'P1 Observador Invisible · P2 Homo Homini Lupus · P3 Virtù vs Fortuna · P4 Velo · P5 Príncipe y Aliados · P6 Mínima Exposición.', 'Flujo en 7 pasos + registro de casos. No dice qué hacer, dice cómo actuar.'], relaciones: ['sis-decisorium', 'sis-plan', 'sis-integracion'], origen: 'Consilium.md' },
-  { id: 'sis-decisorium', titulo: 'Decisorium — Qué hacer', seccion: 'sistema', categoria: 'Decisión', resumen: 'Pre-Consilium: fork A/B/C, matriz 5D ponderada y filtro de recursividad.', puntos: ['Score = B*0.30 + (11-R)*0.25 + (11-C)*0.20 + V*0.15 + A*0.10.', 'Regla: siempre 3 opciones; si ves 2, la tercera es no hacer nada.', 'Ejemplos resueltos: proveedor +15%, sociedad 50/50 con Lu, alfajores vs brownies.', 'Salida: una opción + justificación → pasa a Consilium para ejecución.'], relaciones: ['sis-consilium', 'sis-plantilla-fork'], origen: 'Decisorium.md' },
-  { id: 'sis-index', titulo: 'Index Generalis — Mapa', seccion: 'sistema', categoria: 'Mapa', resumen: 'Mapa estructural del vault: 76 archivos, árbol, 47 vínculos y diagramas Mermaid.', puntos: ['Secciones raíz + 9 carpetas con etiquetas y estados.', 'Detecta 1 enlace frágil en Parci por guion corto vs largo.', '3 diagramas: Sistema Núcleo, Proyecto Brownies, Dominios Conocimiento.'], relaciones: ['sis-integracion', 'sis-consilium'], origen: 'Index_Generalis.md' },
-  { id: 'sis-integracion', titulo: 'Integración Total — Señales', seccion: 'sistema', categoria: 'Mapa', resumen: 'Matriz de 11 dominios + sistema de señales calientes/tibias/frías y rutas críticas.', puntos: ['Calientes semanales: Consilium, Decisorium, Plan, Consolidado, Log, Luciano, Locales.', 'Flujo: disparador → dominio → fork 5D → Consilium P1-P6.', 'Rutas copiar-pegar para brownies, negociación y CV.'], relaciones: ['sis-consilium', 'bro-consolidado', 'bro-log'], origen: 'Integración_Total.md' },
-  { id: 'sis-plan', titulo: 'Plan — 3 pasadas', seccion: 'sistema', categoria: 'Método', resumen: 'No es lista de respuestas: pasada 1 sesgos, 2 poder, 3 paradigma. Salida: ficha de 1 página.', puntos: ['P1 Sesgos: ¿qué quiero creer? ¿autoridad falsa? ¿exceso de confianza?', 'P2 Poder: quién tiene poder real, qué oculta, timing actuar/esperar/retirarse.', 'P3 Paradigma: elegir lente útil, no verdadero; validar con acción pequeña.', 'Uso inverso: aplicar sesgos para comunicar y vender.'], relaciones: ['men-indice-sesgos', 'men-leyes', 'men-paradigmas'], origen: 'Plan/Plan.md' },
-  { id: 'sis-plantilla-persona', titulo: 'Plantilla Análisis de Persona', seccion: 'sistema', categoria: 'Plantilla', resumen: 'Clasifica Aliado / Lastre / Peligro con P1-P6 antes de invertir en alguien.', puntos: ['P1 hechos duros · P2 interés declarado vs probable · P3 ventana temporal.', 'P4 velo discurso vs lógica · P5 veredicto + inversión · P6 una acción con canal y deadline.'], relaciones: ['sis-consilium', 'con-luciano'], origen: 'Plantillas/Plantilla_Analisis_de_Persona.md' },
-  { id: 'sis-plantilla-fork', titulo: 'Plantilla Fork Decisorium', seccion: 'sistema', categoria: 'Plantilla', resumen: 'Situación en 2 líneas → 3 opciones → matriz B/R → filtro recursividad → selección.', puntos: ['Tabla beneficio/riesgo/costo/reversibilidad/alineación + ratio B÷R.', 'Filtro: si falla, ¿se deshace en X días? ¿cómo?', 'Pase a Consilium con principios, primer paso y fecha de revisión.'], relaciones: ['sis-decisorium'], origen: 'Plantillas/Plantilla_Fork_Decisorium.md' },
+  {
+    id: 'sis-consilium', titulo: 'Consilium — Kernel', seccion: 'sistema', categoria: 'Núcleo', resumen: 'Única fuente de verdad: rampa 60s, umbral 0.5, tabla de activación y principios P1-P6.', puntos: ['Clasifica cada consulta en Simple / Contextual / Compleja para no sobre-analizar.', 'Tabla de Activación con 11 disparadores (Lu, brownie, cliente, CV, sesgo, poder…) → archivo exacto.', 'P1 Observador Invisible · P2 Homo Homini Lupus · P3 Virtù vs Fortuna · P4 Velo · P5 Príncipe y Aliados · P6 Mínima Exposición.', 'Flujo en 7 pasos + registro de casos. No dice qué hacer, dice cómo actuar.'], relaciones: ['sis-decisorium', 'sis-plan', 'sis-integracion'], origen: 'Consilium.md',
+    tipo: 'articulo',
+    intro: 'El kernel operativo: rampa de 60 segundos, tabla de activación y seis principios para actuar sin sobre-analizar.',
+    tags: ['decision', 'poder', 'principios'],
+    bloques: [
+      { t: 'h2', texto: 'Cómo clasifica' },
+      { t: 'p', texto: 'Rampa de 60 segundos + Filtro de Umbral 0.5: cada consulta cae en Simple, Contextual o Compleja.' },
+      { t: 'h2', texto: 'Tabla de Activación' },
+      { t: 'p', texto: 'Once disparadores (Lu, brownie, cliente, CV, sesgo, poder…) apuntan al archivo exacto a cargar.' },
+      { t: 'h2', texto: 'Principios P1-P6' },
+      { t: 'lista', items: ['P1 Observador Invisible · P2 Homo Homini Lupus · P3 Virtù vs Fortuna.', 'P4 Velo · P5 Príncipe y Aliados · P6 Mínima Exposición.'] },
+      { t: 'p', texto: 'Flujo en 7 pasos + registro de casos. No dice qué hacer, dice cómo actuar.' },
+      { t: 'p', texto: 'La decisión previa vive en [[sis-decisorium]] y el método completo en [[sis-plan]].' }
+    ]
+  },
+  {
+    id: 'sis-decisorium', titulo: 'Decisorium — Qué hacer', seccion: 'sistema', categoria: 'Decisión', resumen: 'Pre-Consilium: fork A/B/C, matriz 5D ponderada y filtro de recursividad.', puntos: ['Score = B*0.30 + (11-R)*0.25 + (11-C)*0.20 + V*0.15 + A*0.10.', 'Regla: siempre 3 opciones; si ves 2, la tercera es no hacer nada.', 'Ejemplos resueltos: proveedor +15%, sociedad 50/50 con Lu, alfajores vs brownies.', 'Salida: una opción + justificación → pasa a Consilium para ejecución.'], relaciones: ['sis-consilium', 'sis-plantilla-fork'], origen: 'Decisorium.md',
+    tipo: 'articulo',
+    intro: 'La capa previa: decide qué hacer con fork de 3 opciones, matriz 5D y filtro de recursividad, antes de pasar a Consilium.',
+    tags: ['decision', 'matriz', 'evaluacion'],
+    bloques: [
+      { t: 'h2', texto: 'La matriz 5D' },
+      { t: 'card', variante: 'definicion', titulo: 'La fórmula', texto: '`Score = (B×0.30) + ((11-R)×0.25) + ((11-C)×0.20) + (V×0.15) + (A×0.10)`, con Beneficio, Riesgo, Costo, reversibilidad (V) y Alineación.' },
+      { t: 'h2', texto: 'Reglas' },
+      { t: 'lista', items: ['Siempre 3 opciones; si ves 2, la tercera es no hacer nada.', 'Filtro de recursividad: si falla, ¿se deshace? ¿cómo?'] },
+      { t: 'h2', texto: 'Ejemplos resueltos' },
+      { t: 'lista', items: ['Proveedor +15% → gana B.', 'Lu pide 50/50 → gana A.', 'Alfajores vs brownies → gana A, foco 100 u/sem.'] },
+      { t: 'p', texto: 'Salida: una opción + justificación. La ficha para aplicarlo está en [[sis-plantilla-fork]] y la ejecución en [[sis-consilium]].' }
+    ]
+  },
+  {
+    id: 'sis-index', titulo: 'Index Generalis — Mapa', seccion: 'sistema', categoria: 'Mapa', resumen: 'Mapa estructural del vault: 76 archivos, árbol, 47 vínculos y diagramas Mermaid.', puntos: ['Secciones raíz + 9 carpetas con etiquetas y estados.', 'Detecta 1 enlace frágil en Parci por guion corto vs largo.', '3 diagramas: Sistema Núcleo, Proyecto Brownies, Dominios Conocimiento.'], relaciones: ['sis-integracion', 'sis-consilium'], origen: 'Index_Generalis.md',
+    tipo: 'indice',
+    intro: 'El mapa estructural del vault: árbol, vínculos, diagramas y mantenimiento.',
+    tags: ['mapas', 'nucleo', 'estructura'],
+    bloques: [
+      { t: 'h2', texto: 'Qué contiene' },
+      { t: 'lista', items: ['Árbol de secciones raíz + 9 carpetas con etiquetas y estados.', '47 vínculos internos válidos y 1 enlace frágil detectado en Parci.', '3 diagramas: Sistema Núcleo, Proyecto Brownies y Dominios Conocimiento.'] },
+      { t: 'p', texto: 'Cómo se conectan los dominios está en [[sis-integracion]].' }
+    ]
+  },
+  {
+    id: 'sis-integracion', titulo: 'Integración Total — Señales', seccion: 'sistema', categoria: 'Mapa', resumen: 'Matriz de 11 dominios + sistema de señales calientes/tibias/frías y rutas críticas.', puntos: ['Calientes semanales: Consilium, Decisorium, Plan, Consolidado, Log, Luciano, Locales.', 'Flujo: disparador → dominio → fork 5D → Consilium P1-P6.', 'Rutas copiar-pegar para brownies, negociación y CV.'], relaciones: ['sis-consilium', 'bro-consolidado', 'bro-log'], origen: 'Integración_Total.md',
+    tipo: 'indice',
+    intro: 'Once dominios conectados: qué aporta cada uno, señales calientes y tibias, y rutas críticas.',
+    tags: ['nucleo', 'mapas', 'estructura'],
+    bloques: [
+      { t: 'h2', texto: 'Señales' },
+      { t: 'lista', items: ['Calientes semanales: Consilium, Decisorium, Plan, Consolidado, Log, Luciano y Locales.', 'Flujo: disparador → dominio → fork 5D → Consilium P1-P6.', 'Rutas copiar-pegar para brownies, negociación y CV.'] },
+      { t: 'p', texto: 'La tabla única de activación vive en [[sis-consilium]] y el estado del proyecto en [[bro-consolidado]].' }
+    ]
+  },
+  {
+    id: 'sis-plan', titulo: 'Plan — 3 pasadas', seccion: 'sistema', categoria: 'Método', resumen: 'No es lista de respuestas: pasada 1 sesgos, 2 poder, 3 paradigma. Salida: ficha de 1 página.', puntos: ['P1 Sesgos: ¿qué quiero creer? ¿autoridad falsa? ¿exceso de confianza?', 'P2 Poder: quién tiene poder real, qué oculta, timing actuar/esperar/retirarse.', 'P3 Paradigma: elegir lente útil, no verdadero; validar con acción pequeña.', 'Uso inverso: aplicar sesgos para comunicar y vender.'], relaciones: ['men-indice-sesgos', 'men-leyes', 'men-paradigmas'], origen: 'Plan/Plan.md',
+    tipo: 'articulo',
+    intro: 'Tres pasadas para decidir la jugada: limpiar sesgos, leer el poder y elegir el lente. Salida: ficha de 1 página.',
+    tags: ['decision', 'poder', 'metodo'],
+    bloques: [
+      { t: 'h2', texto: 'Pasada 1 — Sesgos' },
+      { t: 'p', texto: '¿Qué quiero creer? ¿Autoridad falsa? ¿Exceso de confianza? Los sesgos nunca deciden al final.' },
+      { t: 'h2', texto: 'Pasada 2 — Poder' },
+      { t: 'p', texto: 'Quién tiene poder real, qué oculta, de qué depende; timing para actuar, esperar o retirarse.' },
+      { t: 'h2', texto: 'Pasada 3 — Paradigma' },
+      { t: 'p', texto: 'Elegir el lente útil, no el verdadero; validar con una acción pequeña.' },
+      { t: 'card', variante: 'idea', titulo: 'Uso inverso', texto: 'Aplicar sesgos para comunicar y vender.' },
+      { t: 'p', texto: 'Los lentes están en [[men-paradigmas]], los sesgos en [[men-indice-sesgos]] y el tablero en [[men-leyes]].' }
+    ]
+  },
+  {
+    id: 'sis-plantilla-persona', titulo: 'Plantilla Análisis de Persona', seccion: 'sistema', categoria: 'Plantilla', resumen: 'Clasifica Aliado / Lastre / Peligro con P1-P6 antes de invertir en alguien.', puntos: ['P1 hechos duros · P2 interés declarado vs probable · P3 ventana temporal.', 'P4 velo discurso vs lógica · P5 veredicto + inversión · P6 una acción con canal y deadline.'], relaciones: ['sis-consilium', 'con-luciano'], origen: 'Plantillas/Plantilla_Analisis_de_Persona.md',
+    tipo: 'articulo',
+    intro: 'Antes de invertir en alguien: clasificar Aliado, Lastre o Peligro con P1-P6.',
+    tags: ['plantillas', 'principios', 'poder', 'metodo'],
+    bloques: [
+      { t: 'h2', texto: 'La grilla P1-P6' },
+      { t: 'lista', items: ['P1 hechos duros · P2 interés declarado vs probable · P3 ventana temporal.', 'P4 velo discurso vs lógica · P5 veredicto + inversión · P6 una acción con canal y deadline.'] },
+      { t: 'p', texto: 'Notas post: resultado, desviación y próximo paso.' },
+      { t: 'p', texto: 'El marco para leer intenciones está en [[men-principe]] y el kernel en [[sis-consilium]].' }
+    ]
+  },
+  {
+    id: 'sis-plantilla-fork', titulo: 'Plantilla Fork Decisorium', seccion: 'sistema', categoria: 'Plantilla', resumen: 'Situación en 2 líneas → 3 opciones → matriz B/R → filtro recursividad → selección.', puntos: ['Tabla beneficio/riesgo/costo/reversibilidad/alineación + ratio B÷R.', 'Filtro: si falla, ¿se deshace en X días? ¿cómo?', 'Pase a Consilium con principios, primer paso y fecha de revisión.'], relaciones: ['sis-decisorium'], origen: 'Plantillas/Plantilla_Fork_Decisorium.md',
+    tipo: 'articulo',
+    intro: 'Antes de una decisión con impacto: situación en 2 líneas, 3 opciones, matriz y filtro.',
+    tags: ['plantillas', 'matriz', 'decision', 'evaluacion'],
+    bloques: [
+      { t: 'h2', texto: 'La ficha' },
+      { t: 'lista', items: ['Tabla beneficio/riesgo/costo/reversibilidad/alineación + ratio B÷R.', 'Filtro: si falla, ¿se deshace en X días? ¿cómo?', 'Pase a Consilium con principios, primer paso y fecha de revisión.'] },
+      { t: 'p', texto: 'Viene de [[sis-decisorium]].' }
+    ]
+  },
 
   // ── BROWNIES ──
   { id: 'bro-adn', titulo: 'ADN del Brownie', seccion: 'brownies', categoria: 'Visión', resumen: 'Artesanal, belga, húmedo dentro + crocante fuera, para after-office. No somos precio ni panadería.', puntos: ['Diferenciación: textura + chocolate belga + presentación instagrameable.', 'Momento: antojo 5pm y after-office. NO: abuela, barato, genérico.'], relaciones: ['bro-okr', 'bro-fase1'], origen: 'Plan/01_Vision_y_Objetivos/ADN_del_Brownie.md' },

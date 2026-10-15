@@ -7,7 +7,8 @@ Reglas aplicadas: ids/títulos/resúmenes/puntos/relaciones/origen intactos; sol
 (toda ilustración viene de las propias notas).
 
 Vocabulario controlado de tags (minúsculas, cada uno con 2+ usos al cerrar cada lote):
-csharp, sql, patrones, dotnet, trayectoria, operaciones, programacion, testing.
+csharp, sql, patrones, dotnet, trayectoria, operaciones, programacion, testing,
+decision, poder, principios, matriz, evaluacion, mapas, nucleo, estructura, metodo, plantillas.
 
 ## Lote piloto — Facultad + Ideas sueltas
 
@@ -28,3 +29,13 @@ csharp, sql, patrones, dotnet, trayectoria, operaciones, programacion, testing.
 - `yo-educacion` · tipo articulo · tags trayectoria, programacion · Agregado: intro + 3 niveles (Terciario / Curso / Secundaria) + links a fac-parcial y fac-guia-net. Sin banderas.
 - `yo-habilidades` · tipo ficha · tags csharp, sql, programacion, testing · Agregado: intro + 3 claves (Lenguajes / Datos y APIs / Calidad). `testing` mapea "tests unitarios" literal. Sin ejemplos añadidos. Sin banderas.
 - `yo-proyectos` · tipo proyecto · tags csharp, programacion · Agregado: intro + Proyectos / Método + link a oxi-web-arg. Sin banderas.
+
+## Lote Sistema (7 notas)
+
+- `sis-consilium` · tipo articulo · tags decision, poder, principios · Agregado: intro + 3 secciones (clasifica / tabla / P1-P6) + links a decisorium y plan. Sin ejemplos añadidos. Sin banderas.
+- `sis-decisorium` · tipo articulo · tags decision, matriz, evaluacion · Agregado: intro + fórmula en tarjeta de definición (contenido literal de la nota) + reglas + ejemplos + links. Sin banderas.
+- `sis-index` · tipo indice · tags mapas, nucleo, estructura · Agregado: intro + Qué contiene + link a integración. Sin banderas.
+- `sis-integracion` · tipo indice · tags nucleo, mapas, estructura · Agregado: intro + Señales + links a consilium y consolidado. Sin banderas.
+- `sis-plan` · tipo articulo · tags decision, poder, metodo · Agregado: intro + 3 pasadas como secciones + tarjeta "Uso inverso" (contenido literal) + links a paradigmas, sesgos y leyes. Sin banderas.
+- `sis-plantilla-persona` · tipo articulo · tags plantillas, principios, poder, metodo · Agregado: intro + grilla + links a príncipe y consilium. Sin banderas.
+- `sis-plantilla-fork` · tipo articulo · tags plantillas, matriz, decision, evaluacion · Agregado: intro + ficha + link a decisorium. Sin banderas.
