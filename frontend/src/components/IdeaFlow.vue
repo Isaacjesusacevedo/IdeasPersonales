@@ -11,8 +11,9 @@ const props = withDefaults(defineProps<{
   tagFiltro?: string | null
   resaltarIds?: string[] | null
   busqueda?: string
+  foco?: string | null
 }>(), {
-  mini: false, temaInicial: null, tagFiltro: null, resaltarIds: null, busqueda: ''
+  mini: false, temaInicial: null, tagFiltro: null, resaltarIds: null, busqueda: '', foco: null
 })
 
 const route = useRoute()
@@ -222,6 +223,12 @@ const onHoverNota = (id: string | null, e?: PointerEvent) => {
   construir()
 }
 
+watch(() => props.foco, v => {
+  if (!v) return
+  const n = notaPorId(v)
+  if (n && !props.mini) { abiertos.value = [n.seccion]; construir() }
+  nextTick(() => { try { fitView({ nodes: [`n-${v}`], padding: 0.35, duration: reducida.value ? 0 : 400 }) } catch { /* */ } })
+})
 watch(() => props.temaInicial, v => {
   if (v && !props.mini) {
     abiertos.value = [v]
@@ -252,6 +259,14 @@ onMounted(() => {
     if (temas.size) abiertos.value = [...temas]
   }
   construir()
+  if (props.foco) {
+    const n = notaPorId(props.foco)
+    if (n && !props.mini) abiertos.value = [n.seccion]
+    construir()
+    nextTick(() => {
+      try { fitView({ nodes: [`n-${props.foco}`], padding: 0.35, duration: reducida.value ? 0 : 400 }) } catch { /* */ }
+    })
+  }
 })
 </script>
 

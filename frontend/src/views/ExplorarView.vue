@@ -2,7 +2,7 @@
 import { computed, defineAsyncComponent, ref, watch } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
 import { tagIndex, notasPorTag } from '@/data/vault-index'
-import { secciones, notasPorSeccion } from '@/data/vault'
+import { secciones, notasPorSeccion, notaPorId } from '@/data/vault'
 
 const IdeaFlow = defineAsyncComponent(() => import('@/components/IdeaFlow.vue'))
 const GraphView = defineAsyncComponent(() => import('@/components/GraphView.vue'))
@@ -21,6 +21,7 @@ const vista = ref<Vista>(
 )
 const tema = ref<string | null>((route.query.tema as string) ?? null)
 const tag = ref<string | null>((route.query.tag as string) ?? null)
+const foco = ref<string | null>((route.query.foco as string) ?? null)
 const q = ref('')
 const abiertos = ref<string[]>([])
 
@@ -30,6 +31,11 @@ watch(
     if (v.vista === 'mapa' || v.vista === 'lista' || v.vista === 'red') vista.value = v.vista
     tema.value = (v.tema as string) ?? null
     tag.value = (v.tag as string) ?? null
+    foco.value = (v.foco as string) ?? null
+    if (v.foco) {
+      const n = notaPorId(v.foco as string)
+      if (n) { tema.value = n.seccion; vista.value = 'mapa' }
+    }
   }
 )
 
@@ -56,16 +62,18 @@ const setTag = (t: string | null) => {
 }
 
 // Ids que coinciden con la búsqueda (para resaltar en el mapa)
-const resaltadas = computed<string[] | null>(() => {
-  const b = q.value.trim().toLowerCase()
-  if (!b) return null
+const resaltarIds = computed<string[] | null>(() => {
   const out: string[] = []
-  for (const s of secciones) {
-    for (const n of notasPorSeccion(s.id)) {
-      if ((n.titulo + ' ' + n.resumen + ' ' + n.categoria).toLowerCase().includes(b)) out.push(n.id)
+  if (foco.value) out.push(foco.value)
+  const b = q.value.trim().toLowerCase()
+  if (b) {
+    for (const s of secciones) {
+      for (const n of notasPorSeccion(s.id)) {
+        if ((n.titulo + ' ' + n.resumen + ' ' + n.categoria).toLowerCase().includes(b)) out.push(n.id)
+      }
     }
   }
-  return out
+  return out.length ? out : null
 })
 
 const toggleTemaLista = (id: string) => {
@@ -102,7 +110,7 @@ const toggleTemaLista = (id: string) => {
     </div>
 
     <div v-if="vista === 'mapa'" class="card mapa-marco">
-      <IdeaFlow :tema-inicial="tema" :tag-filtro="tag" :resaltar-ids="resaltadas" :busqueda="q" />
+      <IdeaFlow :tema-inicial="tema" :tag-filtro="tag" :resaltar-ids="resaltarIds" :busqueda="q" :foco="foco" />
       <div class="mapa-acciones">
         <span class="id-mono">Pan y zoom con el ratón · clic en un tema para abrirlo</span>
       </div>

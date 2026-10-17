@@ -1,107 +1,256 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { secciones } from '@/data/vault'
-import { buildLocal, sembrar, tick, COLOR_POR_SECCION } from '@/graph'
+import { notaPorId, secciones } from '@/data/vault'
+import { aristas } from '@/data/vault-index'
+import { radioNodo, COLOR_POR_SECCION } from '@/graph'
 
 const props = defineProps<{ id: string }>()
 const router = useRouter()
+
 const caja = ref<HTMLDivElement | null>(null)
-const svg = ref<SVGSVGElement | null>(null)
-const W = ref(300)
-const H = 240
+const W = ref(320)
+const H = 260
 const hover = ref<string | null>(null)
 
-let nodes = buildLocal(props.id).nodes
-let edges = buildLocal(props.id).edges
-let centro = 0
-let alpha = 1
-let raf = 0
-let vivo = false
+interface LNode {
+  id: string
+  titulo: string
+  seccion: string
+  x: number
+  y: number
+  r: number
+  color: string
+  esCentro: boolean
+  esDesborde: boolean
+  desbordeN: number
+  angle: number
+}
 
-const acento = (sec: string) => secciones.find(s => s.id === sec)?.acento ?? 'purple'
+const seccionIndex = (id: string) => secciones.findIndex(s => s.id === id)
+
+const vecinosTodos = computed(() => {
+  const ids = new Set<string>()
+  for (const [a, b] of aristas()) {
+    if (a === props.id) ids.add(b)
+    if (b === props.id) ids.add(a)
+  }
+  const list = [...ids].map(id => notaPorId(id)).filter(Boolean) as { id: string; titulo: string; seccion: string }[]
+  list.sort((a, b) => {
+    const ia = seccionIndex(a.seccion)
+    const ib = seccionIndex(b.seccion)
+    if (ia !== ib) return ia - ib
+    return a.titulo.localeCompare(b.titulo)
+  })
+  return list
+})
+
+const gradoDe = (id: string) => aristas().filter(([a, b]) => a === id || b === id).length
+
+const maxVecinos = 12
+const desborde = computed(() => Math.max(0, vecinosTodos.value.length - maxVecinos))
+const vecinos = computed(() => vecinosTodos.value.slice(0, maxVecinos))
+
+const nodes = ref<LNode[]>([])
+const edges = ref<{ a: number; b: number }[]>([])
+const centerLines = ref<string[]>([])
+
+function trunc(s: string, n = 20) {
+  return s.length > n ? s.slice(0, n - 1) + '…' : s
+}
 
 function armar() {
-  const g = buildLocal(props.id)
-  nodes = g.nodes
-  edges = g.edges
-  centro = g.centro
-  sembrar(nodes, W.value, H, 21)
-  alpha = 1
-  pintar()
-}
+  const center = notaPorId(props.id)
+  if (!center) return
+  const width = Math.max(240, caja.value?.clientWidth ?? 320)
+  W.value = width
+  const cx = width / 2
+  const cy = H / 2
 
-function pintar() {
-  const els = svg.value
-  if (!els) return
-  els.querySelectorAll<SVGCircleElement>('circle[data-i]').forEach(c => {
-    const n = nodes[Number(c.dataset.i)]
-    if (n) { c.setAttribute('cx', n.x.toFixed(1)); c.setAttribute('cy', n.y.toFixed(1)) }
+  const degs = new Map<string, number>()
+  for (const n of vecinos.value) degs.set(n.id, gradoDe(n.id))
+  const maxNodeR = Math.max(12, ...vecinos.value.map(n => radioNodo(degs.get(n.id) ?? 1)))
+  const maxLabel = Math.max(40, ...vecinos.value.map(n => trunc(n.titulo).length * 6.2 + 4))
+  const spaceX = cx - 28 - maxNodeR - 4 - maxLabel
+  const spaceY = cy - 28 - maxNodeR - 4 - 12
+  let R = Math.max(24, Math.min(spaceX, spaceY))
+  // asegurar separación mínima entre nodos del círculo
+  const sepR = ((maxNodeR * 2 + 14) * vecinos.value.length) / (2 * Math.PI)
+  if (sepR > R) R = Math.max(24, Math.min(spaceX, spaceY))
+
+  const list = [...vecinos.value]
+  const tieneDesborde = desborde.value > 0
+  const total = list.length + (tieneDesborde ? 1 : 0)
+
+  const out: LNode[] = []
+  // centro
+  out.push({
+    id: center.id,
+    titulo: center.titulo,
+    seccion: center.seccion,
+    x: cx,
+    y: cy,
+    r: 13,
+    color: COLOR_POR_SECCION[secciones.find(s => s.id === center.seccion)?.acento ?? 'purple'],
+    esCentro: true,
+    esDesborde: false,
+    desbordeN: 0,
+    angle: 0
   })
-  els.querySelectorAll<SVGLineElement>('line[data-e]').forEach(l => {
-    const e = edges[Number(l.dataset.e)]
-    if (e) {
-      l.setAttribute('x1', nodes[e.a].x.toFixed(1)); l.setAttribute('y1', nodes[e.a].y.toFixed(1))
-      l.setAttribute('x2', nodes[e.b].x.toFixed(1)); l.setAttribute('y2', nodes[e.b].y.toFixed(1))
-    }
+
+  list.forEach((n, i) => {
+    const angle = (i / Math.max(1, total)) * Math.PI * 2 - Math.PI / 2
+    out.push({
+      id: n.id,
+      titulo: n.titulo,
+      seccion: n.seccion,
+      x: cx + Math.cos(angle) * R,
+      y: cy + Math.sin(angle) * R,
+      r: radioNodo(degs.get(n.id) ?? 1),
+      color: COLOR_POR_SECCION[secciones.find(s => s.id === n.seccion)?.acento ?? 'purple'],
+      esCentro: false,
+      esDesborde: false,
+      desbordeN: 0,
+      angle
+    })
   })
+
+  if (tieneDesborde) {
+    const i = list.length
+    const angle = (i / Math.max(1, total)) * Math.PI * 2 - Math.PI / 2
+    out.push({
+      id: '__overflow__',
+      titulo: `+${desborde.value}`,
+      seccion: center.seccion,
+      x: cx + Math.cos(angle) * R,
+      y: cy + Math.sin(angle) * R,
+      r: 11,
+      color: 'var(--text-muted)',
+      esCentro: false,
+      esDesborde: true,
+      desbordeN: desborde.value,
+      angle
+    })
+  }
+
+  nodes.value = out
+
+  // aristas entre nodos presentes
+  const idx = new Map(out.map((n, i) => [n.id, i]))
+  const es = []
+  for (const [a, b] of aristas()) {
+    if (!idx.has(a) || !idx.has(b)) continue
+    if (a === '__overflow__' || b === '__overflow__') continue
+    es.push({ a: idx.get(a)!, b: idx.get(b)! })
+  }
+  edges.value = es
+
+  // líneas del centro
+  const t = center.titulo
+  if (t.length <= 16) centerLines.value = [t]
+  else {
+    const mid = Math.floor(t.length / 2)
+    let cut = t.lastIndexOf(' ', mid)
+    if (cut < 4) cut = t.indexOf(' ', mid)
+    if (cut < 0) centerLines.value = [t.slice(0, 15) + '…', t.slice(15)]
+    else centerLines.value = [t.slice(0, cut), t.slice(cut + 1)]
+  }
 }
 
-function loop() {
-  if (!vivo) return
-  tick(nodes, edges, W.value / 2, H / 2, alpha)
-  alpha *= 0.97
-  pintar()
-  if (alpha >= 0.01) raf = requestAnimationFrame(loop)
+function acentoDe(n: LNode) {
+  return secciones.find(s => s.id === n.seccion)?.acento ?? 'purple'
 }
 
-function iniciar() {
-  detener()
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let a = 1
-    for (let i = 0; i < 300 && a >= 0.01; i++) { tick(nodes, edges, W.value / 2, H / 2, a); a *= 0.97 }
-    pintar()
+const onNodeClick = (n: LNode, e: MouseEvent) => {
+  if (n.esDesborde) {
+    const el = document.getElementById('menciones')
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     return
   }
-  vivo = true
-  raf = requestAnimationFrame(loop)
+  if (e.shiftKey || e.ctrlKey || e.metaKey) {
+    // peek se implementa en Paso 4
+    router.push(`/n/${n.id}`)
+    return
+  }
+  router.push(`/n/${n.id}`)
 }
 
-function detener() {
-  vivo = false
-  cancelAnimationFrame(raf)
+const anchorFor = (n: LNode) => {
+  const c = Math.cos(n.angle)
+  if (c > 0.25) return 'start'
+  if (c < -0.25) return 'end'
+  return 'middle'
 }
 
-watch(() => props.id, () => { armar(); iniciar() })
+const labelPos = (n: LNode) => {
+  const r = n.r + 6
+  const x = n.x + Math.cos(n.angle) * r
+  const y = n.y + Math.sin(n.angle) * r + 4
+  return { x, y }
+}
 
+watch(() => props.id, () => armar())
 onMounted(() => {
-  if (caja.value) W.value = Math.max(240, caja.value.clientWidth)
   armar()
-  iniciar()
 })
-onUnmounted(detener)
 </script>
 
 <template>
   <div ref="caja" class="grafo-local">
-    <div class="toc-title" style="margin-bottom:6px">Vecindad · {{ nodes.length - 1 }} conexiones</div>
-    <svg ref="svg" :width="W" :height="H" role="img" :aria-label="`Grafo local de la nota`">
-      <line v-for="(e, i) in edges" :key="'e' + i" :data-e="i"
-        :x1="nodes[e.a].x" :y1="nodes[e.a].y" :x2="nodes[e.b].x" :y2="nodes[e.b].y"
-        stroke="rgba(139,148,255,.3)" stroke-width="1" />
+    <div class="toc-title" style="margin-bottom:6px">Conexiones · {{ vecinosTodos.length }}</div>
+    <svg :width="W" :height="H" :viewBox="`0 0 ${W} ${H}`" role="img" :aria-label="`Grafo local de la nota`">
+      <line
+        v-for="(e, i) in edges" :key="'e' + i"
+        :x1="nodes[e.a].x" :y1="nodes[e.a].y"
+        :x2="nodes[e.b].x" :y2="nodes[e.b].y"
+        stroke="rgba(139,148,255,.25)" stroke-width="1"
+        :opacity="hover && !(nodes[e.a].id === hover || nodes[e.b].id === hover) ? 0.25 : 0.9"
+      />
       <g v-for="(n, i) in nodes" :key="n.id">
-        <circle :data-i="i" :cx="n.x" :cy="n.y"
-          :r="i === centro ? 9 : 5.5"
-          :fill="COLOR_POR_SECCION[acento(n.seccion)]"
-          :stroke="i === centro ? '#fff' : 'none'" :stroke-width="i === centro ? 1.5 : 0"
-          :opacity="hover && hover !== n.id ? 0.35 : 0.92"
+        <circle
+          :cx="n.x" :cy="n.y" :r="n.r"
+          :fill="n.color"
+          :stroke="n.esCentro ? '#fff' : 'none'"
+          :stroke-width="n.esCentro ? 1.5 : 0"
+          :opacity="hover && hover !== n.id ? 0.3 : (n.esCentro ? 1 : 0.92)"
           style="cursor:pointer"
-          @click="router.push(`/n/${n.id}`)"
-          @pointerenter="hover = n.id" @pointerleave="hover = null">
+          @click="onNodeClick(n, $event)"
+          @pointerenter="hover = n.id" @pointerleave="hover = null"
+          @focus="hover = n.id" @blur="hover = null"
+        >
           <title>{{ n.titulo }}</title>
         </circle>
-        <text v-if="i === centro || hover === n.id" :x="n.x + 12" :y="n.y + 4" class="grafo-label">{{ n.titulo }}</text>
+        <text
+          v-if="!n.esCentro"
+          :x="labelPos(n).x" :y="labelPos(n).y"
+          class="grafo-label"
+          :text-anchor="anchorFor(n)"
+          :opacity="hover && hover !== n.id ? 0.35 : 0.95"
+        >
+          <title>{{ n.titulo }}</title>
+          {{ trunc(n.titulo) }}
+        </text>
+        <template v-if="n.esCentro">
+          <text
+            v-for="(ln, li) in centerLines" :key="li"
+            :x="n.x" :y="n.y + (li - (centerLines.length - 1) / 2) * 12"
+            text-anchor="middle" class="grafo-label" style="font-weight:600"
+          >
+            <title>{{ n.titulo }}</title>
+            {{ ln }}
+          </text>
+        </template>
       </g>
     </svg>
+    <ul class="sr-only">
+      <li v-for="n in vecinos" :key="n.id">{{ n.titulo }}</li>
+    </ul>
+    <div style="margin-top:8px">
+      <button class="btn btn-ghost btn-sm" @click="router.push(`/explorar?foco=${props.id}`)">Ver en el mapa</button>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+</style>
