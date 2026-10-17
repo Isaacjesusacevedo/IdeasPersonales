@@ -7,8 +7,10 @@ import { secciones } from '@/data/vault'
 import InlineText from '@/components/InlineText.vue'
 import Collapsible from '@/components/Collapsible.vue'
 import { useNotePreview } from '@/composables/useNotePreview'
+import { usePeek } from '@/composables/usePeek'
 
 const { scheduleShow, scheduleHide } = useNotePreview()
+const { open: openPeek } = usePeek()
 
 const props = defineProps<{ nota: VaultNote }>()
 
@@ -41,6 +43,7 @@ const colorDe = (sec: string) => {
         @mouseenter="scheduleShow(b.nota.id, $event.currentTarget as HTMLElement)"
         @mouseleave="scheduleHide()">
         <RouterLink :to="`/n/${b.nota.id}`" class="rel-row"
+          @click="(e: MouseEvent) => { if (e.shiftKey || e.ctrlKey || e.metaKey) { e.preventDefault(); openPeek(b.nota.id) } }"
           @mouseenter="scheduleShow(b.nota.id, $event.currentTarget as HTMLElement)"
           @mouseleave="scheduleHide()"
           @focus="scheduleShow(b.nota.id, $event.currentTarget as HTMLElement)"
@@ -58,6 +61,7 @@ const colorDe = (sec: string) => {
         @mouseenter="scheduleShow(m.nota.id, $event.currentTarget as HTMLElement)"
         @mouseleave="scheduleHide()">
         <RouterLink :to="`/n/${m.nota.id}`" class="rel-row"
+          @click="(e: MouseEvent) => { if (e.shiftKey || e.ctrlKey || e.metaKey) { e.preventDefault(); openPeek(m.nota.id) } }"
           @mouseenter="scheduleShow(m.nota.id, $event.currentTarget as HTMLElement)"
           @mouseleave="scheduleHide()"
           @focus="scheduleShow(m.nota.id, $event.currentTarget as HTMLElement)"
@@ -76,6 +80,7 @@ const colorDe = (sec: string) => {
     <div v-if="rels.length" style="margin-bottom:12px">
       <div class="rel-group">Relacionadas</div>
       <RouterLink v-for="n in rels" :key="n.id" :to="`/n/${n.id}`" class="rel-row"
+        @click="(e: MouseEvent) => { if (e.shiftKey || e.ctrlKey || e.metaKey) { e.preventDefault(); openPeek(n.id) } }"
         @mouseenter="scheduleShow(n.id, $event.currentTarget as HTMLElement)"
         @mouseleave="scheduleHide()"
         @focus="scheduleShow(n.id, $event.currentTarget as HTMLElement)"
@@ -89,6 +94,7 @@ const colorDe = (sec: string) => {
     <div v-if="mismas.length" style="margin-bottom:12px">
       <div class="rel-group">Mismos conceptos</div>
       <RouterLink v-for="n in mismas" :key="n.id" :to="`/n/${n.id}`" class="rel-row"
+        @click="(e: MouseEvent) => { if (e.shiftKey || e.ctrlKey || e.metaKey) { e.preventDefault(); openPeek(n.id) } }"
         @mouseenter="scheduleShow(n.id, $event.currentTarget as HTMLElement)"
         @mouseleave="scheduleHide()"
         @focus="scheduleShow(n.id, $event.currentTarget as HTMLElement)"
@@ -99,9 +105,11 @@ const colorDe = (sec: string) => {
     </div>
 
     <nav class="pager" aria-label="Anterior y siguiente">
-      <RouterLink v-if="vecinas.prev" :to="`/n/${vecinas.prev.id}`" class="btn btn-ghost">{{ vecinas.prev.titulo }} ←</RouterLink>
+      <RouterLink v-if="vecinas.prev" :to="`/n/${vecinas.prev.id}`" class="btn btn-ghost"
+        @click="(e: MouseEvent) => { if (e.shiftKey || e.ctrlKey || e.metaKey) { e.preventDefault(); openPeek(vecinas.prev!.id) } }">{{ vecinas.prev.titulo }} ←</RouterLink>
       <span v-else></span>
-      <RouterLink v-if="vecinas.next" :to="`/n/${vecinas.next.id}`" class="btn btn-ghost">{{ vecinas.next.titulo }} →</RouterLink>
+      <RouterLink v-if="vecinas.next" :to="`/n/${vecinas.next.id}`" class="btn btn-ghost"
+        @click="(e: MouseEvent) => { if (e.shiftKey || e.ctrlKey || e.metaKey) { e.preventDefault(); openPeek(vecinas.next!.id) } }">{{ vecinas.next.titulo }} →</RouterLink>
     </nav>
   </section>
 </template>

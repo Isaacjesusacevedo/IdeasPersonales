@@ -4,8 +4,10 @@ import { useRoute, useRouter, RouterLink } from 'vue-router'
 import { buscarNotas, resaltar, tagIndex, todasLasTags, type Frag } from '@/data/vault-index'
 import { secciones } from '@/data/vault'
 import { useNotePreview } from '@/composables/useNotePreview'
+import { usePeek } from '@/composables/usePeek'
 
 const { scheduleShow, scheduleHide } = useNotePreview()
+const { open: openPeek } = usePeek()
 const route = useRoute()
 const router = useRouter()
 
@@ -119,6 +121,7 @@ const limpiar = () => {
     <tbody><tr v-for="h in resultados" :key="h.nota.id">
       <td>
         <RouterLink :to="`/n/${h.nota.id}`" class="row-link"
+          @click="(e: MouseEvent) => { if (e.shiftKey || e.ctrlKey || e.metaKey) { e.preventDefault(); openPeek(h.nota.id) } }"
           @mouseenter="scheduleShow(h.nota.id, $event.currentTarget as HTMLElement)"
           @mouseleave="scheduleHide()"
           @focus="scheduleShow(h.nota.id, $event.currentTarget as HTMLElement)"

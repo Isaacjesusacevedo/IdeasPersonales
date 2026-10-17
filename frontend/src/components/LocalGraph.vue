@@ -4,10 +4,12 @@ import { useRouter } from 'vue-router'
 import { notaPorId, secciones } from '@/data/vault'
 import { aristas } from '@/data/vault-index'
 import { useNotePreview } from '@/composables/useNotePreview'
+import { usePeek } from '@/composables/usePeek'
 import { radioNodo, COLOR_POR_SECCION } from '@/graph'
 
 const props = defineProps<{ id: string }>()
 const { scheduleShow, scheduleHide } = useNotePreview()
+const { open: openPeek } = usePeek()
 const router = useRouter()
 
 const caja = ref<HTMLDivElement | null>(null)
@@ -170,8 +172,7 @@ const onNodeClick = (n: LNode, e: MouseEvent) => {
     return
   }
   if (e.shiftKey || e.ctrlKey || e.metaKey) {
-    // peek se implementa en Paso 4
-    router.push(`/n/${n.id}`)
+    openPeek(n.id)
     return
   }
   router.push(`/n/${n.id}`)

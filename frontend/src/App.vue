@@ -7,6 +7,7 @@ import { ui, toggleSidebar, openPalette } from '@/ui'
 import BackgroundNetwork from '@/components/BackgroundNetwork.vue'
 import CommandPalette from '@/components/CommandPalette.vue'
 import NotePreview from '@/components/NotePreview.vue'
+import PeekPanel from '@/components/PeekPanel.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -234,6 +235,7 @@ const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorS
       </RouterView>
       <CommandPalette />
       <NotePreview />
+      <PeekPanel />
       <div v-if="ui.toast" class="toast" role="status" :key="ui.toastN">{{ ui.toast }}</div>
     </main>
   </div>
