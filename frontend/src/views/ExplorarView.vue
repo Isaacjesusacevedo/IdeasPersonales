@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, defineAsyncComponent, ref, watch } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
-import { tagIndex, notasPorTag } from '@/data/vault-index'
+import { ui, toast } from '@/ui'
+import { tagIndex, notasPorTag, aristas } from '@/data/vault-index'
 import { secciones, notasPorSeccion, notaPorId } from '@/data/vault'
 
 const IdeaFlow = defineAsyncComponent(() => import('@/components/IdeaFlow.vue'))
@@ -76,6 +77,64 @@ const resaltarIds = computed<string[] | null>(() => {
   return out.length ? out : null
 })
 
+const exportarCanvas = () => {
+  const colorTema = (sec: string) => {
+    const a = secciones.find(s => s.id === sec)?.acento ?? 'purple'
+    return a === 'teal' ? '#2dd4bf' : a === 'mix' ? '#9aa3ff' : '#a78bfa'
+  }
+  const nodes: Record<string, unknown>[] = []
+  const edges: Record<string, unknown>[] = []
+  let xCursor = 0
+  const gapX = 340
+  for (const s of secciones) {
+    const ns = notasPorSeccion(s.id)
+    const color = colorTema(s.id)
+    const noteH = 90
+    const noteGap = 16
+    const header = 48
+    const pad = 24
+    const groupW = 260 + pad * 2
+    const groupH = header + ns.length * (noteH + noteGap) + pad
+    const gx = xCursor
+    const gy = 0
+    nodes.push({ type: 'group', id: `group-${s.id}`, label: s.nombre, x: gx, y: gy, width: groupW, height: groupH, color })
+    ns.forEach((n, i) => {
+      const isFile = /\.md$/i.test(n.origen) && !n.origen.startsWith('/') && !n.origen.includes('://')
+      const noteNode = isFile
+        ? { type: 'file', id: `note-${n.id}`, file: n.origen, x: gx + pad, y: gy + header + i * (noteH + noteGap), width: 260, height: noteH }
+        : { type: 'text', id: `note-${n.id}`, text: `# ${n.titulo}\n\n${n.resumen}`, x: gx + pad, y: gy + header + i * (noteH + noteGap), width: 260, height: noteH }
+      nodes.push(noteNode)
+      edges.push({ id: `edge-${s.id}-${n.id}`, fromNode: `group-${s.id}`, toNode: `note-${n.id}`, color })
+    })
+    xCursor += gapX
+  }
+  const seen = new Set<string>()
+  for (const [a, b] of aristas()) {
+    const key = [a, b].sort().join('|')
+    if (seen.has(key)) continue
+    seen.add(key)
+    const na = notaPorId(a)
+    if (!na) continue
+    edges.push({ id: `edge-rel-${a}-${b}`, fromNode: `note-${a}`, toNode: `note-${b}`, color: colorTema(na.seccion) })
+  }
+  const ids = new Set(nodes.map(n => String(n.id)))
+  if (ids.size !== nodes.length) { toast('Error: ids duplicados'); return }
+  for (const e of edges) {
+    if (!ids.has(String(e.fromNode)) || !ids.has(String(e.toNode))) { toast('Error: arista inválida'); return }
+  }
+  const json = JSON.stringify({ nodes, edges }, null, 2)
+  const blob = new Blob([json], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'IdeasPersonales.canvas'
+  document.body.appendChild(a)
+  a.click()
+  a.remove()
+  URL.revokeObjectURL(url)
+  toast('Listo: copialo a tu vault de Obsidian y abrilo')
+}
+
 const toggleTemaLista = (id: string) => {
   abiertos.value = abiertos.value.includes(id)
     ? abiertos.value.filter(x => x !== id)
@@ -113,6 +172,7 @@ const toggleTemaLista = (id: string) => {
       <IdeaFlow :tema-inicial="tema" :tag-filtro="tag" :resaltar-ids="resaltarIds" :busqueda="q" :foco="foco" />
       <div class="mapa-acciones">
         <span class="id-mono">Pan y zoom con el ratón · clic en un tema para abrirlo</span>
+        <button class="btn btn-ghost btn-sm" @click="exportarCanvas">Descargar para Obsidian (.canvas)</button>
       </div>
     </div>
 
