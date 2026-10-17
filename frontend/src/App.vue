@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { RouterView, useRoute, useRouter } from 'vue-router'
-import { computed, onMounted, onUnmounted, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { notas, secciones, notaPorId, notasPorSeccion } from '@/data/vault'
 import { notaAlAzar } from '@/data/vault-index'
 import { ui, toggleSidebar, openPalette } from '@/ui'
+import { useVisited } from '@/composables/useVisited'
 import BackgroundNetwork from '@/components/BackgroundNetwork.vue'
 import CommandPalette from '@/components/CommandPalette.vue'
 import NotePreview from '@/components/NotePreview.vue'
@@ -11,6 +12,7 @@ import PeekPanel from '@/components/PeekPanel.vue'
 
 const route = useRoute()
 const router = useRouter()
+const { isVisited, reset: resetVisited, countFor, unvisited } = useVisited()
 
 watch(() => route.name, () => { ui.drawer = false })
 
@@ -20,8 +22,11 @@ const isActive = (name: string | string[]) => {
 }
 const isSeccion = (id: string) => route.name === 'seccion' && route.params.seccion === id
 
+const confirmReset = ref(false)
+
 const aleatoria = () => {
-  const pick = notaAlAzar(route.params.id as string | undefined)
+  const pool = unvisited(notas, 1)
+  const pick = pool[0] ?? notaAlAzar(route.params.id as string | undefined)
   if (pick) router.push(`/n/${pick.id}`)
 }
 
@@ -114,7 +119,7 @@ const secIcon: Record<string, string> = {
   facultad: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19a2 2 0 0 1 2-2h13"/>',
   ideas: '<path d="M12 2v4M4.9 4.9l2.8 2.8M2 12h4M20 12h4M19.1 4.9l-2.8 2.8M12 22a7 7 0 0 0 4-12.7c-.6-.5-1-1.4-1-2.3h-6c0 .9-.4 1.8-1 2.3A7 7 0 0 0 12 22z"/>'
 }
-const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorSeccion(s.id).length} notas`
+const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorSeccion(s.id).length} notas · ${countFor(s.id)}/${notasPorSeccion(s.id).length} vistas`
 </script>
 
 <template>
@@ -196,6 +201,14 @@ const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorS
           <span class="nav-status-text">Todo al día</span>
         </div>
         <div class="nav-total">{{ notas.length }} notas en total</div>
+        <div class="nav-reset">
+          <button v-if="!confirmReset" class="nav-reset-btn" @click="confirmReset = true">Reiniciar recorrido</button>
+          <span v-else class="nav-reset-confirm">
+            ¿Seguro?
+            <button class="nav-reset-yes" @click="resetVisited(); confirmReset = false">Sí</button>
+            <button class="nav-reset-no" @click="confirmReset = false">No</button>
+          </span>
+        </div>
       </div>
     </nav>
 

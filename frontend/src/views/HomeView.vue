@@ -2,9 +2,11 @@
 import { computed, defineAsyncComponent } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { secciones, notas, notasPorSeccion } from '@/data/vault'
+import { useVisited } from '@/composables/useVisited'
 
 const IdeaFlowMini = defineAsyncComponent(() => import('@/components/IdeaFlow.vue'))
 
+const { isVisited, recent, unvisited } = useVisited()
 const router = useRouter()
 const total = computed(() => notas.length)
 const porSeccion = computed(() => secciones.map(s => ({ ...s, n: notasPorSeccion(s.id).length })))
@@ -18,6 +20,8 @@ const destacadas = computed(() =>
     .map(id => notas.find(n => n.id === id)!)
     .filter(Boolean)
 )
+const segui = computed(() => recent(3))
+const sinLeer = computed(() => unvisited(notas, 3))
 // 3 notas distintas por carga para el bloque Descubrí
 const descubrir = computed(() => {
   const pool = [...notas]
@@ -28,7 +32,7 @@ const descubrir = computed(() => {
   return out
 })
 const sorpresa = () => {
-  const pick = notas[Math.floor(Math.random() * notas.length)]
+  const pick = unvisited(notas, 1)[0] ?? notas[Math.floor(Math.random() * notas.length)]
   if (pick) router.push(`/n/${pick.id}`)
 }
 const badgeDe = (seccion: string) => {
@@ -116,6 +120,30 @@ const badgeDe = (seccion: string) => {
         <td><span class="badge" :class="badgeDe(n.seccion)">{{ n.seccion }}</span></td>
         <td>{{ n.resumen }}</td>
       </tr></tbody></table></div>
+    </div>
+
+    <div v-if="segui.length" class="card" style="margin-bottom:16px">
+      <div class="card-title" style="margin-bottom:12px">Seguí donde quedaste</div>
+      <div class="grid-3">
+        <RouterLink v-for="n in segui" :key="n.id" :to="`/n/${n.id}`" class="card">
+          <span class="pill" style="display:inline-flex;align-items:center;gap:6px">
+            <span class="visited-dot" aria-hidden="true"></span>{{ n.categoria }}
+          </span>
+          <h3 style="margin:8px 0;font-size:15px">{{ n.titulo }}</h3>
+          <p class="clamp-3" style="color:var(--text-muted);font-size:13px">{{ n.resumen }}</p>
+        </RouterLink>
+      </div>
+    </div>
+
+    <div v-if="sinLeer.length" class="card" style="margin-bottom:16px">
+      <div class="card-title" style="margin-bottom:12px">Sin leer</div>
+      <div class="grid-3">
+        <RouterLink v-for="n in sinLeer" :key="n.id" :to="`/n/${n.id}`" class="card">
+          <span class="pill">{{ n.categoria }}</span>
+          <h3 style="margin:8px 0;font-size:15px">{{ n.titulo }}</h3>
+          <p class="clamp-3" style="color:var(--text-muted);font-size:13px">{{ n.resumen }}</p>
+        </RouterLink>
+      </div>
     </div>
 
     <div class="card">

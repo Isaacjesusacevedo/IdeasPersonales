@@ -4,6 +4,7 @@ import { useRoute, RouterLink } from 'vue-router'
 import { notaPorId, notasPorSeccion, secciones } from '@/data/vault'
 import { lecturaLabel, textoNota } from '@/data/vault-index'
 import { ui, enterReading, exitReading } from '@/ui'
+import { useVisited } from '@/composables/useVisited'
 import NoteRenderer from '@/components/NoteRenderer.vue'
 import NoteToc from '@/components/NoteToc.vue'
 import LocalGraph from '@/components/LocalGraph.vue'
@@ -42,11 +43,21 @@ const puntosFiltrados = computed(() => {
   return pts.filter(p => p.toLowerCase().includes(t))
 })
 
+const { markVisited } = useVisited()
+let visitaTimer: number | undefined
 const onKey = (e: KeyboardEvent) => {
   if (e.key === 'Escape' && ui.reading) exitReading()
 }
-onMounted(() => window.addEventListener('keydown', onKey))
-onUnmounted(() => window.removeEventListener('keydown', onKey))
+onMounted(() => {
+  window.addEventListener('keydown', onKey)
+  if (nota.value) {
+    visitaTimer = window.setTimeout(() => markVisited(nota.value!.id), 3000)
+  }
+})
+onUnmounted(() => {
+  window.removeEventListener('keydown', onKey)
+  if (visitaTimer) window.clearTimeout(visitaTimer)
+})
 
 const scrollAHeading = async () => {
   const h = route.query.h as string | undefined
@@ -56,7 +67,10 @@ const scrollAHeading = async () => {
     .find(e => e.id === h || e.id.startsWith(h + '-'))
   el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
-watch(() => route.query.h, scrollAHeading, { immediate: true })
+watch(() => route.params.id, () => {
+  if (visitaTimer) window.clearTimeout(visitaTimer)
+  if (nota.value) visitaTimer = window.setTimeout(() => markVisited(nota.value!.id), 3000)
+})
 </script>
 
 <template>

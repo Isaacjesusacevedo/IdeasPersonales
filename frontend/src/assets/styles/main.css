@@ -836,3 +836,9 @@ button.flownode { font-family: var(--font-body); }
 .peek-title { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin: 0; flex: 1; }
 .peek-actions { display: flex; gap: 8px; }
 .peek-body { display: flex; flex-direction: column; gap: 10px; }
+
+.visited-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--text-muted); opacity: .45; margin-right: 6px; vertical-align: middle; }
+.nav-reset { margin-top: 10px; font-size: 12px; }
+.nav-reset-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0; text-decoration: underline; }
+.nav-reset-confirm { color: var(--text-muted); display: inline-flex; gap: 6px; align-items: center; }
+.nav-reset-yes, .nav-reset-no { background: none; border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 2px 6px; cursor: pointer; font-size: 11px; }

@@ -8,9 +8,11 @@ import InlineText from '@/components/InlineText.vue'
 import Collapsible from '@/components/Collapsible.vue'
 import { useNotePreview } from '@/composables/useNotePreview'
 import { usePeek } from '@/composables/usePeek'
+import { useVisited } from '@/composables/useVisited'
 
 const { scheduleShow, scheduleHide } = useNotePreview()
 const { open: openPeek } = usePeek()
+const { isVisited } = useVisited()
 
 const props = defineProps<{ nota: VaultNote }>()
 
@@ -49,6 +51,7 @@ const colorDe = (sec: string) => {
           @focus="scheduleShow(b.nota.id, $event.currentTarget as HTMLElement)"
           @blur="scheduleHide()">
           <span class="sec-dot" :style="{ background: colorDe(b.nota.seccion) }" aria-hidden="true"></span>
+          <span v-if="isVisited(b.nota.id)" class="visited-dot" aria-hidden="true"></span>
           <strong>{{ b.nota.titulo }}</strong>
         </RouterLink>
         <p class="mention-frag"><InlineText :texto="b.fragmento" /></p>
@@ -67,6 +70,7 @@ const colorDe = (sec: string) => {
           @focus="scheduleShow(m.nota.id, $event.currentTarget as HTMLElement)"
           @blur="scheduleHide()">
           <span class="sec-dot" :style="{ background: colorDe(m.nota.seccion) }" aria-hidden="true"></span>
+          <span v-if="isVisited(m.nota.id)" class="visited-dot" aria-hidden="true"></span>
           <strong>{{ m.nota.titulo }}</strong>
         </RouterLink>
         <p class="mention-frag">

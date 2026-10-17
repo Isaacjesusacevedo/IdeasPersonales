@@ -4,12 +4,14 @@ import { useRouter } from 'vue-router'
 import { notaPorId, secciones } from '@/data/vault'
 import { aristas } from '@/data/vault-index'
 import { useNotePreview } from '@/composables/useNotePreview'
+import { useVisited } from '@/composables/useVisited'
 import { usePeek } from '@/composables/usePeek'
 import { radioNodo, COLOR_POR_SECCION } from '@/graph'
 
 const props = defineProps<{ id: string }>()
 const { scheduleShow, scheduleHide } = useNotePreview()
 const { open: openPeek } = usePeek()
+const { isVisited } = useVisited()
 const router = useRouter()
 
 const caja = ref<HTMLDivElement | null>(null)
@@ -215,7 +217,7 @@ onMounted(() => {
           :fill="n.color"
           :stroke="n.esCentro ? '#fff' : 'none'"
           :stroke-width="n.esCentro ? 1.5 : 0"
-          :opacity="hover && hover !== n.id ? 0.3 : (n.esCentro ? 1 : 0.92)"
+          :opacity="hover && hover !== n.id ? 0.3 : (n.esCentro ? 1 : (isVisited(n.id) ? 0.55 : 0.92))"
           style="cursor:pointer"
           @click="onNodeClick(n, $event)"
           @pointerenter="hover = n.id; if (!n.esDesborde && n.id !== '__overflow__') scheduleShow(n.id, $event.currentTarget as HTMLElement)"

@@ -3,6 +3,7 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
 import { useNotePreview } from '@/composables/useNotePreview'
 import { usePeek } from '@/composables/usePeek'
+import { useVisited } from '@/composables/useVisited'
 import { VueFlow, useVueFlow, MarkerType, Position, Handle, type Edge as FlowEdge } from '@vue-flow/core'
 import { notasPorSeccion, notaPorId, secciones, type VaultNote } from '@/data/vault'
 import '@vue-flow/core/dist/style.css'
@@ -22,6 +23,7 @@ const route = useRoute()
 const router = useRouter()
 const { scheduleShow, scheduleHide } = useNotePreview()
 const { open: openPeek } = usePeek()
+const { isVisited } = useVisited()
 const { fitView } = useVueFlow()
 
 const reducida = ref(false)
@@ -306,7 +308,7 @@ onMounted(() => {
       </template>
       <template #node-nota="p">
         <RouterLink :to="`/n/${p.data.noteId}`" class="flownode"
-          :style="{ borderColor: String(p.data.color) }"
+          :style="{ borderColor: String(p.data.color), opacity: isVisited(String(p.data.noteId)) ? 0.6 : 1 }"
           :aria-label="`Nota ${p.data.titulo}`"
           @click="(e: MouseEvent) => { if (e.shiftKey || e.ctrlKey || e.metaKey) { e.preventDefault(); openPeek(String(p.data.noteId)) } }"
           @pointerenter="onHoverNota(String(p.data.noteId), $event); scheduleShow(String(p.data.noteId), $event.currentTarget as HTMLElement)"
