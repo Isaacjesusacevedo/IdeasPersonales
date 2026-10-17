@@ -3,7 +3,7 @@ import { defineAsyncComponent } from 'vue'
 import InlineText from '@/components/InlineText.vue'
 import CalloutCard from '@/components/CalloutCard.vue'
 import Collapsible from '@/components/Collapsible.vue'
-import { headingId } from '@/inline'
+import { headingId, slugify } from '@/inline'
 import { toast } from '@/ui'
 import type { NoteBlock } from '@/data/vault'
 
@@ -13,12 +13,14 @@ import type { NoteBlock } from '@/data/vault'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const NestedBlocks: any = defineAsyncComponent(() => import('@/components/NoteRenderer.vue'))
 
-defineProps<{ bloques: NoteBlock[]; prefijo?: string }>()
+const props = defineProps<{ bloques: NoteBlock[]; prefijo?: string; notaId?: string }>()
 
 const hid = (texto: string, prefijo = '', i = 0) => headingId(texto, prefijo, i)
 
-const copiarEnlace = async () => {
-  const url = location.href
+const copiarEnlace = async (texto: string) => {
+  const slug = slugify(texto)
+  const id = props.notaId
+  const url = id ? `#/n/${id}?h=${slug}` : location.href
   try {
     await navigator.clipboard.writeText(url)
     toast('Enlace copiado')
@@ -41,8 +43,8 @@ const copiarEnlace = async () => {
 <template>
   <div class="reading">
     <template v-for="(b, i) in bloques" :key="i">
-      <h2 v-if="b.t === 'h2'" :id="hid(b.texto, prefijo, i)" class="read-h2 anchorable" @click="copiarEnlace" title="Copiar enlace">{{ b.texto }}</h2>
-      <h3 v-else-if="b.t === 'h3'" :id="hid(b.texto, prefijo, i)" class="read-h3 anchorable" @click="copiarEnlace" title="Copiar enlace">{{ b.texto }}</h3>
+      <h2 v-if="b.t === 'h2'" :id="hid(b.texto, prefijo, i)" class="read-h2 anchorable">{{ b.texto }}<button class="heading-anchor" type="button" @click.stop="copiarEnlace(b.texto)" aria-label="Copiar enlace a esta sección">#</button></h2>
+      <h3 v-else-if="b.t === 'h3'" :id="hid(b.texto, prefijo, i)" class="read-h3 anchorable">{{ b.texto }}<button class="heading-anchor" type="button" @click.stop="copiarEnlace(b.texto)" aria-label="Copiar enlace a esta sección">#</button></h3>
       <p v-else-if="b.t === 'p'" class="read-p"><InlineText :texto="b.texto" /></p>
       <ul v-else-if="b.t === 'lista' && !b.ordenada" class="puntos">
         <li v-for="(it, j) in b.items" :key="j"><InlineText :texto="it" /></li>

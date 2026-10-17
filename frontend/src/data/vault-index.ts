@@ -83,6 +83,11 @@ export function lecturaMin(nota: VaultNote): number {
   return Math.max(1, Math.round(palabras / 200))
 }
 
+export function lecturaLabel(nota: VaultNote): string {
+  const m = lecturaMin(nota)
+  return m < 2 ? 'Lectura breve' : `${m} min`
+}
+
 /** Texto normalizado por nota para el índice de búsqueda. */
 export const indiceBusqueda: Record<string, string> = {}
 for (const n of notas) indiceBusqueda[n.id] = norm(textoNota(n))

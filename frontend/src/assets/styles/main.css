@@ -651,7 +651,11 @@ code.code { font-family: var(--font-mono); font-size: 0.85em; background: var(--
 .rel-row:hover { border-color: var(--teal); background: var(--surface-2); }
 
 /* ══ FASE 4 · hero en columnas + nube de conceptos ══ */
-/* ══ FASE 4 (Iter3) · mapa de flujo ══ */
+/* Wikilinks sin resolver */
+.is-unresolved { color: var(--text-muted); text-decoration: underline dotted; cursor: help; }
+.file-icon { display: inline-flex; align-items: center; color: var(--text-muted); margin-left: 2px; }
+.heading-anchor { opacity: 0; margin-left: 8px; color: var(--text-muted); font-size: .85em; background: none; border: none; cursor: pointer; transition: opacity .15s; }
+.anchorable:hover .heading-anchor, .anchorable:focus-within .heading-anchor { opacity: 1; }
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 28px; align-items: center; }
 @media (max-width: 1179px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
 .mapa-marco { padding: 16px; }
