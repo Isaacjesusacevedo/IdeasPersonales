@@ -6,6 +6,7 @@ import { notaAlAzar } from '@/data/vault-index'
 import { ui, toggleSidebar, openPalette } from '@/ui'
 import BackgroundNetwork from '@/components/BackgroundNetwork.vue'
 import CommandPalette from '@/components/CommandPalette.vue'
+import NotePreview from '@/components/NotePreview.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -232,6 +233,7 @@ const tipDe = (s: { id: string; nombre: string }) => `${s.nombre} · ${notasPorS
         </Transition>
       </RouterView>
       <CommandPalette />
+      <NotePreview />
       <div v-if="ui.toast" class="toast" role="status" :key="ui.toastN">{{ ui.toast }}</div>
     </main>
   </div>

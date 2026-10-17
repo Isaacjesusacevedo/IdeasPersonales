@@ -3,7 +3,9 @@ import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
 import { buscarNotas, resaltar, tagIndex, todasLasTags, type Frag } from '@/data/vault-index'
 import { secciones } from '@/data/vault'
+import { useNotePreview } from '@/composables/useNotePreview'
 
+const { scheduleShow, scheduleHide } = useNotePreview()
 const route = useRoute()
 const router = useRouter()
 
@@ -116,7 +118,11 @@ const limpiar = () => {
     <div v-else class="table-wrap"><table><thead><tr><th>Nota</th><th>Tema</th><th>Resumen</th></tr></thead>
     <tbody><tr v-for="h in resultados" :key="h.nota.id">
       <td>
-        <RouterLink :to="`/n/${h.nota.id}`" class="row-link"><template v-for="(f, j) in frags(h.nota.titulo)" :key="j"><mark v-if="f.mark">{{ f.texto }}</mark><template v-else>{{ f.texto }}</template></template></RouterLink>
+        <RouterLink :to="`/n/${h.nota.id}`" class="row-link"
+          @mouseenter="scheduleShow(h.nota.id, $event.currentTarget as HTMLElement)"
+          @mouseleave="scheduleHide()"
+          @focus="scheduleShow(h.nota.id, $event.currentTarget as HTMLElement)"
+          @blur="scheduleHide()"><template v-for="(f, j) in frags(h.nota.titulo)" :key="j"><mark v-if="f.mark">{{ f.texto }}</mark><template v-else>{{ f.texto }}</template></template></RouterLink>
         <div class="id-mono">{{ h.nota.id }} · {{ h.nota.tipo ?? 'articulo' }}</div>
       </td>
       <td><span class="badge" :class="badgeDe(h.nota.seccion)">{{ h.nota.seccion }}</span></td>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
+import { useNotePreview } from '@/composables/useNotePreview'
 import { VueFlow, useVueFlow, MarkerType, Position, Handle, type Edge as FlowEdge } from '@vue-flow/core'
 import { notasPorSeccion, notaPorId, secciones, type VaultNote } from '@/data/vault'
 import '@vue-flow/core/dist/style.css'
@@ -18,6 +19,7 @@ const props = withDefaults(defineProps<{
 
 const route = useRoute()
 const router = useRouter()
+const { scheduleShow, scheduleHide } = useNotePreview()
 const { fitView } = useVueFlow()
 
 const reducida = ref(false)
@@ -304,10 +306,10 @@ onMounted(() => {
         <RouterLink :to="`/n/${p.data.noteId}`" class="flownode"
           :style="{ borderColor: String(p.data.color) }"
           :aria-label="`Nota ${p.data.titulo}`"
-          @pointerenter="onHoverNota(String(p.data.noteId), $event)"
-          @pointerleave="onHoverNota(null)"
-          @focus="onHoverNota(String(p.data.noteId))"
-          @blur="onHoverNota(null)">
+          @pointerenter="onHoverNota(String(p.data.noteId), $event); scheduleShow(String(p.data.noteId), $event.currentTarget as HTMLElement)"
+          @pointerleave="onHoverNota(null); scheduleHide()"
+          @focus="onHoverNota(String(p.data.noteId)); scheduleShow(String(p.data.noteId), $event.currentTarget as HTMLElement)"
+          @blur="onHoverNota(null); scheduleHide()">
           <span class="flow-t flow-t--sm">{{ p.data.titulo }}</span>
           <span class="flow-s mono">{{ p.data.categoria }}</span>
         </RouterLink>

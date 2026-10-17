@@ -2,8 +2,11 @@
 import { RouterLink } from 'vue-router'
 import { parseInline } from '@/inline'
 import { notaPorId } from '@/data/vault'
+import { useNotePreview } from '@/composables/useNotePreview'
 
 defineProps<{ texto: string }>()
+
+const { scheduleShow, scheduleHide } = useNotePreview()
 
 const resolver = (id: string) => {
   const n = notaPorId(id)
@@ -13,5 +16,9 @@ const resolver = (id: string) => {
 </script>
 
 <template>
-  <span><template v-for="(s, i) in parseInline(texto)" :key="i"><strong v-if="s.k === 'b'">{{ s.texto }}</strong><code v-else-if="s.k === 'c'" class="code">{{ s.texto }}</code><template v-else-if="s.k === 'l'"><span v-if="!resolver(s.id)" class="is-unresolved" title="Nota no encontrada">{{ s.texto }}</span><RouterLink v-else :to="`/n/${s.id}`" class="read-link">{{ s.alias ? s.texto : resolver(s.id)!.titulo }}</RouterLink></template><template v-else>{{ s.texto }}</template></template></span>
+  <span><template v-for="(s, i) in parseInline(texto)" :key="i"><strong v-if="s.k === 'b'">{{ s.texto }}</strong><code v-else-if="s.k === 'c'" class="code">{{ s.texto }}</code><template v-else-if="s.k === 'l'"><span v-if="!resolver(s.id)" class="is-unresolved" title="Nota no encontrada">{{ s.texto }}</span><RouterLink v-else :to="`/n/${s.id}`" class="read-link"
+    @mouseenter="scheduleShow(s.id, $event.currentTarget as HTMLElement)"
+    @mouseleave="scheduleHide()"
+    @focus="scheduleShow(s.id, $event.currentTarget as HTMLElement)"
+    @blur="scheduleHide()">{{ s.alias ? s.texto : resolver(s.id)!.titulo }}</RouterLink></template><template v-else>{{ s.texto }}</template></template></span>
 </template>

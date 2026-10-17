@@ -3,9 +3,11 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { notaPorId, secciones } from '@/data/vault'
 import { aristas } from '@/data/vault-index'
+import { useNotePreview } from '@/composables/useNotePreview'
 import { radioNodo, COLOR_POR_SECCION } from '@/graph'
 
 const props = defineProps<{ id: string }>()
+const { scheduleShow, scheduleHide } = useNotePreview()
 const router = useRouter()
 
 const caja = ref<HTMLDivElement | null>(null)
@@ -215,8 +217,10 @@ onMounted(() => {
           :opacity="hover && hover !== n.id ? 0.3 : (n.esCentro ? 1 : 0.92)"
           style="cursor:pointer"
           @click="onNodeClick(n, $event)"
-          @pointerenter="hover = n.id" @pointerleave="hover = null"
-          @focus="hover = n.id" @blur="hover = null"
+          @pointerenter="hover = n.id; if (!n.esDesborde && n.id !== '__overflow__') scheduleShow(n.id, $event.currentTarget as HTMLElement)"
+          @pointerleave="hover = null; scheduleHide()"
+          @focus="hover = n.id; if (!n.esDesborde) scheduleShow(n.id, $event.currentTarget as HTMLElement)"
+          @blur="hover = null; scheduleHide()"
         >
           <title>{{ n.titulo }}</title>
         </circle>

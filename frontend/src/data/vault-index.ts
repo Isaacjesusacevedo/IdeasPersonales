@@ -1,4 +1,4 @@
-import { notas, notaPorId, type VaultNote } from './vault'
+import { notas, notaPorId, secciones, type VaultNote } from './vault'
 
 /** Normaliza para índice/búsqueda: minúsculas + sin acentos. */
 export const norm = (s: string) =>
@@ -86,6 +86,132 @@ export function lecturaMin(nota: VaultNote): number {
 export function lecturaLabel(nota: VaultNote): string {
   const m = lecturaMin(nota)
   return m < 2 ? 'Lectura breve' : `${m} min`
+}
+
+export interface BacklinkCtx { nota: VaultNote; fragmento: string; via: 'relacion' | 'wikilink' }
+export interface MencionCtx { nota: VaultNote; fragmento: string }
+
+function escapeRegex(s: string) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function camposTexto(n: VaultNote): string[] {
+  const out: string[] = []
+  if (n.intro) out.push(n.intro)
+  if (n.resumen) out.push(n.resumen)
+  out.push(...n.puntos)
+  for (const c of n.claves ?? []) out.push(c.termino, c.definicion)
+  const walk = (bs: VaultNote['bloques']) => {
+    for (const b of bs ?? []) {
+      if (b.t === 'desplegable') walk(b.bloques)
+      else if (b.t === 'lista') out.push(...b.items)
+      else {
+        if ('titulo' in b && b.titulo) out.push(b.titulo)
+        if (b.texto) out.push(b.texto)
+      }
+    }
+  }
+  walk(n.bloques)
+  return out.filter(Boolean)
+}
+
+function fragmentoCon(texto: string, titulo: string): string {
+  const nt = norm(titulo)
+  const ntText = norm(texto)
+  let idx = ntText.indexOf(nt)
+  if (idx < 0) {
+    // búsqueda por tokens
+    const tok = nt.split(/\s+/)[0]
+    idx = tok ? ntText.indexOf(tok) : -1
+  }
+  if (idx < 0) return texto.slice(0, 180).trim()
+  let start = 0
+  for (let i = idx; i >= 0; i--) {
+    if (/[.!?;\n]/.test(texto[i])) { start = i + 1; break }
+  }
+  let end = texto.length
+  for (let i = idx + nt.length; i < texto.length; i++) {
+    if (/[.!?;\n]/.test(texto[i])) { end = i + 1; break }
+  }
+  let frag = texto.slice(start, end).trim()
+  if (!frag) frag = texto.slice(Math.max(0, idx - 90), Math.min(texto.length, idx + nt.length + 90)).trim()
+  if (frag.length > 200) frag = frag.slice(0, 197) + '…'
+  return frag
+}
+
+function contieneTitulo(texto: string, titulo: string): boolean {
+  const nt = norm(titulo)
+  if (nt.length < 4) return false
+  const re = new RegExp('(^|[^a-z0-9])' + escapeRegex(nt) + '([^a-z0-9]|$)')
+  return re.test(norm(texto))
+}
+
+function buscarWikilink(n: VaultNote, targetId: string): string | null {
+  const re = new RegExp('\\[\\[' + escapeRegex(targetId) + '(?:\\|[^\\]]*)?\\]\\]')
+  for (const c of camposTexto(n)) {
+    if (re.test(c)) return fragmentoCon(c, targetId)
+  }
+  return null
+}
+
+function calcularBacklinksContexto(id: string): BacklinkCtx[] {
+  const target = notaPorId(id)
+  if (!target) return []
+  const out: BacklinkCtx[] = []
+  const seen = new Set<string>()
+  for (const n of notas) {
+    if (n.id === id) continue
+    const wikiFrag = buscarWikilink(n, id)
+    const viaRel = n.relaciones.includes(id)
+    if (!wikiFrag && !viaRel) continue
+    if (seen.has(n.id)) continue
+    seen.add(n.id)
+    if (wikiFrag) out.push({ nota: n, fragmento: wikiFrag, via: 'wikilink' })
+    else out.push({ nota: n, fragmento: n.intro || n.resumen, via: 'relacion' })
+  }
+  out.sort((a, b) => {
+    const ia = secciones.findIndex(s => s.id === a.nota.seccion)
+    const ib = secciones.findIndex(s => s.id === b.nota.seccion)
+    if (ia !== ib) return ia - ib
+    return a.nota.titulo.localeCompare(b.nota.titulo)
+  })
+  return out
+}
+
+function calcularMenciones(id: string): MencionCtx[] {
+  const target = notaPorId(id)
+  if (!target || norm(target.titulo).length < 4) return []
+  const backlinkIds = new Set((backlinksContextoCache[id] ?? []).map(x => x.nota.id))
+  const out: MencionCtx[] = []
+  for (const n of notas) {
+    if (n.id === id) continue
+    if (backlinkIds.has(n.id)) continue
+    let frag: string | null = null
+    for (const c of camposTexto(n)) {
+      if (contieneTitulo(c, target.titulo)) { frag = fragmentoCon(c, target.titulo); break }
+    }
+    if (!frag) continue
+    out.push({ nota: n, fragmento: frag })
+  }
+  out.sort((a, b) => {
+    const ia = secciones.findIndex(s => s.id === a.nota.seccion)
+    const ib = secciones.findIndex(s => s.id === b.nota.seccion)
+    if (ia !== ib) return ia - ib
+    return a.nota.titulo.localeCompare(b.nota.titulo)
+  })
+  return out.slice(0, 8)
+}
+
+const backlinksContextoCache: Record<string, BacklinkCtx[]> = {}
+const mencionesCache: Record<string, MencionCtx[]> = {}
+for (const n of notas) backlinksContextoCache[n.id] = calcularBacklinksContexto(n.id)
+for (const n of notas) mencionesCache[n.id] = calcularMenciones(n.id)
+
+export function backlinksConContexto(id: string): BacklinkCtx[] {
+  return backlinksContextoCache[id] ?? []
+}
+export function mencionesSinEnlazar(id: string): MencionCtx[] {
+  return mencionesCache[id] ?? []
 }
 
 /** Texto normalizado por nota para el índice de búsqueda. */
